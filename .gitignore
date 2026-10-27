@@ -1,0 +1,21 @@
+.env
+.venv/
+__pycache__/
+node_modules/
+reference/
+
+# Data: bare modellene og metrikkene appen trenger legges i git (rådata hentes på nytt ved trening)
+data/*
+!data/models/
+!data/eval/
+data/eval/*
+!data/eval/metrics_fc.json
+!data/eval/metrics_hourly.json
+
+# Eksporterte JSON-filer (lages av scripts/export_static.py)
+frontend/public/api/
+frontend/dist/
+
+# Lokale filer
+elvepred-plan-v2-whitewater-guide.md
+.claude/

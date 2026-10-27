@@ -1,0 +1,278 @@
+# Elver, målestasjoner og terskler. Terskler er i målerens enhet (m³/s).
+# Padlenivåer (thresholds) og innsett/utsett er fra nokken.net og whitewater.guide, lisensiert CC BY-NC-SA 4.0.
+# thresholds brukes til klassifisering; kilde nokken.net (CC BY-NC-SA 4.0) der seksjonen har GOOD-intervall,
+# ellers whitewater.guide. Mapping fra nokken: LOW.min → minimum, GOOD → optimum..maximum, VERY HIGH.min → impossible.
+# regulation: regulated (dam-/magasinstyrt) | partly | unregulated | unknown, fra NVE HydAPI Stations.
+rivers:
+- id: akerselva
+  station_pos:
+  - 59.96883
+  - 10.7876
+  regulation: regulated
+  regulation_note: "Maridalsvannet er regulert med magasin og overføringer (NVE). Vannføringen styres i stor grad av slipp fra dammen."
+  name: Akerselva
+  nokken_section: 144
+  putin:
+  - 59.968864
+  - 10.787404
+  grade: II
+  thresholds:
+    minimum: 17.0
+    optimum: 20.0
+    maximum: 30.0
+    impossible: 30.0
+    source: nokken.net
+  station: 6.9.0
+  approximate: false
+- id: lysakerelva
+  station_pos:
+  - 59.9146
+  - 10.63691
+  takeout:
+  - 59.930173
+  - 10.628744
+  nokken_river: 105
+  regulation: unknown
+  regulation_note: "NVE har ikke reguleringsdata for stasjonen."
+  name: Lysakerelva
+  station: 7.29.0
+  station_name: Lysaker Mølle
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 8.0
+    optimum: 12.0
+    maximum: 16.0
+    impossible: 16.0
+    source: nokken.net
+  nokken_section: 137
+  putin:
+  - 59.940436
+  - 10.632293
+  thresholds_wwguide:
+    minimum: 8
+    optimum: 15
+    maximum: 30
+    impossible: 40
+    source: whitewater.guide
+- id: lomma
+  station_pos:
+  - 59.8935
+  - 10.50789
+  regulation: partly
+  regulation_note: "NVE registrerer magasiner i feltet, men uten regulert areal. Liten påvirkning."
+  name: Lomma
+  station: 8.2.0
+  station_name: Sandvikselva Bjørnegårdssvingen
+  grade: III-IV (V-)
+  approximate: true
+  thresholds:
+    minimum: 10.0
+    optimum: 15.0
+    maximum: 40.0
+    impossible: 80.0
+    source: nokken.net
+  nokken_section: 194
+  thresholds_wwguide:
+    minimum: 15
+    optimum: 35
+    maximum: 50
+    impossible: 60
+    source: whitewater.guide
+- id: hakadalselva
+  station_pos:
+  - 60.10302
+  - 10.86589
+  takeout:
+  - 60.141477
+  - 10.796247
+  nokken_river: 22
+  regulation: partly
+  regulation_note: "Ca. 8 % av feltet går gjennom regulerte magasiner (NVE). Liten påvirkning."
+  name: Hakadalselva
+  nokken_section: 30
+  putin:
+  - 60.156291
+  - 10.72533
+  grade: II+
+  thresholds:
+    minimum: 11.0
+    optimum: 13.0
+    maximum: 23.0
+    impossible: 30.0
+    source: nokken.net
+  station: 2.461.0
+  approximate: false
+- id: leira
+  station_pos:
+  - 60.2364
+  - 10.9908
+  takeout:
+  - 60.26164
+  - 10.945228
+  nokken_river: 109
+  regulation: partly
+  regulation_note: "NVE registrerer magasiner i feltet, men uten regulert areal. Liten påvirkning."
+  name: Leira
+  nokken_section: 146
+  putin:
+  - 60.2611208
+  - 10.9025061
+  grade: III
+  thresholds:
+    minimum: 15.0
+    optimum: 15.0
+    maximum: 25.0
+    impossible: 25.0
+    source: nokken.net
+  station: 2.280.0
+  approximate: false
+- id: randselva
+  station_pos:
+  - 60.22176
+  - 10.36211
+  regulation: regulated
+  regulation_note: "Randsfjorden og 16 magasiner er regulert (38 % av feltet, NVE). Vannføringen styres i stor grad av slipp."
+  name: Randselva
+  nokken_section: 149
+  putin:
+  - 60.1934587
+  - 10.3025248
+  grade: II
+  thresholds:
+    minimum: 40.0
+    optimum: 55.0
+    maximum: 100.0
+    impossible: 110.0
+    source: nokken.net
+  station: 12.228.0
+  approximate: false
+- id: sogna
+  station_pos:
+  - 60.20725
+  - 10.02315
+  takeout:
+  - 60.179906
+  - 10.174178
+  nokken_river: 111
+  regulation: unregulated
+  regulation_note: "Uregulert (NVE)."
+  name: Sogna
+  nokken_section: 152
+  putin:
+  - 60.201611
+  - 10.125546
+  grade: II
+  thresholds:
+    minimum: 12.0
+    optimum: 20.0
+    maximum: 35.0
+    impossible: 60.0
+    source: nokken.net
+  station: 12.114.0
+  approximate: false
+- id: simoa
+  station_pos:
+  - 60.04321
+  - 9.63403
+  takeout:
+  - 59.976944
+  - 9.764167
+  nokken_river: 131
+  regulation: regulated
+  regulation_note: "Magasinregulert: 6 magasiner, hele feltet regulert (NVE). Slipp kan endre vannføringen raskt."
+  name: Simoa
+  station: 12.113.0
+  station_name: Kråkefjord ndf.
+  grade: III-IV
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 35
+    maximum: 60
+    impossible: 70
+    source: whitewater.guide
+  nokken_section: 191
+  putin:
+  - 59.997526
+  - 9.743019
+- id: bingselva
+  station_pos:
+  - 59.70715
+  - 9.55527
+  takeout:
+  - 59.864994
+  - 9.833439
+  nokken_river: 4
+  regulation: partly
+  regulation_note: "NVE registrerer to magasiner (fra 2013), men uten regulert areal. Liten påvirkning."
+  name: Bingselva
+  station: 15.21.0
+  station_name: Jondalselva
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 8
+    optimum: 20
+    maximum: 35
+    impossible: 50
+    source: whitewater.guide
+  nokken_section: 7
+  putin:
+  - 59.875392
+  - 9.715609
+- id: dorja
+  station_pos:
+  - 59.69721
+  - 9.7902
+  takeout:
+  - 59.72562
+  - 9.833788
+  nokken_river: 10
+  regulation: unregulated
+  regulation_note: "Uregulert (NVE)."
+  name: Dørja
+  nokken_section: 16
+  putin:
+  - 59.744766
+  - 9.711906
+  grade: IV−
+  thresholds:
+    minimum: 4.0
+    optimum: 4.0
+    maximum: 6.0
+    impossible: 6.0
+    source: nokken.net
+  station: 12.193.0
+  approximate: false
+- id: eggedola
+  station_pos:
+  - 60.15247
+  - 9.43342
+  takeout:
+  - 60.246205
+  - 9.326977
+  nokken_river: 11
+  regulation: unregulated
+  regulation_note: "Uregulert (NVE)."
+  name: Eggedøla
+  station: 12.178.0
+  station_name: Eggedal
+  grade: V
+  approximate: false
+  thresholds:
+    minimum: 18.0
+    optimum: 18.0
+    maximum: 22.0
+    impossible: 22.0
+    source: nokken.net
+  nokken_section: 17
+  putin:
+  - 60.29463
+  - 9.237119
+  thresholds_wwguide:
+    minimum: 8
+    optimum: 12
+    maximum: 18
+    impossible: 22
+    source: whitewater.guide
