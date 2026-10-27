@@ -1,9 +1,8 @@
 """NVE HydAPI – observert vannføring."""
-import time
 
-import httpx
 import pandas as pd
 
+from elvepred.clients import http
 from elvepred.settings import NVE_API_KEY
 
 BASE = "https://hydapi.nve.no/api/v1"
@@ -11,13 +10,8 @@ DISCHARGE = 1001
 
 
 def _get(path: str, params: dict) -> dict:
-    for attempt in range(6):
-        r = httpx.get(f"{BASE}/{path}", params=params, headers={"X-API-Key": NVE_API_KEY}, timeout=180)
-        if r.status_code != 429:
-            break
-        time.sleep(2 ** attempt)  # rate limit
-    r.raise_for_status()
-    return r.json()
+    return http.get(f"{BASE}/{path}", attempts=6, params=params, headers={"X-API-Key": NVE_API_KEY},
+                    timeout=180).json()
 
 
 def daily_discharge(station: str, start: str, end: str) -> pd.DataFrame:

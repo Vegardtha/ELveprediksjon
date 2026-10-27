@@ -9,7 +9,7 @@ import httpx
 import pandas as pd
 from pyproj import Transformer
 
-from elvepred.clients import gts
+from elvepred.clients import gts, http
 
 URL = "https://previous-runs-api.open-meteo.com/v1/forecast"
 ARCHIVE_START = "2024-03-01"
@@ -93,12 +93,11 @@ LIVE_URL = "https://api.open-meteo.com/v1/forecast"
 def live_hourly(station: str, model: str, past_days: int = 3, forecast_days: int = 10) -> pd.DataFrame:
     """Siste prognose per time med kolonner rr_l{N}/tm_l{N}. Én kjøring, så alle ledetider er like."""
     pts = points(station, N_POINTS.get(model, 4))
-    r = httpx.get(LIVE_URL, timeout=120, params={
+    r = http.get(LIVE_URL, timeout=60, params={
         "latitude": ",".join(f"{p[0]:.4f}" for p in pts), "longitude": ",".join(f"{p[1]:.4f}" for p in pts),
         "hourly": "precipitation,temperature_2m", "models": model, "past_days": past_days,
         "forecast_days": forecast_days,
     })
-    r.raise_for_status()
     js = r.json() if isinstance(r.json(), list) else [r.json()]
     df = pd.concat(pd.DataFrame(j["hourly"]).set_index("time") for j in js).groupby(level=0).mean()
     df.index = pd.to_datetime(df.index)

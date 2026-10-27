@@ -4,6 +4,7 @@ værprognose (MET Nordic via Open-Meteo) → p10/p50/p90 per dag.
 p10/p90 justeres med konforme tillegg fra scripts/evaluate.py (data/models/calibration.json).
 """
 import json
+import sys
 import time
 
 import joblib
@@ -44,12 +45,18 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
     hmodels = {n: joblib.load(MODELS / f"hourly_{n}.joblib") for n in QUANTILES}
     hcal = {int(k): v for k, v in json.loads((MODELS / "hourly_calibration.json").read_text()).items()}
     hk = sorted(hcal)
-    rows, obs, hrows, timing = [], [], [], {"fetch_s": 0.0, "predict_s": 0.0}
+    rows, obs, hrows, failed, timing = [], [], [], [], {"fetch_s": 0.0, "predict_s": 0.0}
     for r in load_rivers():
         st = r["station"]
         t0 = time.perf_counter()
-        df, hq, fc, fch = current_inputs(st, today)
-        timing["fetch_s"] += time.perf_counter() - t0
+        try:
+            df, hq, fc, fch = current_inputs(st, today)
+        except Exception as e:  # én utilgjengelig kilde skal ikke stoppe de andre elvene
+            print(f"::warning::{r['id']}: kunne ikke hente data ({type(e).__name__}: {e})", file=sys.stderr)
+            failed.append(r["id"])
+            continue
+        finally:
+            timing["fetch_s"] += time.perf_counter() - t0
         t0 = time.perf_counter()
         issue = df["q"].last_valid_index()
         d = df["q"].dropna().iloc[-OBSERVED_DAYS:]
@@ -85,12 +92,14 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
             row["prob_optimal"] = classify.prob_between(t["optimum"], t["maximum"], row["p10"], row["p50"], row["p90"])
         rows.extend(days)
         timing["predict_s"] += time.perf_counter() - t0
+    if not rows:
+        raise RuntimeError(f"ingen elver fikk prognose (feilet: {failed})")
     out = pd.DataFrame(rows)
     OUT.mkdir(parents=True, exist_ok=True)
     out.to_parquet(OUT / "latest.parquet")
     pd.concat(obs, ignore_index=True).to_parquet(OUT / "observed.parquet")
     pd.concat(hrows, ignore_index=True).to_parquet(OUT / "hourly.parquet")
-    (OUT / "run.json").write_text(json.dumps({"run_at": pd.Timestamp.now(tz="UTC").isoformat(), **timing}))
+    (OUT / "run.json").write_text(json.dumps({"run_at": pd.Timestamp.now(tz="UTC").isoformat(), "failed": failed, **timing}))
     return out, timing
 
 
