@@ -23,6 +23,8 @@ def fetch(r):
     return f"{r['id']:12s} {len(q):7d} timer, {q.notna().sum():7d} med verdi, fra {q.first_valid_index()} ({time.time() - t:.0f}s)"
 
 
+# --new: bare stasjoner uten lagrede timesverdier
+todo = [r for r in load_rivers() if "--new" not in sys.argv or not (out / f"{r['station']}.parquet").exists()]
 with ThreadPoolExecutor(1) as ex:
-    for line in ex.map(fetch, load_rivers()):
+    for line in ex.map(fetch, todo):
         print(line)

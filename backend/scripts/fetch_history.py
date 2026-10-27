@@ -14,6 +14,7 @@ from elvepred.settings import DATA, load_rivers
 p = argparse.ArgumentParser()
 p.add_argument("--from", dest="start", default="1990-01-01")
 p.add_argument("--river")
+p.add_argument("--new", action="store_true", help="bare stasjoner uten lagret historikk")
 args = p.parse_args()
 
 today = pd.Timestamp.today().normalize()
@@ -24,6 +25,8 @@ for r in load_rivers():
     if args.river and r["id"] != args.river:
         continue
     st = r["station"]
+    if args.new and (DATA / "raw" / "gts" / f"{st}.parquet").exists():
+        continue
     t = time.time()
     q = hydapi.daily_discharge(st, args.start, today.strftime("%Y-%m-%d"))
     q.to_parquet(DATA / "raw" / "hydapi" / f"{st}.parquet")

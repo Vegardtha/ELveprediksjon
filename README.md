@@ -1,6 +1,6 @@
 # Elvepred
 
-Vannføringsprognoser for padleelver på Østlandet: time for time de neste 48 timene, deretter døgn for døgn ut 9 dager, med usikkerhet og sjanse for padlbar vannføring. Elver som styres av demninger er merket.
+Vannføringsprognoser for 40 padleelver på Østlandet: time for time de neste 48 timene, deretter døgn for døgn ut 9 dager, med usikkerhet og sjanse for padlbar vannføring. Elver som styres av demninger er merket.
 
 Siden oppdateres hver 2. time av GitHub Actions og publiseres på GitHub Pages.
 
@@ -15,6 +15,8 @@ Siden oppdateres hver 2. time av GitHub Actions og publiseres på GitHub Pages.
 ## Drift (GitHub)
 
 `.github/workflows/update.yml` kjører hvert andre time (minutt 17, UTC), ved push til `main` og manuelt. Den henter ferske data, beregner prognosen med de lagrede modellene i `data/models`, eksporterer JSON (`scripts/export_static.py`) og publiserer den statiske siden.
+
+seNorge-feltmiddelet (GTS, ca. 140 kall per stasjon) oppdateres bare én gang i døgnet. Det hentes derfor ved første kjøring hver dag og første kjøring etter kl. 08 UTC, og ligger ellers i Actions-cachen (`data/cache`). Stasjonene hentes parallelt.
 
 Oppsett én gang:
 
@@ -35,6 +37,20 @@ npm ci --prefix frontend
 npm run dev --prefix frontend
 ```
 
+### Nye elver
+
+Legg stasjon og seksjon i `SECTIONS` i `backend/scripts/add_rivers.py`, og kjør:
+
+```bash
+uv run --directory backend python scripts/add_rivers.py
+uv run --directory backend python scripts/fetch_catchments.py
+uv run --directory backend python scripts/fetch_history.py --new
+uv run --directory backend python scripts/fetch_hourly.py --new
+uv run --directory backend python scripts/fetch_forecasts.py
+```
+
+Deretter ny trening som under. Modellene kjenner bare stasjonene de er trent på.
+
 ### Ny trening
 
 Trening gjøres lokalt (anbefalt omtrent månedlig), og de nye modellene pushes:
@@ -47,7 +63,7 @@ uv run --directory backend python scripts/train.py
 uv run --directory backend python scripts/train_hourly.py
 ```
 
-`scripts/evaluate_fc.py` lager kalibrering og metrikker for døgnmodellen (tar ca. 35 min).
+`scripts/evaluate_fc.py --fc-models metno_seamless --skip-gts` lager kalibrering og metrikker for døgnmodellen.
 
 ## Lisenser og kilder
 
