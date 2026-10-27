@@ -48,7 +48,12 @@ jobs:
       - name: Beregn prognose
         env:
           NVE_API_KEY: ${{ secrets.NVE_API_KEY }}
-        run: uv run --directory backend python scripts/update.py
+        run: |
+          if [ -z "$NVE_API_KEY" ]; then
+            echo "::error::Mangler repo-secret NVE_API_KEY (Settings → Secrets and variables → Actions)"
+            exit 1
+          fi
+          uv run --directory backend python scripts/update.py
 
       - name: Eksporter JSON
         run: uv run --directory backend python scripts/export_static.py
