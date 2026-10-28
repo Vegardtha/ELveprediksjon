@@ -6,6 +6,7 @@ p10/p90 justeres med konforme tillegg fra scripts/evaluate.py (data/models/calib
 import json
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 
 import joblib
 import numpy as np
@@ -25,17 +26,58 @@ OBSERVED_HOURS = 72
 BLEND_K0, BLEND_K1 = 6, hourly.MAX_K
 HOURLY_HISTORY = hourly.PAST + 48  # timer med timesmålinger som timesmodellen trenger
 OUT = DATA / "predictions"
+# seNorge (GTS) oppdateres én gang i døgnet, om morgenen. Feltmiddelet (~115 kall per stasjon) hentes derfor
+# bare ved første kjøring hver dag og første kjøring etter GTS_REFRESH_UTC, og ellers fra hurtiglageret.
+GTS_CACHE = DATA / "cache" / "gts"
+GTS_REFRESH_UTC = 8
+GTS_STALE_DAYS = 2  # eldre hurtiglager brukes bare hvis GTS ikke svarer
+FETCH_WORKERS = 4
 
 
-def current_inputs(station: str, today: pd.Timestamp) -> tuple[pd.DataFrame, pd.Series, pd.DataFrame, pd.DataFrame]:
+def gts_state(station: str, today: pd.Timestamp) -> tuple[pd.DataFrame, bool]:
+    """Feltmiddel fra GTS for HISTORY_DAYS bakover til siste prognosedag. Returnerer (frame, fra hurtiglager)."""
+    f, meta = GTS_CACHE / f"{station}.parquet", GTS_CACHE / f"{station}.json"
+    now = pd.Timestamp.now(tz="UTC").tz_localize(None)
+    cached = pd.Timestamp(json.loads(meta.read_text())["fetched_at"]) if f.exists() and meta.exists() else None
+    fresh = cached is not None and cached.normalize() == now.normalize() and (
+        cached.hour >= GTS_REFRESH_UTC or now.hour < GTS_REFRESH_UTC)
+    if fresh:
+        return pd.read_parquet(f), True
+    start = today - pd.Timedelta(days=HISTORY_DAYS)
+    try:
+        end = gts.last_available(station, today)
+        w = gts.frame(station, start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
+    except Exception as e:
+        if cached is None or now - cached > pd.Timedelta(days=GTS_STALE_DAYS):
+            raise
+        print(f"::warning::{station}: GTS feilet ({type(e).__name__}), bruker hurtiglager fra {cached}", file=sys.stderr)
+        return pd.read_parquet(f), True
+    GTS_CACHE.mkdir(parents=True, exist_ok=True)
+    w.to_parquet(f)
+    meta.write_text(json.dumps({"fetched_at": now.isoformat()}))
+    return w, False
+
+
+def current_inputs(station: str, today: pd.Timestamp) -> tuple[pd.DataFrame, pd.Series, pd.DataFrame, pd.DataFrame, bool]:
     start = today - pd.Timedelta(days=HISTORY_DAYS)
     q = hydapi.daily_discharge(station, start.strftime("%Y-%m-%d"), today.strftime("%Y-%m-%d"))[["q"]]
     hq = hydapi.hourly_discharge(station, (today - pd.Timedelta(hours=HOURLY_HISTORY)).strftime("%Y-%m-%d"),
                                  today.strftime("%Y-%m-%d")).dropna()
-    end = gts.last_available(station, today)
-    w = gts.frame(station, start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d"))
+    w, from_cache = gts_state(station, today)
+    w = w[w.index >= start]
     fch = openmeteo.live_hourly(station, FC_MODEL)
-    return w.join(q, how="left").asfreq("D"), hq, openmeteo.daily_forecasts(fch), fch
+    return w.join(q, how="left").asfreq("D"), hq, openmeteo.daily_forecasts(fch), fch, from_cache
+
+
+def fetch_all(stations: list[str], today: pd.Timestamp) -> dict[str, tuple | Exception]:
+    """Henter inndata for alle stasjoner parallelt. En feilet stasjon gir unntaket i stedet for data."""
+    def one(st):
+        try:
+            return current_inputs(st, today)
+        except Exception as e:  # én utilgjengelig kilde skal ikke stoppe de andre elvene
+            return e
+    with ThreadPoolExecutor(FETCH_WORKERS) as ex:
+        return dict(zip(stations, ex.map(one, stations)))
 
 
 def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
@@ -45,18 +87,20 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
     hmodels = {n: joblib.load(MODELS / f"hourly_{n}.joblib") for n in QUANTILES}
     hcal = {int(k): v for k, v in json.loads((MODELS / "hourly_calibration.json").read_text()).items()}
     hk = sorted(hcal)
-    rows, obs, hrows, failed, timing = [], [], [], [], {"fetch_s": 0.0, "predict_s": 0.0}
-    for r in load_rivers():
+    rivers = load_rivers()
+    t0 = time.perf_counter()
+    inputs = fetch_all(list(dict.fromkeys(r["station"] for r in rivers)), today)
+    timing = {"fetch_s": time.perf_counter() - t0, "predict_s": 0.0,
+              "gts_cached": sum(1 for v in inputs.values() if not isinstance(v, Exception) and v[4])}
+    rows, obs, hrows, failed = [], [], [], []
+    for r in rivers:
         st = r["station"]
-        t0 = time.perf_counter()
-        try:
-            df, hq, fc, fch = current_inputs(st, today)
-        except Exception as e:  # én utilgjengelig kilde skal ikke stoppe de andre elvene
+        if isinstance(inputs[st], Exception):
+            e = inputs[st]
             print(f"::warning::{r['id']}: kunne ikke hente data ({type(e).__name__}: {e})", file=sys.stderr)
             failed.append(r["id"])
             continue
-        finally:
-            timing["fetch_s"] += time.perf_counter() - t0
+        df, hq, fc, fch, _ = inputs[st]
         t0 = time.perf_counter()
         issue = df["q"].last_valid_index()
         d = df["q"].dropna().iloc[-OBSERVED_DAYS:]

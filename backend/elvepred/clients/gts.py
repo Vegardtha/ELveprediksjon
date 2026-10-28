@@ -72,11 +72,24 @@ def frame(station: str, start: str, end: str, themes=THEMES) -> pd.DataFrame:
     pts = sample_points(station)
     jobs = [(t, x, y) for t in themes for x, y in pts]
     with ThreadPoolExecutor(8) as ex:
-        res = list(ex.map(lambda j: point_series(j[1], j[2], j[0], start, end), jobs))
+        res = list(ex.map(lambda j: _point_or_none(j[1], j[2], j[0], start, end), jobs))
     cols = {}
     for t in themes:
-        cols[t] = pd.concat([s for (tt, _, _), s in zip(jobs, res) if tt == t], axis=1).mean(axis=1)
+        ss = [s for (tt, _, _), s in zip(jobs, res) if tt == t and s is not None]
+        if not ss:
+            raise ValueError(f"{station}: ingen GTS-punkter for {t}")
+        cols[t] = pd.concat(ss, axis=1).mean(axis=1)
     return pd.DataFrame(cols)
+
+
+def _point_or_none(x: int, y: int, theme: str, start: str, end: str) -> pd.Series | None:
+    """Punkter utenfor seNorge-rutenettet (felt som går inn i Sverige) gir HTTP 400 og utelates."""
+    try:
+        return point_series(x, y, theme, start, end)
+    except httpx.HTTPStatusError as e:
+        if e.response.status_code == 400:
+            return None
+        raise
 
 
 def last_available(station: str, today: pd.Timestamp, max_days: int = 12) -> pd.Timestamp:

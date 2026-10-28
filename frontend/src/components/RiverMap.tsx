@@ -42,15 +42,22 @@ function lines(rivers: River[]): GeoJSON.FeatureCollection {
   }
 }
 
+const LABEL_ZOOM = 8
+
 export function RiverMap({ rivers, selected, onSelect }: Props) {
   const el = useRef<HTMLDivElement>(null)
   const map = useRef<maplibregl.Map | null>(null)
   const markers = useRef<Map<string, HTMLElement>>(new Map())
+  const fitted = useRef(false)
 
   useEffect(() => {
     const m = new maplibregl.Map({ container: el.current!, style: STYLE, center: [10.3, 60.0], zoom: 7.3 })
     m.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
     map.current = m
+    // navneskilt overlapper når hele Østlandet vises; skjules under LABEL_ZOOM (unntatt valgt elv)
+    const labels = () => el.current?.classList.toggle('zoomed-out', m.getZoom() < LABEL_ZOOM)
+    m.on('zoom', labels)
+    labels()
     // grid-raden endrer høyde når detaljpanelet åpnes; MapLibre fanger ikke alltid det opp selv
     const ro = new ResizeObserver(() => m.resize())
     ro.observe(el.current!)
@@ -63,6 +70,12 @@ export function RiverMap({ rivers, selected, onSelect }: Props) {
   useEffect(() => {
     const m = map.current
     if (!m || !rivers.length) return
+    if (!fitted.current && !selected) {
+      const b = new maplibregl.LngLatBounds()
+      rivers.forEach((r) => b.extend(pos(r)))
+      m.fitBounds(b, { padding: 40, maxZoom: 9, duration: 0 })
+    }
+    fitted.current = true
     const addLines = () => {
       const data = lines(rivers)
       const src = m.getSource('sections') as maplibregl.GeoJSONSource | undefined
@@ -94,6 +107,7 @@ export function RiverMap({ rivers, selected, onSelect }: Props) {
       added.push(new maplibregl.Marker({ element: node, anchor: 'left', offset: [-9, 0] }).setLngLat(pos(r)).addTo(m))
     }
     return () => added.forEach((mk) => mk.remove())
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- `selected` trengs bare ved første tilpasning
   }, [rivers, onSelect])
 
   useEffect(() => {

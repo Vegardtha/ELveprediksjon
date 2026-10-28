@@ -28,6 +28,9 @@ def points(station: str, n: int = 8) -> list[tuple[float, float]]:
     return [tuple(reversed(_utm_to_wgs.transform(x, y))) for x, y in pick]
 
 
+QUOTA_WAIT_S = 2 * 3600
+
+
 def hourly(station: str, model: str, start: str, end: str) -> pd.DataFrame:
     """Feltmiddel per time. Kolonner `rr_l{N}` (mm) og `tm_l{N}` (°C) for ledetid N døgn."""
     pts = points(station, N_POINTS.get(model, 4))
@@ -36,22 +39,35 @@ def hourly(station: str, model: str, start: str, end: str) -> pd.DataFrame:
     parts, s = [], pd.Timestamp(start)
     while s <= pd.Timestamp(end):
         e = min(s + pd.DateOffset(months=6) - pd.Timedelta(days=1), pd.Timestamp(end))
-        for attempt in range(12):
+        attempt, waited = 0, 0
+        while True:
             try:
                 r = httpx.get(URL, timeout=300, params={
                     "latitude": ",".join(f"{p[0]:.4f}" for p in pts), "longitude": ",".join(f"{p[1]:.4f}" for p in pts),
                     "hourly": ",".join(names), "models": model, "start_date": f"{s:%Y-%m-%d}", "end_date": f"{e:%Y-%m-%d}",
                 })
-                if r.status_code == 429:
-                    time.sleep(65)  # minuttkvote
+                # gratiskvoten gjelder per minutt, time og døgn. Døgnkvoten (ca. 5 stasjoner arkiv) nullstilles
+                # ved midnatt UTC: da ventes det til neste døgn, så arkivet for mange nye stasjoner hentes over flere dager
+                if r.status_code == 429 and "daily" in r.text.lower():
+                    reset = pd.Timestamp.now(tz="UTC").normalize() + pd.Timedelta(days=1, minutes=10)
+                    print(f"Open-Meteo døgnkvote brukt opp, venter til {reset:%Y-%m-%d %H:%M} UTC", flush=True)
+                    while pd.Timestamp.now(tz="UTC") < reset:  # korte søvner: tiden PC-en sover telles ikke av sleep()
+                        time.sleep(60)
+                    continue
+                if r.status_code == 429 and waited < QUOTA_WAIT_S:
+                    pause = 65 if "minutely" in r.text.lower() else 300
+                    print(f"Open-Meteo 429 ({r.text[:80]}), venter {pause}s", flush=True)
+                    time.sleep(pause)
+                    waited += pause
                     continue
                 r.raise_for_status()
                 j = r.json()  # kan feile ved avkuttet svar
                 break
             except (httpx.TransportError, ValueError):
-                if attempt == 11:
+                attempt += 1
+                if attempt == 30:
                     raise
-                time.sleep(10)
+                time.sleep(60)  # også nettbrudd (f.eks. DNS) som varer noen minutter
         r.raise_for_status()
         js = j if isinstance(j, list) else [j]
         frames = [pd.DataFrame(j["hourly"]).set_index("time").rename(columns=names) for j in js]

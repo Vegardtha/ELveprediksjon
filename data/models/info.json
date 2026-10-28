@@ -1,6 +1,6 @@
 {
- "trained_at": "2026-10-27T13:26:03.529993",
- "train_seconds": 371.3635457996279,
+ "trained_at": "2026-10-28T13:07:45.123137",
+ "train_seconds": 3191.678356199991,
  "weather": "wx_mixed",
  "fc_model": "metno_seamless"
 }

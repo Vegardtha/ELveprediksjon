@@ -1,6 +1,8 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { api } from './api'
 import { DamIcon } from './components/Badges'
+import { ListControls } from './components/ListControls'
+import { applyFilter, DEFAULT_FILTER } from './filter'
 import { RiverDetail } from './components/RiverDetail'
 import { RiverList } from './components/RiverList'
 import { RiverMap } from './components/RiverMap'
@@ -14,6 +16,8 @@ export default function App() {
   const [meta, setMeta] = useState<Meta | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [selected, setSelected] = useState<string | null>(fromHash)
+  const [filter, setFilter] = useState(DEFAULT_FILTER)
+  const shown = useMemo(() => applyFilter(rivers, filter), [rivers, filter])
 
   useEffect(() => {
     Promise.all([api.rivers(), api.meta()])
@@ -40,7 +44,7 @@ export default function App() {
         <span className="muted">Vannføringsprognoser for padleelver på Østlandet</span>
       </header>
       <section className="map-wrap">
-        <RiverMap rivers={rivers} selected={selected} onSelect={onSelect} />
+        <RiverMap rivers={shown} selected={selected} onSelect={onSelect} />
         <div className="map-legend">
           {STATUS_ORDER.map((s) => (
             <span key={s}><i className="dot" style={{ background: STATUS[s].color }} />{STATUS[s].short}</span>
@@ -54,11 +58,12 @@ export default function App() {
           <RiverDetail id={selected} onClose={() => select(null)} />
         ) : (
           <>
+            <ListControls filter={filter} onChange={setFilter} shown={shown.length} total={rivers.length} />
             <div className="list-head">
               <span>Elv · nå</span>
               <span className="muted">Neste dager · % sjanse for padlbart</span>
             </div>
-            <RiverList rivers={rivers} selected={selected} onSelect={onSelect} />
+            <RiverList rivers={shown} selected={selected} onSelect={onSelect} grouped={filter.sort === 'basin'} />
           </>
         )}
         <footer className="attrib">

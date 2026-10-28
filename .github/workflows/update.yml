@@ -45,6 +45,14 @@ jobs:
       - name: Installer frontend-avhengigheter
         run: npm ci --prefix frontend
 
+      # GTS-feltmiddel hentes bare én til to ganger i døgnet (elvepred/model/predict.py: gts_state).
+      # Cache-nøkler kan ikke overskrives, så hver kjøring lagrer en ny og gjenoppretter den nyeste.
+      - uses: actions/cache@v6
+        with:
+          path: data/cache
+          key: gts-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: gts-
+
       - name: Beregn prognose
         env:
           NVE_API_KEY: ${{ secrets.NVE_API_KEY }}
