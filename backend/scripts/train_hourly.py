@@ -27,7 +27,9 @@ REPORT_K = [1, 3, 6, 12, 18, 24, 36, 48]
 N_TREES = 800
 
 t0 = time.perf_counter()
-stations = [r["station"] for r in load_rivers()]
+# bare stasjoner med prognosearkiv; de andre får «ukjent stasjon» i modellen til neste trening
+stations = [r["station"] for r in load_rivers()
+            if (DATA / "raw" / "forecasts" / "metno_seamless" / f"{r['station']}_hourly.parquet").exists()]
 d = hourly.dataset(stations)
 cols = [c for c in d.columns if c not in hourly.NON_FEATURES]
 tr, va, te = d[d.time <= TRAIN_END], d[(d.time > TRAIN_END) & (d.time <= VAL_END)], d[d.time > VAL_END]

@@ -81,8 +81,10 @@ def _future(df: pd.DataFrame, h: int) -> pd.DataFrame:
     return f
 
 
-def load_forecasts(station: str, model: str) -> pd.DataFrame:
-    return pd.read_parquet(DATA / "raw" / "forecasts" / model / f"{station}.parquet")
+def load_forecasts(station: str, model: str) -> pd.DataFrame | None:
+    """None hvis arkivet ikke er hentet ennå; wx_mixed bruker da fasit for hele perioden."""
+    f = DATA / "raw" / "forecasts" / model / f"{station}.parquet"
+    return pd.read_parquet(f) if f.exists() else None
 
 
 def _future_wx(df: pd.DataFrame, h: int, fc: pd.DataFrame | None, mixed: bool = False) -> pd.DataFrame:
@@ -152,6 +154,8 @@ def dataset(stations: list[str], h: int, weather: str | None = "gts", nowcast: b
         df = load_station(st)
         hq = load_hourly(st) if nowcast else None
         fc = load_forecasts(st, fc_model) if weather in ("wx_fc", "wx_mixed") else None
+        if weather == "wx_fc" and fc is None:  # ingen ekte prognoser: radene skal falle ut av testen, ikke få fasit
+            fc = pd.DataFrame(columns=[f"{v}_fc{k}" for v in ("rr", "tm") for k in HORIZONS], dtype=float)
         for hour in (HOURS if nowcast else (None,)):
             X = build(df, h, weather, hq, hour, fc)
             X["station"] = st

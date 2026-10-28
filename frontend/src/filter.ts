@@ -3,9 +3,9 @@ import type { River } from './types'
 // Hovednummeret i NVE-stasjonsnummeret er vassdraget (REGINE).
 const BASINS: Record<string, string> = {
   '2': 'Glomma og Gudbrandsdalen',
-  '6': 'Oslo og Asker',
-  '7': 'Oslo og Asker',
-  '8': 'Oslo og Asker',
+  '6': 'Oslo og Bærum',
+  '7': 'Oslo og Bærum',
+  '8': 'Oslo og Bærum',
   '12': 'Drammensvassdraget',
   '15': 'Numedalslågen',
   '16': 'Skiensvassdraget',
