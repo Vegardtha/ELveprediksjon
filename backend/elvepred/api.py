@@ -25,6 +25,8 @@ ATTRIBUTION = [
      "url": "https://nokken.net"},
     {"name": "whitewater.guide", "what": "padlenivåer", "license": "CC BY-NC-SA 4.0",
      "url": "https://whitewater.guide"},
+    {"name": "NVE Elvenett (ELVIS)", "what": "elveløp for seksjonene", "license": "NLOD 2.0",
+     "url": "https://www.nve.no/kart/kartdata/vassdragsdata/elvenett-elvis/"},
 ]
 
 app = FastAPI(title="Elvepred")

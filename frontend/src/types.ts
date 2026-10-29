@@ -74,3 +74,8 @@ export interface HourlyForecast {
   prob_paddleable: number
   rr: number | null
 }
+
+/** Seksjoner tegnet langs elva (OpenStreetMap), koordinater som [lon, lat]. */
+export interface SectionLines {
+  features: { properties: { id: string }; geometry: { coordinates: [number, number][] } }[]
+}

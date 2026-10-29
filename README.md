@@ -11,6 +11,7 @@ Siden oppdateres hver 2. time av GitHub Actions og publiseres på GitHub Pages.
 - **Timesmodell:** én XGBoost-modell per kvantil med horisont som feature, 1–48 timer fra siste timesmåling (`backend/elvepred/hourly.py`). Den glir gradvis over i døgnprognosen og er lik den ved 48 timer (valgt med `scripts/backtest_blend.py`).
 - **Usikkerhet:** p10/p90 er kalibrert konformt på en valideringsperiode, så 80 %-båndet holder omtrent.
 - **Nivåer:** padlenivåer og innsett/utsett fra nokken.net og whitewater.guide, i `backend/config/rivers.yaml`.
+- **Kart:** hver seksjon tegnes langs elva, fra innsett til utsett i NVEs elvenett (`scripts/fetch_section_lines.py`, lagret i `backend/config/section_lines.geojson`), og farges etter vannføringen nå eller på valgt prognosedag.
 
 ## Drift (GitHub)
 
@@ -49,6 +50,7 @@ uv run --directory backend python scripts/fetch_catchments.py
 uv run --directory backend python scripts/fetch_history.py --new
 uv run --directory backend python scripts/fetch_hourly.py --new
 uv run --directory backend python scripts/fetch_forecasts.py
+uv run --directory backend python scripts/fetch_section_lines.py
 ```
 
 Deretter ny trening som under (bare nødvendig for nye stasjoner). Modellene kjenner bare stasjonene de er trent på.
@@ -72,7 +74,7 @@ uv run --directory backend python scripts/train_hourly.py
 - Vannføring: [NVE HydAPI](https://hydapi.nve.no), NLOD 2.0.
 - Observert vær, snø og markvann: [seNorge](https://www.senorge.no) (NVE/MET), CC BY 4.0.
 - Værprognose: MET Norway via [Open-Meteo](https://open-meteo.com), CC BY 4.0. Open-Meteos gratis API er bare for ikke-kommersiell bruk.
-- Kart: © [Kartverket](https://www.kartverket.no), CC BY 4.0.
+- Kart: © [Kartverket](https://www.kartverket.no), CC BY 4.0. Elveløp: [NVE Elvenett (ELVIS)](https://www.nve.no/kart/kartdata/vassdragsdata/elvenett-elvis/), NLOD 2.0.
 - Padlenivåer og innsett/utsett i `backend/config/rivers.yaml` er hentet fra [nokken.net](https://nokken.net) og [whitewater.guide](https://whitewater.guide) og er lisensiert under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 Prognosene er modellberegninger og kan ta feil, særlig i regulerte elver. Sjekk alltid siste måling før du drar.

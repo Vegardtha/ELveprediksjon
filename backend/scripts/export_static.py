@@ -11,7 +11,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from elvepred import api
-from elvepred.settings import ROOT
+from elvepred.settings import CONFIG, ROOT
 
 p = argparse.ArgumentParser()
 p.add_argument("--out", type=Path, default=ROOT / "frontend" / "public")
@@ -35,4 +35,10 @@ for r in rivers:
     write(f"rivers/{rid}/observed_hour", api.observed(rid, "hour"))
     write(f"rivers/{rid}/forecast", api.forecast(rid))
     write(f"rivers/{rid}/forecast_hourly", api.forecast_hourly(rid))
+# seksjonslinjer langs elva (scripts/fetch_section_lines.py), bare for seksjonene som finnes
+lines = CONFIG / "section_lines.geojson"
+if lines.exists():
+    ids = {r["id"] for r in rivers}
+    fc = json.loads(lines.read_text(encoding="utf-8"))
+    write("sections", fc | {"features": [f for f in fc["features"] if f["properties"]["id"] in ids]})
 print(f"skrev {len(list(base.rglob('*.json')))} filer til {base}")

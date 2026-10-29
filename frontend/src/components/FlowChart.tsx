@@ -113,7 +113,7 @@ export function FlowChart(props: Props) {
     scale: 'time' as const,
     ticks,
     tickFormatter: (t: number) => new Date(t).toLocaleDateString('nb-NO', { day: 'numeric', month: 'numeric' }),
-    tick: { fill: 'var(--text-secondary)', fontSize: 12 },
+    tick: { fill: 'var(--ink-2)', fontSize: 12 },
     stroke: 'var(--axis)',
   }
   const zone = (y1: number, y2: number, color: string) => (
@@ -125,7 +125,7 @@ export function FlowChart(props: Props) {
         y={y}
         stroke="var(--axis)"
         strokeDasharray="2 4"
-        label={{ value: `${label} ${fmtQ(y)}`, position: 'insideTopLeft', fill: 'var(--text-secondary)', fontSize: 11 }}
+        label={{ value: `${label} ${fmtQ(y)}`, position: 'insideTopLeft', fill: 'var(--ink-2)', fontSize: 11 }}
       />
     )
 
@@ -149,11 +149,11 @@ export function FlowChart(props: Props) {
           {th.optimum !== th.minimum && line(th.optimum, 'opt')}
           {line(th.maximum, 'maks')}
           <XAxis {...xAxis} />
-          <YAxis domain={[0, yMax]} tick={{ fill: 'var(--text-secondary)', fontSize: 12 }} stroke="var(--axis)" width={48} />
-          <ReferenceLine x={now} stroke="var(--text-secondary)" label={{ value: 'nå', position: 'top', fill: 'var(--text-secondary)', fontSize: 11 }} />
+          <YAxis domain={[0, yMax]} tick={{ fill: 'var(--ink-2)', fontSize: 12 }} stroke="var(--axis)" width={48} />
+          <ReferenceLine x={now} stroke="var(--ink-2)" label={{ value: 'nå', position: 'top', fill: 'var(--ink-2)', fontSize: 11 }} />
           {isFinite(hourEnd) && (
             <ReferenceLine x={hourEnd} stroke="var(--axis)" strokeDasharray="3 3"
-              label={{ value: '48 t', position: 'top', fill: 'var(--text-secondary)', fontSize: 11 }} />
+              label={{ value: '48 t', position: 'top', fill: 'var(--ink-2)', fontSize: 11 }} />
           )}
           <Area dataKey="band" stroke="none" fill={FC} fillOpacity={0.2} connectNulls isAnimationActive={false} />
           <Line dataKey="hour" stroke={OBS} strokeWidth={2} dot={false} connectNulls isAnimationActive={false} />
@@ -165,7 +165,7 @@ export function FlowChart(props: Props) {
       <ResponsiveContainer width="100%" height={70}>
         <BarChart data={rain} margin={{ top: 4, right: 8, bottom: 0, left: -12 }}>
           <XAxis {...xAxis} hide />
-          <YAxis tick={{ fill: 'var(--text-secondary)', fontSize: 11 }} stroke="var(--axis)" width={48} />
+          <YAxis tick={{ fill: 'var(--ink-2)', fontSize: 11 }} stroke="var(--axis)" width={48} />
           <Bar dataKey="rr" fill="var(--series-rain)" radius={[2, 2, 0, 0]} barSize={8} isAnimationActive={false} />
           <Tooltip
             cursor={{ fill: 'var(--grid)' }}

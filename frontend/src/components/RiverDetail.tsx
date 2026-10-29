@@ -3,6 +3,7 @@ import { api } from '../api'
 import { REGULATION, STATUS, fmtDate, fmtQ, fmtTime, fmtWeekday, pct } from '../status'
 import type { ForecastDay, HourlyForecast, Observation, RiverDetail as Detail } from '../types'
 import { DamIcon, RegulationBadge, StatusPill } from './Badges'
+import { Gauge } from './Gauge'
 import { FlowChart, noon, utc, type FcPoint } from './FlowChart'
 
 interface Data {
@@ -28,7 +29,7 @@ export function RiverDetail({ id, onClose }: { id: string; onClose: () => void }
   }, [id])
 
   if (error) return <div className="detail"><p className="error">Kunne ikke hente data: {error}</p></div>
-  if (!data) return <div className="detail"><p className="muted">Henter …</p></div>
+  if (!data) return <div className="detail"><p className="muted">Henter prognosen …</p></div>
   const { river: r, hourly, forecast, hourlyFc } = data
   // Timesmodellen de første 48 timene, deretter døgnmodellen for dagene som ligger etter
   const hourEnd = hourlyFc.length ? utc(hourlyFc.at(-1)!.time) : -Infinity
@@ -45,25 +46,43 @@ export function RiverDetail({ id, onClose }: { id: string; onClose: () => void }
   const hourLabel = (iso: string) =>
     new Date(utc(iso)).toLocaleString('nb-NO', { weekday: 'short', hour: '2-digit', minute: '2-digit' })
   const th = r.thresholds
+  const [river, section] = r.name.split(' – ')
   const best = forecast.reduce((a, b) => (b.prob_paddleable > a.prob_paddleable ? b : a), forecast[0])
   const skill = (h: number) => r.skill.find((s) => s.horizon === h)
 
   return (
     <article className="detail">
       <header className="detail-head">
-        <button className="back" onClick={onClose} aria-label="Tilbake til listen">←</button>
-        <div>
-          <h2>{r.name} <span className="grade">{r.grade}</span></h2>
-          <div className="sub">
-            Målestasjon {r.station_name ?? ''} ({r.station}) · {fmtQ(r.q_now)} m³/s {r.q_now_time && `(${fmtTime(r.q_now_time)})`}
-          </div>
+        <button className="back" onClick={onClose}>
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 5 8l5 5" fill="none" stroke="currentColor" strokeWidth="1.8" /></svg>
+          Alle seksjoner
+        </button>
+        <h2>
+          {river}
+          {section && <span className="section">{section}</span>}
+        </h2>
+        <div className="sub">
+          {r.grade && <span className="grade">Grad {r.grade}</span>}
+          <RegulationBadge regulation={r.regulation} full />
+          {r.approximate && (
+            <span className="badge reg-unknown" title="Målestasjonen står i en nabo-elv eller lenger nede i vassdraget">Omtrentlig måler</span>
+          )}
         </div>
       </header>
 
-      <div className="now">
-        <StatusPill status={r.status_now} />
-        <RegulationBadge regulation={r.regulation} full />
+      <div className="now" style={{ '--c': r.status_now ? STATUS[r.status_now].color : 'var(--line)' } as React.CSSProperties}>
+        <div className="now-q">
+          <span className="now-num">{fmtQ(r.q_now)}</span> <span className="now-unit">m³/s</span>
+        </div>
+        <div className="now-text">
+          <StatusPill status={r.status_now} />
+          <span className="muted">
+            {r.station_name ?? r.station}
+            {r.q_now_time && `, ${fmtTime(r.q_now_time)}`}
+          </span>
+        </div>
       </div>
+      <Gauge q={r.q_now} th={th} />
 
       {r.regulation === 'regulated' && (
         <div className="callout">
@@ -78,7 +97,7 @@ export function RiverDetail({ id, onClose }: { id: string; onClose: () => void }
 
       {best && best.prob_paddleable >= 0.5 ? (
         <p className="headline">
-          Beste dag: <b>{fmtWeekday(best.date)} {fmtDate(best.date)}</b> – {pct(best.prob_paddleable)} sjanse for padlbar vannføring.
+          Beste dag er <b>{fmtWeekday(best.date)} {fmtDate(best.date)}</b> – {pct(best.prob_paddleable)} sjanse for padlbar vannføring.
         </p>
       ) : (
         <p className="headline">Ingen dager med over 50 % sjanse for padlbar vannføring de neste {forecast.length} dagene.</p>

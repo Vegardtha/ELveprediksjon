@@ -1,4 +1,4 @@
-import type { ForecastDay, HourlyForecast, Meta, Observation, River, RiverDetail } from './types'
+import type { ForecastDay, HourlyForecast, Meta, Observation, River, RiverDetail, SectionLines } from './types'
 
 // Statiske JSON-filer fra backend/scripts/export_static.py, relativt til der siden ligger
 async function get<T>(path: string): Promise<T> {
@@ -14,4 +14,5 @@ export const api = {
   observed: (id: string, resolution: 'day' | 'hour') => get<Observation[]>(`/rivers/${id}/observed_${resolution}`),
   forecast: (id: string) => get<ForecastDay[]>(`/rivers/${id}/forecast`),
   forecastHourly: (id: string) => get<HourlyForecast[]>(`/rivers/${id}/forecast_hourly`),
+  sections: () => get<SectionLines>('/sections'),
 }

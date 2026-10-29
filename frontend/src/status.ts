@@ -1,16 +1,21 @@
-import type { Regulation, Status } from './types'
+import type { Regulation, River, Status } from './types'
 
 // Ordnet skala fra for lite til for mye. Farge bærer aldri betydning alene – alltid med tekst.
-export const STATUS: Record<Status, { label: string; short: string; color: string }> = {
-  dry: { label: 'For lite vann', short: 'Tørt', color: '#9a9890' },
-  low: { label: 'Lavt, under minimum', short: 'Lavt', color: '#86b6ef' },
-  'min-opt': { label: 'Padlbart, i lavkant', short: 'Padlbart', color: '#7cc576' },
-  'opt-max': { label: 'Optimalt', short: 'Optimalt', color: '#0ca30c' },
-  high: { label: 'Høyt', short: 'Høyt', color: '#ec835a' },
-  impossible: { label: 'For mye vann', short: 'For mye', color: '#d03b3b' },
+// `rank` styrer tegnerekkefølgen på kartet: padlbare seksjoner ligger øverst.
+export const STATUS: Record<Status, { label: string; short: string; color: string; rank: number }> = {
+  dry: { label: 'For lite vann', short: 'Tørt', color: '#9a9890', rank: 1 },
+  low: { label: 'Lavt, under minimum', short: 'Lavt', color: '#6fa6e6', rank: 2 },
+  'min-opt': { label: 'Padlbart, i lavkant', short: 'Padlbart', color: '#86c95a', rank: 5 },
+  'opt-max': { label: 'Optimalt', short: 'Optimalt', color: '#14983a', rank: 6 },
+  high: { label: 'Høyt', short: 'Høyt', color: '#ef8a3e', rank: 4 },
+  impossible: { label: 'For mye vann', short: 'For mye', color: '#d23a3a', rank: 3 },
 }
 
 export const STATUS_ORDER: Status[] = ['dry', 'low', 'min-opt', 'opt-max', 'high', 'impossible']
+export const PADDLEABLE: Status[] = ['min-opt', 'opt-max']
+
+/** Status nå (`day` = -1) eller for prognosedag `day`. */
+export const statusOn = (r: River, day: number): Status | null => (day < 0 ? r.status_now : r.days[day]?.status ?? null)
 
 export const REGULATION: Record<Regulation, { label: string; long: string }> = {
   regulated: { label: 'Demningsstyrt', long: 'Vannføringen styres i stor grad av slipp fra demning' },
