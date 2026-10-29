@@ -30,7 +30,8 @@ from elvepred.settings import CONFIG, DATA, load_rivers
 OSTLANDET = set(range(1, 17)) | {311}
 # målestasjonen står i en annen (nabo)elv enn seksjonen, selv om elvenavnet er likt
 PROXY = {"12.171.0", "12.215.0", "311.460.0"}
-# Glomma ved Solbergfoss: 40 000 km², styrt av magasinslipp og uten nedbørfelt i NVEs kart (trengs for GTS)
+# Glomma ved Solbergfoss: 40 000 km², styrt av magasinslipp og uten nedbørfelt i NVEs kart (trengs for GTS).
+# Pæddekummen ligger derfor inne for hånd med `forecast: false` (bare målt vannføring).
 EXCLUDE = {"2.605.0"}
 # målestasjonen står i seksjonens elv selv om HydAPI bruker vassdrags- eller stedsnavn
 PRIMARY = {"12.164.0": "Usteåni", "12.76.0": "Storåni", "16.10.0": "Hedølla"}

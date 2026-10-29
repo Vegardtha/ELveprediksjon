@@ -9,7 +9,7 @@ interface Props {
 
 /** Velger nå eller en av prognosedagene. Søylen viser hvor mange seksjoner som er padlbare den dagen. */
 export function DayPicker({ rivers, day, onChange }: Props) {
-  const dates = rivers[0]?.days.map((d) => d.date) ?? []
+  const dates = rivers.find((r) => r.days.length)?.days.map((d) => d.date) ?? []
   const count = (i: number) => rivers.filter((r) => PADDLEABLE.includes(statusOn(r, i)!)).length
   const opts = [-1, ...dates.map((_, i) => i)].map((i) => ({ i, n: count(i) }))
   const max = Math.max(1, ...opts.map((o) => o.n))

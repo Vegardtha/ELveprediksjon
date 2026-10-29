@@ -20,8 +20,13 @@ def load_rivers() -> list[dict]:
 
 
 def load_stations() -> list[dict]:
-    """Første (primære) seksjon per målestasjon. Modellene trenes og evalueres per stasjon."""
+    """Første (primære) seksjon per målestasjon. Modellene trenes og evalueres per stasjon.
+
+    Seksjoner med `forecast: false` (bare målt vannføring) er ikke med.
+    """
     out = {}
     for r in load_rivers():
+        if r.get("forecast") is False:
+            continue
         out.setdefault(r["station"], r)
     return list(out.values())

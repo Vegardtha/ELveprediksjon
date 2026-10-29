@@ -133,8 +133,12 @@ export function FlowChart(props: Props) {
     <div className="chart">
       <div className="legend">
         <span><i className="sw line" style={{ background: OBS }} />Målt siste 48 t</span>
-        <span><i className="sw line dashed" style={{ borderColor: FC }} />Prognose (median)</span>
-        <span><i className="sw band" style={{ background: FC }} />80 % usikkerhet</span>
+        {forecast.length > 0 && (
+          <>
+            <span><i className="sw line dashed" style={{ borderColor: FC }} />Prognose (median)</span>
+            <span><i className="sw band" style={{ background: FC }} />80 % usikkerhet</span>
+          </>
+        )}
         <span><i className="sw band" style={{ background: STATUS['opt-max'].color }} />Optimalt</span>
         <span><i className="sw band" style={{ background: STATUS['min-opt'].color }} />Padlbart</span>
       </div>
@@ -161,22 +165,26 @@ export function FlowChart(props: Props) {
           <Tooltip content={<Tip />} cursor={{ stroke: 'var(--axis)' }} />
         </ComposedChart>
       </ResponsiveContainer>
-      <div className="chart-sub">Varslet nedbør i feltet (mm/døgn)</div>
-      <ResponsiveContainer width="100%" height={70}>
-        <BarChart data={rain} margin={{ top: 4, right: 8, bottom: 0, left: -12 }}>
-          <XAxis {...xAxis} hide />
-          <YAxis tick={{ fill: 'var(--ink-2)', fontSize: 11 }} stroke="var(--axis)" width={48} />
-          <Bar dataKey="rr" fill="var(--series-rain)" radius={[2, 2, 0, 0]} barSize={8} isAnimationActive={false} />
-          <Tooltip
-            cursor={{ fill: 'var(--grid)' }}
-            content={({ active, payload }) =>
-              active && payload?.length ? (
-                <div className="tip">{fmtWhen(payload[0].payload.t, false)}: {Number(payload[0].value).toFixed(1)} mm</div>
-              ) : null
-            }
-          />
-        </BarChart>
-      </ResponsiveContainer>
+      {rain.length > 0 && (
+        <>
+          <div className="chart-sub">Varslet nedbør i feltet (mm/døgn)</div>
+          <ResponsiveContainer width="100%" height={70}>
+            <BarChart data={rain} margin={{ top: 4, right: 8, bottom: 0, left: -12 }}>
+              <XAxis {...xAxis} hide />
+              <YAxis tick={{ fill: 'var(--ink-2)', fontSize: 11 }} stroke="var(--axis)" width={48} />
+              <Bar dataKey="rr" fill="var(--series-rain)" radius={[2, 2, 0, 0]} barSize={8} isAnimationActive={false} />
+              <Tooltip
+                cursor={{ fill: 'var(--grid)' }}
+                content={({ active, payload }) =>
+                  active && payload?.length ? (
+                    <div className="tip">{fmtWhen(payload[0].payload.t, false)}: {Number(payload[0].value).toFixed(1)} mm</div>
+                  ) : null
+                }
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        </>
+      )}
     </div>
   )
 }

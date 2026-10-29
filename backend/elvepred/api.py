@@ -75,10 +75,15 @@ def _river(rid: str) -> dict:
     return r
 
 
-def _summary(r: dict, fc: pd.DataFrame) -> dict:
+def _summary(r: dict, fc: pd.DataFrame, obs: pd.DataFrame | None) -> dict:
     t = r["thresholds"]
     f = fc[fc["river"] == r["id"]].sort_values("date")
     q_now = float(f["q_now"].iloc[0]) if len(f) else None
+    q_now_time = _clean(f["q_now_time"].iloc[0]) if len(f) else None
+    if q_now is None and obs is not None:  # seksjoner uten prognose: siste timesmåling
+        o = obs[(obs["river"] == r["id"]) & (obs["resolution"] == "hour")].sort_values("time")
+        if len(o):
+            q_now, q_now_time = float(o["q"].iloc[-1]), _clean(o["time"].iloc[-1])
     return {
         "id": r["id"], "name": r["name"], "grade": r.get("grade"), "station": r["station"],
         "station_name": r.get("station_name"),
@@ -88,7 +93,8 @@ def _summary(r: dict, fc: pd.DataFrame) -> dict:
         "putin": r.get("putin"), "takeout": r.get("takeout"), "station_pos": r.get("station_pos"),
         "nokken_url": f"https://nokken.net/rivers/{r['nokken_river']}" if r.get("nokken_river") else None,
         "q_now": q_now,
-        "q_now_time": _clean(f["q_now_time"].iloc[0]) if len(f) else None,
+        "q_now_time": q_now_time,
+        "forecast": r.get("forecast") is not False,
         "status_now": classify.LABELS[classify.interval(q_now, t)] if q_now is not None else None,
         "days": _records(f[["date", "p10", "p50", "p90", "status", "prob_paddleable", "prob_optimal"]]),
     }
@@ -103,7 +109,7 @@ def meta():
 @app.get("/api/rivers")
 def rivers():
     d = _load()
-    return [_summary(r, d["fc"]) for r in d["rivers"].values()]
+    return [_summary(r, d["fc"], d["obs"]) for r in d["rivers"].values()]
 
 
 @app.get("/api/rivers/{rid}")
@@ -112,13 +118,13 @@ def river(rid: str):
     d = _load()
     m = d["metrics"]
     # treffsikkerhet evalueres per målestasjon, på stasjonens primære seksjon
-    mid = d["primary"][r["station"]]
+    mid = d["primary"].get(r["station"])
     skill = [{"horizon": int(h), **{k: m[h][METRICS_KEY][mid].get(k) for k in ("NSE", "F1_paddleable")}}
              for h in sorted(m, key=int) if mid in m[h].get(METRICS_KEY, {})]
     mh = d["metrics_hourly"]
     skill_hourly = [{"hours": int(k), "NSE": v["model"][mid]["NSE"], "NSE_persistence": v["persistence"][mid]["NSE"]}
                     for k, v in sorted(mh.items(), key=lambda x: int(x[0])) if mid in v["model"]]
-    return {**_summary(r, d["fc"]), "skill": skill, "skill_hourly": skill_hourly}
+    return {**_summary(r, d["fc"], d["obs"]), "skill": skill, "skill_hourly": skill_hourly}
 
 
 @app.get("/api/rivers/{rid}/observed")

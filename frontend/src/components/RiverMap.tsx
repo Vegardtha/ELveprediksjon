@@ -9,6 +9,8 @@ interface Props {
   day: number
   selected: string | null
   onSelect: (id: string) => void
+  /** søketeksten; kartet zoomer til treffene når den endres */
+  query: string
 }
 
 const dark = () => matchMedia('(prefers-color-scheme: dark)').matches
@@ -113,7 +115,7 @@ function addLayers(m: maplibregl.Map) {
 
 const HIT = ['line', 'line-reg', 'start']
 
-export function RiverMap({ rivers, lines, day, selected, onSelect }: Props) {
+export function RiverMap({ rivers, lines, day, selected, onSelect, query }: Props) {
   const el = useRef<HTMLDivElement>(null)
   const map = useRef<maplibregl.Map | null>(null)
   const [ready, setReady] = useState(false)
@@ -147,8 +149,10 @@ export function RiverMap({ rivers, lines, day, selected, onSelect }: Props) {
           .setLngLat(e.lngLat)
           .setHTML(
             `<b>${r.name}</b>${r.grade ? ` <span>${r.grade}</span>` : ''}<br>` +
-              `<i style="background:${s ? STATUS[s].color : '#888'}"></i>${s ? STATUS[s].label : 'Ukjent'} · ` +
-              (d ? `${fmtQ(d.p50)} m³/s, ${pct(d.prob_paddleable)} sjanse` : `${fmtQ(r.q_now)} m³/s`),
+              (s
+                ? `<i style="background:${STATUS[s].color}"></i>${STATUS[s].label} · `
+                : `${r.forecast ? 'Ukjent' : 'Ingen prognose'} · `) +
+              (d ? `${fmtQ(d.p50)} m³/s, ${pct(d.prob_paddleable)} sjanse` : `${fmtQ(r.q_now)} m³/s nå`),
           )
           .addTo(m)
       })
@@ -199,6 +203,19 @@ export function RiverMap({ rivers, lines, day, selected, onSelect }: Props) {
       m.fitBounds(b, { padding: 70, maxZoom: 12.5, duration: 700 })
     } else m.easeTo({ center: start(r), zoom: Math.max(m.getZoom(), 11), duration: 700 })
   }, [ready, selected, rivers, lines])
+
+  // søk: zoom inn på treffene, og ut til alle seksjonene når søket tømmes
+  useEffect(() => {
+    const m = map.current
+    if (!m || !ready || !fitted.current || !rivers.length) return
+    const t = setTimeout(() => {
+      const b = new maplibregl.LngLatBounds()
+      rivers.forEach((r) => (geometry(r, lines) ?? [start(r)]).forEach((p) => b.extend(p)))
+      m.fitBounds(b, { padding: { top: 100, bottom: 50, left: 40, right: 40 }, maxZoom: 11.5, duration: 600 })
+    }, 300)
+    return () => clearTimeout(t)
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- bare når søket endres, ikke ved dagbytte
+  }, [query, ready])
 
   return <div ref={el} className="map" role="region" aria-label="Kart over seksjonene, farget etter vannføring" />
 }

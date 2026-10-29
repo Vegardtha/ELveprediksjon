@@ -37,6 +37,8 @@ export interface River {
   q_now: number | null
   q_now_time: string | null
   status_now: Status | null
+  /** false: bare målt vannføring, ingen prognose (days er tom) */
+  forecast: boolean
   days: Day[]
 }
 

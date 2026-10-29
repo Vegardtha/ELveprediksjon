@@ -18,7 +18,7 @@ export function RiverList({ rivers, selected, onSelect, grouped, day }: Props) {
       {rivers.map((r, i) => {
         const [river, section] = r.name.split(' – ')
         const s = statusOn(r, day)
-        const q = day >= 0 ? r.days[day]?.p50 : r.q_now
+        const q = day >= 0 && r.forecast ? r.days[day]?.p50 : r.q_now
         return (
           <li key={r.id}>
             {grouped && basin(r) !== (i > 0 ? basin(rivers[i - 1]) : null) && <h2 className="list-group">{basin(r)}</h2>}
@@ -37,12 +37,16 @@ export function RiverList({ rivers, selected, onSelect, grouped, day }: Props) {
                   <span className="reg" title="Demningsstyrt"><DamIcon size={13} /><span className="sr">Demningsstyrt</span></span>
                 )}
                 <span className="q">
-                  {day >= 0 && <span className="approx">ca. </span>}
+                  {day >= 0 && r.forecast && <span className="approx">ca. </span>}
                   {fmtQ(q)} <small>m³/s</small>
                 </span>
               </div>
-              <div className="row-status">{s ? STATUS[s].label : 'Ingen måling'}</div>
-              <DayStrip days={r.days} compact active={day} />
+              <div className="row-status">{s ? STATUS[s].label : !r.forecast && day >= 0 ? 'Ingen prognose for dagen' : 'Ingen måling'}</div>
+              {r.forecast ? (
+                <DayStrip days={r.days} compact active={day} />
+              ) : (
+                <div className="no-fc">Bare målt vannføring, ingen prognose</div>
+              )}
             </button>
           </li>
         )

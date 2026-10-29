@@ -6,6 +6,7 @@ import { applyFilter, DEFAULT_FILTER } from './filter'
 import { RiverDetail } from './components/RiverDetail'
 import { RiverList } from './components/RiverList'
 import { RiverMap } from './components/RiverMap'
+import { SearchBox } from './components/SearchBox'
 import { STATUS, STATUS_ORDER, fmtDate, fmtTime, fmtWeekday } from './status'
 import type { Meta, River } from './types'
 
@@ -41,7 +42,14 @@ export default function App() {
     setSelected(id)
   }, [])
   const onSelect = useCallback((id: string) => select(id), [select])
-  const date = day >= 0 ? rivers[0]?.days[day]?.date : null
+  const date = day >= 0 ? rivers.find((r) => r.days.length)?.days[day]?.date : null
+  const search = useCallback(
+    (q: string) => {
+      setFilter((f) => ({ ...f, q }))
+      if (q && selected) select(null) // treffene vises i lista
+    },
+    [selected, select],
+  )
   const dayLabel = date ? `${fmtWeekday(date)} ${fmtDate(date)}` : null
 
   return (
@@ -52,9 +60,10 @@ export default function App() {
           Elvepred
         </h1>
         <p>Vannføring og prognoser for padleseksjoner på Østlandet</p>
+        <SearchBox value={filter.q} onChange={search} hits={shown.length} />
       </header>
       <section className="map-wrap">
-        <RiverMap rivers={shown} lines={lines} day={day} selected={selected} onSelect={onSelect} />
+        <RiverMap rivers={shown} lines={lines} day={day} selected={selected} onSelect={onSelect} query={filter.q} />
         <div className="map-days">
           <DayPicker rivers={rivers} day={day} onChange={setDay} />
         </div>

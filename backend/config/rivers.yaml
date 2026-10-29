@@ -3,6 +3,8 @@
 # thresholds brukes til klassifisering; kilde nokken.net (CC BY-NC-SA 4.0) der seksjonen har GOOD-intervall,
 # ellers whitewater.guide. Mapping fra nokken: LOW.min → minimum, GOOD → optimum..maximum, VERY HIGH.min → impossible.
 # regulation: regulated (dam-/magasinstyrt) | partly | unregulated | unknown, fra NVE HydAPI Stations.
+# forecast: false gir bare målt vannføring, uten prognose (for stasjoner modellen ikke kan brukes på, f.eks. uten
+# nedbørfelt i NVEs kart). Slike seksjoner er ikke med i trening, evaluering eller værhenting.
 rivers:
 - id: akerselva
   station_pos:
@@ -3423,3 +3425,28 @@ rivers:
   takeout:
   - 61.1307
   - 9.0878
+- id: glomma-paeddekummen
+  name: Glomma – Pæddekummen
+  station: 2.605.0
+  station_name: Solbergfoss
+  station_pos:
+  - 59.63733
+  - 11.15354
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 194 magasiner, 100 % av feltet regulert, magasinene rommer 17 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV
+  approximate: false
+  forecast: false
+  thresholds:
+    minimum: 1100
+    optimum: 2000
+    maximum: 2700
+    impossible: 3500
+    source: whitewater.guide
+  wwguide_section: a38c14fc-3783-11ee-9e0c-5f10601bca94
+  putin:
+  - 59.271
+  - 11.1228
+  takeout:
+  - 59.266
+  - 11.1034

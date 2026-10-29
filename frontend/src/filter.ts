@@ -20,7 +20,7 @@ export interface Filter {
   hideRegulated: boolean
   paddleableOnly: boolean
 }
-export const DEFAULT_FILTER: Filter = { q: '', sort: 'best', hideRegulated: false, paddleableOnly: false }
+export const DEFAULT_FILTER: Filter = { q: '', sort: 'name', hideRegulated: false, paddleableOnly: false }
 
 const norm = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g, '')
 // sjanse for padlbart på valgt dag, eller beste av de neste tre dagene når ingen dag er valgt (`day` = -1)
@@ -29,9 +29,12 @@ const best = (r: River, day: number) =>
 
 export function applyFilter(rivers: River[], f: Filter, day = -1): River[] {
   const q = norm(f.q.trim())
+  // treff i elve- eller seksjonsnavnet går foran; målestasjon og vassdrag brukes bare når ingen navn treffer
+  const byRiver = rivers.some((r) => norm(r.name).includes(q))
+  const hit = (r: River) => !q || norm(byRiver ? r.name : `${r.station_name ?? ''} ${basin(r)}`).includes(q)
   const out = rivers.filter(
     (r) =>
-      (!q || norm(`${r.name} ${r.station_name ?? ''} ${basin(r)}`).includes(q)) &&
+      hit(r) &&
       (!f.hideRegulated || r.regulation !== 'regulated') &&
       (!f.paddleableOnly || best(r, day) >= 0.5),
   )

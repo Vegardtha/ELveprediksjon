@@ -1,6 +1,6 @@
 # Elvepred
 
-Vannføringsprognoser for 141 padleseksjoner på 55 målestasjoner på Østlandet: time for time de neste 48 timene, deretter døgn for døgn ut 9 dager, med usikkerhet og sjanse for padlbar vannføring. Elver som styres av demninger er merket.
+Vannføringsprognoser for 141 padleseksjoner på 55 målestasjoner på Østlandet: time for time de neste 48 timene, deretter døgn for døgn ut 9 dager, med usikkerhet og sjanse for padlbar vannføring. Elver som styres av demninger er merket. Glomma ved Pæddekummen vises med bare målt vannføring (`forecast: false` i `rivers.yaml`), fordi målestasjonen mangler nedbørfelt i NVEs kart.
 
 Siden oppdateres hver 2. time av GitHub Actions og publiseres på GitHub Pages.
 

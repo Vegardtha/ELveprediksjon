@@ -88,14 +88,20 @@ export function RiverDetail({ id, onClose }: { id: string; onClose: () => void }
         <div className="callout">
           <DamIcon size={18} />
           <div>
-            <b>{REGULATION.regulated.long}.</b> {r.regulation_note} Prognosen bygger på vær og historikk og kan ikke
-            forutse planlagte slipp eller stenging – sjekk siste måling før du drar.
+            <b>{REGULATION.regulated.long}.</b> {r.regulation_note}
+            {r.forecast &&
+              ' Prognosen bygger på vær og historikk og kan ikke forutse planlagte slipp eller stenging – sjekk siste måling før du drar.'}
           </div>
         </div>
       )}
       {r.regulation === 'partly' && <p className="note">{r.regulation_note}</p>}
 
-      {best && best.prob_paddleable >= 0.5 ? (
+      {!r.forecast ? (
+        <p className="headline">
+          Ingen prognose for denne seksjonen: målestasjonen mangler nedbørfelt i NVEs kart, så modellen kan ikke brukes
+          her. Under ser du de siste målingene.
+        </p>
+      ) : best && best.prob_paddleable >= 0.5 ? (
         <p className="headline">
           Beste dag er <b>{fmtWeekday(best.date)} {fmtDate(best.date)}</b> – {pct(best.prob_paddleable)} sjanse for padlbar vannføring.
         </p>
@@ -105,7 +111,7 @@ export function RiverDetail({ id, onClose }: { id: string; onClose: () => void }
 
       <FlowChart hourly={hourly} forecast={fcPoints} rain={rain} thresholds={th} />
 
-      <table className="fc-table">
+      {r.forecast && <table className="fc-table">
         <thead>
           <tr>
             <th>Tid</th>
@@ -144,7 +150,7 @@ export function RiverDetail({ id, onClose }: { id: string; onClose: () => void }
             </tr>
           ))}
         </tbody>
-      </table>
+      </table>}
 
       <dl className="facts">
         <div><dt>Padlbart</dt><dd>{fmtQ(th.minimum)}–{fmtQ(th.maximum)} m³/s</dd></div>

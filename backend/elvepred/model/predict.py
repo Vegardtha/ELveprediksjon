@@ -69,6 +69,15 @@ def current_inputs(station: str, today: pd.Timestamp) -> tuple[pd.DataFrame, pd.
     return w.join(q, how="left").asfreq("D"), hq, openmeteo.daily_forecasts(fch), fch, from_cache
 
 
+def measured(station: str, today: pd.Timestamp) -> tuple[pd.Series, pd.Series]:
+    """Bare målt døgn- og timesvannføring, for seksjoner uten prognose."""
+    q = hydapi.daily_discharge(station, (today - pd.Timedelta(days=OBSERVED_DAYS)).strftime("%Y-%m-%d"),
+                               today.strftime("%Y-%m-%d"))["q"].dropna()
+    hq = hydapi.hourly_discharge(station, (today - pd.Timedelta(hours=OBSERVED_HOURS)).strftime("%Y-%m-%d"),
+                                 today.strftime("%Y-%m-%d")).dropna()
+    return q, hq
+
+
 def fetch_all(stations: list[str], today: pd.Timestamp) -> dict[str, tuple | Exception]:
     """Henter inndata for alle stasjoner parallelt. En feilet stasjon gir unntaket i stedet for data."""
     def one(st):
@@ -88,6 +97,9 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
     hcal = {int(k): v for k, v in json.loads((MODELS / "hourly_calibration.json").read_text()).items()}
     hk = sorted(hcal)
     rivers = load_rivers()
+    # seksjoner med `forecast: false` får bare målt vannføring
+    observe = [r for r in rivers if r.get("forecast") is False]
+    rivers = [r for r in rivers if r.get("forecast") is not False]
     t0 = time.perf_counter()
     inputs = fetch_all(list(dict.fromkeys(r["station"] for r in rivers)), today)
     timing = {"fetch_s": time.perf_counter() - t0, "predict_s": 0.0,
@@ -140,6 +152,15 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
             hrows.append(hourly_q.assign(river=r["id"], **pd.DataFrame(
                 [classified(*v, t) for v in hourly_q[["p10", "p50", "p90"]].to_numpy()], index=hourly_q.index)))
         timing["predict_s"] += time.perf_counter() - t0
+    for r in observe:
+        try:
+            d, hobs = measured(r["station"], today)
+        except Exception as e:
+            print(f"::warning::{r['station']}: kunne ikke hente målinger ({type(e).__name__}: {e})", file=sys.stderr)
+            failed.append(r["id"])
+            continue
+        obs.append(pd.DataFrame({"river": r["id"], "time": d.index, "q": d.values, "resolution": "day"}))
+        obs.append(pd.DataFrame({"river": r["id"], "time": hobs.index, "q": hobs.values, "resolution": "hour"}))
     if not rows:
         raise RuntimeError(f"ingen elver fikk prognose (feilet: {failed})")
     out = pd.DataFrame(rows)
