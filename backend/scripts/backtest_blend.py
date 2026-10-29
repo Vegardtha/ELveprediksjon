@@ -12,14 +12,13 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import lightgbm as lgb
 import numpy as np
 import pandas as pd
 
 from elvepred import features, hourly
 from elvepred.evaluation import nse
-from elvepred.model.train import FC_MODEL, N_ESTIMATORS, PARAMS, WEATHER
-from elvepred.settings import DATA, load_rivers
+from elvepred.model.train import FC_MODEL, N_ESTIMATORS, WEATHER, fit_quantile
+from elvepred.settings import DATA, load_stations
 
 SPLIT = "2025-06-30"
 TAUS = [0, 1, 2, 4, 8, np.inf]
@@ -27,8 +26,8 @@ ANCHOR_K = range(42, 49)  # snitt over siste 7 timer, sentrert i T+45 t
 CHECK_K = [12, 24, 36, 48]  # timer der timesmodellen trekkes mot døgnmodellen
 ALPHAS = [0, 0.25, 0.5, 0.75, 1]
 
-stations = [r["station"] for r in load_rivers()]
-ids = {r["station"]: r["id"] for r in load_rivers()}
+stations = [r["station"] for r in load_stations()]
+ids = {r["station"]: r["id"] for r in load_stations()}
 
 # Døgnmodell p50 for h=2..9
 daily = None
@@ -36,8 +35,7 @@ for h in range(1, 10):
     d = features.dataset(stations, h, WEATHER, fc_model=FC_MODEL)
     cols = [c for c in d.columns if c not in features.NON_FEATURES]
     tr, te = d[d.date <= SPLIT], d[d.date > SPLIT]
-    m = lgb.LGBMRegressor(objective="quantile", alpha=0.5, n_estimators=N_ESTIMATORS, **PARAMS)
-    m.fit(tr[cols], tr["y"], categorical_feature=["station"])
+    m = fit_quantile(tr[cols], tr["y"], 0.5, N_ESTIMATORS)
     p = te[["station", "date", "hour", "lq0"]].copy()
     p[f"lp{h}"] = p["lq0"] + m.predict(te[cols])
     p[f"lq{h}"] = np.log1p(te["q_true"])
@@ -48,8 +46,7 @@ for h in range(1, 10):
 # Timesmodell p50
 hd = hourly.dataset(stations)
 hcols = [c for c in hd.columns if c not in hourly.NON_FEATURES]
-hm = lgb.LGBMRegressor(objective="quantile", alpha=0.5, n_estimators=800, **PARAMS)
-hm.fit(hd.loc[hd.time <= SPLIT, hcols], hd.loc[hd.time <= SPLIT, "y"], categorical_feature=["station"])
+hm = fit_quantile(hd.loc[hd.time <= SPLIT, hcols], hd.loc[hd.time <= SPLIT, "y"], 0.5, 800)
 print("timesmodell trent", flush=True)
 
 anchors = []

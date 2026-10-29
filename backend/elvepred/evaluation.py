@@ -1,13 +1,12 @@
 """Felles hjelpere for evalueringsskriptene: metrikker, modelltilpasning og simulert prognosefeil."""
-import lightgbm as lgb
 import numpy as np
 import pandas as pd
 
 from elvepred import classify
-from elvepred.model.train import PARAMS, QUANTILES
-from elvepred.settings import load_rivers
+from elvepred.model.train import QUANTILES, fit_quantile
+from elvepred.settings import load_stations
 
-stations = {r["station"]: r for r in load_rivers()}
+stations = {r["station"]: r for r in load_stations()}
 
 
 def nse(o, s):
@@ -36,15 +35,10 @@ def scores(d: pd.DataFrame, qhat: pd.Series) -> dict:
     return out
 
 
-def fit_lgb(tr: pd.DataFrame, va: pd.DataFrame, cols: list[str]) -> dict:
+def fit_models(tr: pd.DataFrame, va: pd.DataFrame, cols: list[str]) -> dict:
     """p10/p50/p90-modeller med early stopping på valideringssettet."""
-    models = {}
-    for name, a in QUANTILES.items():
-        m = lgb.LGBMRegressor(objective="quantile", alpha=a, n_estimators=3000, **PARAMS)
-        m.fit(tr[cols], tr["y"], eval_set=[(va[cols], va["y"])], categorical_feature=["station"],
-              callbacks=[lgb.early_stopping(100, verbose=False)])
-        models[name] = m
-    return models
+    return {name: fit_quantile(tr[cols], tr["y"], a, 3000, eval_set=[(va[cols], va["y"])], early_stopping=100)
+            for name, a in QUANTILES.items()}
 
 
 def _noisy_rain(te: pd.DataFrame, h: int, rng) -> pd.Series:

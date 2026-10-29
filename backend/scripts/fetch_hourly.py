@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pandas as pd
 
 from elvepred.clients import hydapi
-from elvepred.settings import DATA, load_rivers
+from elvepred.settings import DATA, load_stations
 
 out = DATA / "raw" / "hydapi_hourly"
 out.mkdir(parents=True, exist_ok=True)
@@ -24,7 +24,7 @@ def fetch(r):
 
 
 # --new: bare stasjoner uten lagrede timesverdier
-todo = [r for r in load_rivers() if "--new" not in sys.argv or not (out / f"{r['station']}.parquet").exists()]
+todo = [r for r in load_stations() if "--new" not in sys.argv or not (out / f"{r['station']}.parquet").exists()]
 with ThreadPoolExecutor(1) as ex:
     for line in ex.map(fetch, todo):
         print(line)

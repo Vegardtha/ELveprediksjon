@@ -20,7 +20,7 @@ import numpy as np
 import pandas as pd
 
 from elvepred import features
-from elvepred.evaluation import fit_lgb, perturb_gts as perturb, scores, stations
+from elvepred.evaluation import fit_models, perturb_gts as perturb, scores, stations
 from elvepred.model.train import MODELS
 from elvepred.settings import DATA
 
@@ -42,7 +42,7 @@ for nowcast in (False, True):
         cols = [c for c in d.columns if c not in features.NON_FEATURES]
 
         t0 = time.perf_counter()
-        models = fit_lgb(tr, va, cols)
+        models = fit_models(tr, va, cols)
         if nowcast:
             timing["train_s"] += time.perf_counter() - t0
         if nowcast:

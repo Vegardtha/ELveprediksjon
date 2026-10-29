@@ -7,10 +7,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import httpx
 
-from elvepred.settings import load_rivers
+from elvepred.settings import load_stations
 
 URL = "https://kart.nve.no/enterprise/rest/services/HydrologiskeData3/MapServer/38/query"
-STATIONS = sorted({r["station"] for r in load_rivers()})
+STATIONS = sorted({r["station"] for r in load_stations()})
 OUT = Path(__file__).resolve().parents[1] / "config" / "catchments.geojson"
 
 params = {

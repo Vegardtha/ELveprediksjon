@@ -31,7 +31,11 @@ def points(station: str, n: int = 8) -> list[tuple[float, float]]:
 QUOTA_WAIT_S = 2 * 3600
 
 
-def hourly(station: str, model: str, start: str, end: str) -> pd.DataFrame:
+class DailyQuotaExceeded(RuntimeError):
+    pass
+
+
+def hourly(station: str, model: str, start: str, end: str, wait_daily: bool = True) -> pd.DataFrame:
     """Feltmiddel per time. Kolonner `rr_l{N}` (mm) og `tm_l{N}` (°C) for ledetid N døgn."""
     pts = points(station, N_POINTS.get(model, 4))
     names = {f"{v}{'' if n == 0 else f'_previous_day{n}'}": f"{'rr' if v == 'precipitation' else 'tm'}_l{n}"
@@ -46,9 +50,11 @@ def hourly(station: str, model: str, start: str, end: str) -> pd.DataFrame:
                     "latitude": ",".join(f"{p[0]:.4f}" for p in pts), "longitude": ",".join(f"{p[1]:.4f}" for p in pts),
                     "hourly": ",".join(names), "models": model, "start_date": f"{s:%Y-%m-%d}", "end_date": f"{e:%Y-%m-%d}",
                 })
-                # gratiskvoten gjelder per minutt, time og døgn. Døgnkvoten (ca. 5 stasjoner arkiv) nullstilles
+                # gratiskvoten gjelder per minutt, time og døgn. Døgnkvoten (ca. 16 stasjoner arkiv) nullstilles
                 # ved midnatt UTC: da ventes det til neste døgn, så arkivet for mange nye stasjoner hentes over flere dager
                 if r.status_code == 429 and "daily" in r.text.lower():
+                    if not wait_daily:
+                        raise DailyQuotaExceeded(r.text[:120])
                     reset = pd.Timestamp.now(tz="UTC").normalize() + pd.Timedelta(days=1, minutes=10)
                     print(f"Open-Meteo døgnkvote brukt opp, venter til {reset:%Y-%m-%d %H:%M} UTC", flush=True)
                     while pd.Timestamp.now(tz="UTC") < reset:  # korte søvner: tiden PC-en sover telles ikke av sleep()

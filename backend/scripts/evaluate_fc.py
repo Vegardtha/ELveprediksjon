@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 from elvepred import features
-from elvepred.evaluation import fit_lgb, perturb_gts, perturb_wx, scores, stations
+from elvepred.evaluation import fit_models, perturb_gts, perturb_wx, scores, stations
 from elvepred.model.train import FC_MODEL, MODELS, WEATHER
 from elvepred.settings import DATA
 
@@ -71,19 +71,19 @@ for h in features.HORIZONS:
 
     if not args.skip_gts:
         d = ds["gts"]
-        m = fit_lgb(d[tr], d[va], cols_of(d))
+        m = fit_models(d[tr], d[va], cols_of(d))
         evaluate("gts", m, cols_of(d), {"perfect": d[te], "simulated": perturb_gts(d[te], h, rng(1))},
                  perturb_gts(d[va], h, rng(2)))
 
     d = ds["wx_perfect"]
-    m = fit_lgb(d[tr], d[va], cols_of(d))
+    m = fit_models(d[tr], d[va], cols_of(d))
     tests = {"perfect": d[te], "simulated": perturb_wx(d[te], h, rng(3))}
     tests.update({f"real {fm}": ds[f"wx_fc/{fm}"][te] for fm in FC_MODELS})
     evaluate("wx_perf", m, cols_of(d), tests, ds[f"wx_fc/{FC_MODELS[0]}"][va])
 
     for fm in FC_MODELS:
         d = ds[f"wx_mixed/{fm}"]
-        m = fit_lgb(d[tr], d[va], cols_of(d))
+        m = fit_models(d[tr], d[va], cols_of(d))
         evaluate(f"wx_mixed/{fm}", m, cols_of(d), {f"real {fm}": ds[f"wx_fc/{fm}"][te]}, ds[f"wx_fc/{fm}"][va])
 
     results[h] = res

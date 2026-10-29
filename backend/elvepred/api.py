@@ -12,7 +12,7 @@ from fastapi.staticfiles import StaticFiles
 
 from elvepred import classify
 from elvepred.model.predict import OUT
-from elvepred.settings import DATA, ROOT, load_rivers
+from elvepred.settings import DATA, ROOT, load_rivers, load_stations
 
 METRICS_KEY = "wx_mixed/metno_seamless | real metno_seamless"
 ATTRIBUTION = [
@@ -44,6 +44,7 @@ def _load() -> dict:
             mtime=mtime,
             run=json.loads(run.read_text()) if run.exists() else {},
             rivers={r["id"]: r for r in load_rivers()},
+            primary={r["station"]: r["id"] for r in load_stations()},
             fc=pd.read_parquet(OUT / "latest.parquet"),
             obs=pd.read_parquet(OUT / "observed.parquet") if (OUT / "observed.parquet").exists() else None,
             hourly=pd.read_parquet(OUT / "hourly.parquet") if (OUT / "hourly.parquet").exists() else None,
@@ -108,11 +109,13 @@ def river(rid: str):
     r = _river(rid)
     d = _load()
     m = d["metrics"]
-    skill = [{"horizon": int(h), **{k: m[h][METRICS_KEY][rid].get(k) for k in ("NSE", "F1_paddleable")}}
-             for h in sorted(m, key=int) if rid in m[h].get(METRICS_KEY, {})]
+    # treffsikkerhet evalueres per målestasjon, på stasjonens primære seksjon
+    mid = d["primary"][r["station"]]
+    skill = [{"horizon": int(h), **{k: m[h][METRICS_KEY][mid].get(k) for k in ("NSE", "F1_paddleable")}}
+             for h in sorted(m, key=int) if mid in m[h].get(METRICS_KEY, {})]
     mh = d["metrics_hourly"]
-    skill_hourly = [{"hours": int(k), "NSE": v["model"][rid]["NSE"], "NSE_persistence": v["persistence"][rid]["NSE"]}
-                    for k, v in sorted(mh.items(), key=lambda x: int(x[0])) if rid in v["model"]]
+    skill_hourly = [{"hours": int(k), "NSE": v["model"][mid]["NSE"], "NSE_persistence": v["persistence"][mid]["NSE"]}
+                    for k, v in sorted(mh.items(), key=lambda x: int(x[0])) if mid in v["model"]]
     return {**_summary(r, d["fc"]), "skill": skill, "skill_hourly": skill_hourly}
 
 

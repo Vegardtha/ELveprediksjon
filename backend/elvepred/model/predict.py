@@ -93,20 +93,20 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
     timing = {"fetch_s": time.perf_counter() - t0, "predict_s": 0.0,
               "gts_cached": sum(1 for v in inputs.values() if not isinstance(v, Exception) and v[4])}
     rows, obs, hrows, failed = [], [], [], []
+    by_station = {}
     for r in rivers:
-        st = r["station"]
+        by_station.setdefault(r["station"], []).append(r)
+    for st, secs in by_station.items():
         if isinstance(inputs[st], Exception):
             e = inputs[st]
-            print(f"::warning::{r['id']}: kunne ikke hente data ({type(e).__name__}: {e})", file=sys.stderr)
-            failed.append(r["id"])
+            print(f"::warning::{st}: kunne ikke hente data ({type(e).__name__}: {e})", file=sys.stderr)
+            failed.extend(r["id"] for r in secs)
             continue
         df, hq, fc, fch, _ = inputs[st]
         t0 = time.perf_counter()
         issue = df["q"].last_valid_index()
         d = df["q"].dropna().iloc[-OBSERVED_DAYS:]
-        obs.append(pd.DataFrame({"river": r["id"], "time": d.index, "q": d.values, "resolution": "day"}))
         hobs = hq[hq.index > hq.index[-1] - pd.Timedelta(hours=OBSERVED_HOURS)]
-        obs.append(pd.DataFrame({"river": r["id"], "time": hobs.index, "q": hobs.values, "resolution": "hour"}))
         days = []
         # klokkeslett (UTC) for siste timesmåling, regnet fra starten av dagen etter issue
         hour = int(min(23, (hq.index[-1] - issue - pd.Timedelta(days=1)) / pd.Timedelta(hours=1)))
@@ -116,7 +116,7 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
             X = features.build(df, h, "wx_fc", hq=hq, hour=hour, fc=fc)
             X["station"] = pd.Categorical([st] * len(X), categories=models[(h, "p50")]["stations"])
             x = X.loc[[issue]]
-            row = {"river": r["id"], "station": st, "issue_date": issue, "date": issue + pd.Timedelta(days=h),
+            row = {"station": st, "issue_date": issue, "date": issue + pd.Timedelta(days=h),
                    "horizon": h, "q_yesterday": float(df.loc[issue, "q"]), "q_now": float(hq.iloc[-1]),
                    "q_now_time": hq.index[-1]}
             adj = {"p10": -calib[h]["p10"], "p50": 0.0, "p90": calib[h]["p90"]}
@@ -126,15 +126,19 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
             row["rr_forecast"] = float(df["rr"].get(row["date"]) if h == 1 else fc[f"rr_fc{h}"].get(issue))
             row["tm_forecast"] = float(df["tm"].get(row["date"]) if h == 1 else fc[f"tm_fc{h}"].get(issue))
             days.append(row)
-        hrows.append(predict_hourly(r, hq, fch, df, hmodels, hcal, hk, days, issue))
-        t = r["thresholds"]
+        hourly_q = predict_hourly(st, hq, fch, df, hmodels, hcal, hk, days, issue)
         for row in days:
             # kvantilkryssing kan skje med separate modeller – sorter
             row["p10"], row["p50"], row["p90"] = sorted(float(np.expm1(row[n])) for n in QUANTILES)
-            row["status"] = classify.LABELS[classify.interval(row["p50"], t)]
-            row["prob_paddleable"] = classify.prob_between(t["minimum"], t["maximum"], row["p10"], row["p50"], row["p90"])
-            row["prob_optimal"] = classify.prob_between(t["optimum"], t["maximum"], row["p10"], row["p50"], row["p90"])
-        rows.extend(days)
+        # prognosen er per målestasjon; status og sannsynligheter per seksjon
+        for r in secs:
+            t = r["thresholds"]
+            obs.append(pd.DataFrame({"river": r["id"], "time": d.index, "q": d.values, "resolution": "day"}))
+            obs.append(pd.DataFrame({"river": r["id"], "time": hobs.index, "q": hobs.values, "resolution": "hour"}))
+            for row in days:
+                rows.append(row | {"river": r["id"], **classified(row["p10"], row["p50"], row["p90"], t, optimal=True)})
+            hrows.append(hourly_q.assign(river=r["id"], **pd.DataFrame(
+                [classified(*v, t) for v in hourly_q[["p10", "p50", "p90"]].to_numpy()], index=hourly_q.index)))
         timing["predict_s"] += time.perf_counter() - t0
     if not rows:
         raise RuntimeError(f"ingen elver fikk prognose (feilet: {failed})")
@@ -147,7 +151,15 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
     return out, timing
 
 
-def predict_hourly(r: dict, hq: pd.Series, fch: pd.DataFrame, df: pd.DataFrame, models: dict, calib: dict,
+def classified(p10: float, p50: float, p90: float, t: dict, optimal: bool = False) -> dict:
+    out = {"status": classify.LABELS[classify.interval(p50, t)],
+           "prob_paddleable": classify.prob_between(t["minimum"], t["maximum"], p10, p50, p90)}
+    if optimal:
+        out["prob_optimal"] = classify.prob_between(t["optimum"], t["maximum"], p10, p50, p90)
+    return out
+
+
+def predict_hourly(station: str, hq: pd.Series, fch: pd.DataFrame, df: pd.DataFrame, models: dict, calib: dict,
                    ks: list[int], days: list[dict], issue: pd.Timestamp) -> pd.DataFrame:
     """p10/p50/p90 for hver time 1–48 t etter siste timesmåling, gradvis blandet med døgnprognosen.
 
@@ -155,11 +167,11 @@ def predict_hourly(r: dict, hq: pd.Series, fch: pd.DataFrame, df: pd.DataFrame, 
     """
     T = hq.index[-1]
     X = hourly.build(hq, fch, df, pd.DatetimeIndex([T]), ks=range(1, hourly.MAX_K + 1), with_target=False)
-    X["station"] = pd.Categorical([r["station"]] * len(X), categories=models["p50"]["stations"])
+    X["station"] = pd.Categorical([station] * len(X), categories=models["p50"]["stations"])
     k = X["k"].to_numpy()
     adj = {"p10": -np.interp(k, ks, [calib[x]["p10"] for x in ks]), "p50": 0.0,
            "p90": np.interp(k, ks, [calib[x]["p90"] for x in ks])}
-    out = pd.DataFrame({"river": r["id"], "issue_time": T, "time": T + pd.to_timedelta(k, unit="h"), "k": k})
+    out = pd.DataFrame({"issue_time": T, "time": T + pd.to_timedelta(k, unit="h"), "k": k})
     a = np.clip((k - BLEND_K0) / (BLEND_K1 - BLEND_K0), 0, 1) if days else np.zeros(len(k))
     pos = ((out["time"] - issue - pd.Timedelta(hours=12)) / pd.Timedelta(days=1)).to_numpy()
     hs = [d["horizon"] for d in days]
@@ -168,10 +180,5 @@ def predict_hourly(r: dict, hq: pd.Series, fch: pd.DataFrame, df: pd.DataFrame, 
         ld = np.interp(pos, hs, [d[n] for d in days]) if days else lh
         out[n] = np.expm1((1 - a) * lh + a * ld)
     out[["p10", "p50", "p90"]] = np.sort(out[["p10", "p50", "p90"]].to_numpy(), axis=1)
-    t = r["thresholds"]
-    out["status"] = [classify.LABELS[classify.interval(v, t)] for v in out["p50"]]
-    out["prob_paddleable"] = [classify.prob_between(t["minimum"], t["maximum"], a, b, c)
-                              for a, b, c in out[["p10", "p50", "p90"]].to_numpy()]
     out["rr"] = fch["rr_l0"].reindex(out["time"]).to_numpy()
     return out
-

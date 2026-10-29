@@ -9,7 +9,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import pandas as pd
 
 from elvepred.clients import gts, hydapi
-from elvepred.settings import DATA, load_rivers
+from elvepred.settings import DATA, load_stations
 
 p = argparse.ArgumentParser()
 p.add_argument("--from", dest="start", default="1990-01-01")
@@ -21,7 +21,7 @@ today = pd.Timestamp.today().normalize()
 (DATA / "raw" / "hydapi").mkdir(parents=True, exist_ok=True)
 (DATA / "raw" / "gts").mkdir(parents=True, exist_ok=True)
 
-for r in load_rivers():
+for r in load_stations():
     if args.river and r["id"] != args.river:
         continue
     st = r["station"]

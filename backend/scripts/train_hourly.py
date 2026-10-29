@@ -12,14 +12,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import joblib
-import lightgbm as lgb
 import numpy as np
 import pandas as pd
 
 from elvepred import hourly
 from elvepred.evaluation import scores
-from elvepred.model.train import MODELS, PARAMS, QUANTILES
-from elvepred.settings import DATA, load_rivers
+from elvepred.model.train import MODELS, QUANTILES, fit_quantile
+from elvepred.settings import DATA, load_stations
 
 TRAIN_END, VAL_END = "2025-03-31 23:00", "2025-06-30 23:00"
 REPORT_K = [1, 3, 6, 12, 18, 24, 36, 48]
@@ -28,7 +27,7 @@ N_TREES = 800
 
 t0 = time.perf_counter()
 # bare stasjoner med prognosearkiv; de andre får «ukjent stasjon» i modellen til neste trening
-stations = [r["station"] for r in load_rivers()
+stations = [r["station"] for r in load_stations()
             if (DATA / "raw" / "forecasts" / "metno_seamless" / f"{r['station']}_hourly.parquet").exists()]
 d = hourly.dataset(stations)
 cols = [c for c in d.columns if c not in hourly.NON_FEATURES]
@@ -36,8 +35,7 @@ tr, va, te = d[d.time <= TRAIN_END], d[(d.time > TRAIN_END) & (d.time <= VAL_END
 print(f"rader: trening {len(tr)}, validering {len(va)}, test {len(te)} ({time.perf_counter() - t0:.0f}s)", flush=True)
 
 t1 = time.perf_counter()
-models = {n: lgb.LGBMRegressor(objective="quantile", alpha=a, n_estimators=N_TREES, **PARAMS)
-          .fit(tr[cols], tr["y"], categorical_feature=["station"]) for n, a in QUANTILES.items()}
+models = {n: fit_quantile(tr[cols], tr["y"], a, N_TREES) for n, a in QUANTILES.items()}
 fit_s = time.perf_counter() - t1
 print(f"trent på {fit_s:.0f}s", flush=True)
 
@@ -81,8 +79,7 @@ for k in REPORT_K:
 # Endelige modeller på alt
 t1 = time.perf_counter()
 for n, a in QUANTILES.items():
-    m = lgb.LGBMRegressor(objective="quantile", alpha=a, n_estimators=N_TREES, **PARAMS)
-    m.fit(d[cols], d["y"], categorical_feature=["station"])
+    m = fit_quantile(d[cols], d["y"], a, N_TREES)
     joblib.dump({"model": m, "cols": cols, "stations": stations}, MODELS / f"hourly_{n}.joblib")
 (MODELS / "hourly_calibration.json").write_text(json.dumps(calib, indent=1))
 print(f"endelige modeller trent på {time.perf_counter() - t1:.0f}s, totalt {time.perf_counter() - t0:.0f}s")
