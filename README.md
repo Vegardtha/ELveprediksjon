@@ -1,6 +1,6 @@
 # Elvepred
 
-Vannføringsprognoser for 173 padleseksjoner på 55 målestasjoner på Østlandet: time for time de neste 48 timene, deretter døgn for døgn ut 9 dager, med usikkerhet og sjanse for padlbar vannføring. Elver som styres av demninger er merket.
+Vannføringsprognoser for 141 padleseksjoner på 55 målestasjoner på Østlandet: time for time de neste 48 timene, deretter døgn for døgn ut 9 dager, med usikkerhet og sjanse for padlbar vannføring. Elver som styres av demninger er merket.
 
 Siden oppdateres hver 2. time av GitHub Actions og publiseres på GitHub Pages.
 
@@ -42,7 +42,7 @@ npm run dev --prefix frontend
 
 Prognosen lages per målestasjon; hver seksjon på stasjonen får egne terskler, status og sannsynligheter.
 `scripts/add_sections.py` legger inn alle seksjoner med nivåer fra nokken.net og whitewater.guide som ikke
-allerede finnes (se docstringen for hvordan referansefilene hentes). Kjør med `--dry-run` først, og deretter:
+allerede finnes (se docstringen for hvordan referansefilene hentes). whitewater.guide er grunnlaget: `scripts/dedupe_sections.py` fjerner nokken-seksjoner som ligger oppå en whitewater.guide-seksjon. Kjør med `--dry-run` først, og deretter:
 
 ```bash
 uv run --directory backend python scripts/add_sections.py
@@ -51,6 +51,7 @@ uv run --directory backend python scripts/fetch_history.py --new
 uv run --directory backend python scripts/fetch_hourly.py --new
 uv run --directory backend python scripts/fetch_forecasts.py
 uv run --directory backend python scripts/fetch_section_lines.py
+uv run --directory backend python scripts/dedupe_sections.py
 ```
 
 Deretter ny trening som under (bare nødvendig for nye stasjoner). Modellene kjenner bare stasjonene de er trent på.

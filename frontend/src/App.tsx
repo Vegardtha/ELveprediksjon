@@ -51,7 +51,7 @@ export default function App() {
           <svg viewBox="0 0 32 20" aria-hidden="true"><path d="M1 13c5-6 9 4 15-2s10 4 15-2" /><path d="M1 18c5-6 9 4 15-2s10 4 15-2" /></svg>
           Elvepred
         </h1>
-        <p>Vannføring og prognoser for {rivers.length || 173} padleseksjoner på Østlandet</p>
+        <p>Vannføring og prognoser for padleseksjoner på Østlandet</p>
       </header>
       <section className="map-wrap">
         <RiverMap rivers={shown} lines={lines} day={day} selected={selected} onSelect={onSelect} />

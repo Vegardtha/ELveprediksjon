@@ -55,30 +55,6 @@ rivers:
     maximum: 30
     impossible: 40
     source: whitewater.guide
-- id: lomma
-  station_pos:
-  - 59.8935
-  - 10.50789
-  regulation: partly
-  regulation_note: "NVE registrerer magasiner i feltet, men uten regulert areal. Liten påvirkning."
-  name: Lomma
-  station: 8.2.0
-  station_name: Sandvikselva Bjørnegårdssvingen
-  grade: III-IV (V-)
-  approximate: true
-  thresholds:
-    minimum: 10.0
-    optimum: 15.0
-    maximum: 40.0
-    impossible: 80.0
-    source: nokken.net
-  nokken_section: 194
-  thresholds_wwguide:
-    minimum: 15
-    optimum: 35
-    maximum: 50
-    impossible: 60
-    source: whitewater.guide
 - id: hakadalselva
   station_pos:
   - 60.10302
@@ -171,31 +147,6 @@ rivers:
     source: nokken.net
   station: 12.114.0
   approximate: false
-- id: simoa
-  station_pos:
-  - 60.04321
-  - 9.63403
-  takeout:
-  - 59.976944
-  - 9.764167
-  nokken_river: 131
-  regulation: regulated
-  regulation_note: "Magasinregulert: 6 magasiner, hele feltet regulert (NVE). Slipp kan endre vannføringen raskt."
-  name: Simoa
-  station: 12.113.0
-  station_name: Kråkefjord ndf.
-  grade: III-IV
-  approximate: false
-  thresholds:
-    minimum: 15
-    optimum: 35
-    maximum: 60
-    impossible: 70
-    source: whitewater.guide
-  nokken_section: 191
-  putin:
-  - 59.997526
-  - 9.743019
 - id: bingselva
   station_pos:
   - 59.70715
@@ -221,30 +172,6 @@ rivers:
   putin:
   - 59.875392
   - 9.715609
-- id: dorja
-  station_pos:
-  - 59.69721
-  - 9.7902
-  takeout:
-  - 59.72562
-  - 9.833788
-  nokken_river: 10
-  regulation: unregulated
-  regulation_note: "Uregulert (NVE)."
-  name: Dørja
-  nokken_section: 16
-  putin:
-  - 59.744766
-  - 9.711906
-  grade: IV−
-  thresholds:
-    minimum: 4.0
-    optimum: 4.0
-    maximum: 6.0
-    impossible: 6.0
-    source: nokken.net
-  station: 12.193.0
-  approximate: false
 - id: eggedola
   station_pos:
   - 60.15247
@@ -301,31 +228,6 @@ rivers:
   takeout:
   - 60.741665
   - 9.548177
-- id: urula
-  name: Urula
-  station: 12.209.0
-  station_name: Urula
-  station_pos:
-  - 60.55814
-  - 9.87569
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: IV−
-  approximate: false
-  thresholds:
-    minimum: 8.0
-    optimum: 9.4
-    maximum: 21.0
-    impossible: 34.8
-    source: nokken.net
-  nokken_river: 60
-  nokken_section: 74
-  putin:
-  - 60.544651
-  - 9.831224
-  takeout:
-  - 60.553045
-  - 9.904659
 - id: morkedola
   name: Mørkedøla
   station: 12.215.0
@@ -401,56 +303,6 @@ rivers:
   takeout:
   - 61.039357
   - 9.551311
-- id: numedalslagen-vrangfoss
-  name: Numedalslågen – Vrangfoss play spot
-  station: 15.61.0
-  station_name: Holmfoss i Numedalslågen
-  station_pos:
-  - 59.18906
-  - 9.99414
-  regulation: regulated
-  regulation_note: 'Magasinregulert: 59 magasiner, 94 % av feltet regulert, magasinene rommer 33 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
-  grade: III
-  approximate: false
-  thresholds:
-    minimum: 60.0
-    optimum: 70.0
-    maximum: 120.0
-    impossible: 120.0
-    source: nokken.net
-  nokken_river: 38
-  nokken_section: 154
-  putin:
-  - 59.350409
-  - 9.917133
-  takeout:
-  - 59.343751
-  - 9.913725
-- id: numedalslagen-dagali
-  name: Numedalslågen – Dagali
-  station: 15.79.0
-  station_name: Ossjøen
-  station_pos:
-  - 60.3821
-  - 8.26392
-  regulation: regulated
-  regulation_note: 'Magasinregulert: 1 magasiner, 100 % av feltet regulert, magasinene rommer 5 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
-  grade: IV
-  approximate: false
-  thresholds:
-    minimum: 15.0
-    optimum: 15.0
-    maximum: 170.0
-    impossible: 300.0
-    source: nokken.net
-  nokken_river: 38
-  nokken_section: 47
-  putin:
-  - 60.381356
-  - 8.257758
-  takeout:
-  - 60.40234
-  - 8.439039
 - id: austbygdai
   name: Austbygdåi – Middle
   station: 16.128.0
@@ -476,81 +328,6 @@ rivers:
   takeout:
   - 60.06265
   - 8.782169
-- id: skogsaa
-  name: Skogsåa
-  station: 16.155.0
-  station_name: Sønnlandsvatn
-  station_pos:
-  - 59.70388
-  - 8.85882
-  regulation: regulated
-  regulation_note: 'Magasinregulert: 3 magasiner, 70 % av feltet regulert, magasinene rommer 33 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
-  grade: IV
-  approximate: false
-  thresholds:
-    minimum: 5.4
-    optimum: 8.3
-    maximum: 19.0
-    impossible: 19.0
-    source: nokken.net
-  nokken_river: 48
-  nokken_section: 61
-  putin:
-  - 59.704443
-  - 8.859727
-  takeout:
-  - 59.626614
-  - 8.946038
-- id: frya
-  name: Frya
-  station: 2.1151.0
-  station_name: Frya bru
-  station_pos:
-  - 61.70311
-  - 9.95315
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: III+
-  approximate: false
-  thresholds:
-    minimum: 5
-    optimum: 10
-    maximum: 15
-    impossible: 25
-    source: whitewater.guide
-  nokken_river: 16
-  nokken_section: 24
-  putin:
-  - 61.703141
-  - 9.952975
-  takeout:
-  - 61.556896
-  - 10.057598
-- id: folla
-  name: Folla – Upper
-  station: 2.129.0
-  station_name: Dølplass
-  station_pos:
-  - 62.19223
-  - 10.45107
-  regulation: partly
-  regulation_note: Ca. 28 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
-  grade: IV−
-  approximate: false
-  thresholds:
-    minimum: 15.0
-    optimum: 25.0
-    maximum: 50.0
-    impossible: 50.0
-    source: nokken.net
-  nokken_river: 15
-  nokken_section: 23
-  putin:
-  - 62.187921
-  - 10.276324
-  takeout:
-  - 62.197921
-  - 10.385702
 - id: otta-family
   name: Otta – Family run
   station: 2.25.0
@@ -601,31 +378,6 @@ rivers:
   takeout:
   - 61.936766
   - 11.072446
-- id: mistra
-  name: Mistra
-  station: 2.267.0
-  station_name: Mistra bru
-  station_pos:
-  - 61.71112
-  - 11.24189
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: IV
-  approximate: false
-  thresholds:
-    minimum: 9.0
-    optimum: 14.0
-    maximum: 24.0
-    impossible: 30.0
-    source: nokken.net
-  nokken_river: 33
-  nokken_section: 42
-  putin:
-  - 61.786386
-  - 11.403501
-  takeout:
-  - 61.69716
-  - 11.202837
 - id: bovra-lower
   name: Bøvra – Lower
   station: 2.268.0
@@ -676,31 +428,6 @@ rivers:
   takeout:
   - 61.88222
   - 7.789209
-- id: finna
-  name: Finna
-  station: 2.284.0
-  station_name: Sælatunga
-  station_pos:
-  - 61.88439
-  - 9.06212
-  regulation: partly
-  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
-  grade: IV
-  approximate: false
-  thresholds:
-    minimum: 5.4
-    optimum: 14.0
-    maximum: 22.0
-    impossible: 32.0
-    source: nokken.net
-  nokken_river: 14
-  nokken_section: 22
-  putin:
-  - 61.922703
-  - 8.986934
-  takeout:
-  - 61.88046
-  - 9.081028
 - id: bovra-upper
   name: Bøvra – Upper
   station: 2.290.0
@@ -726,31 +453,6 @@ rivers:
   takeout:
   - 61.726098
   - 8.296068
-- id: tora
-  name: Tora
-  station: 2.291.0
-  station_name: Tora
-  station_pos:
-  - 62.00772
-  - 7.86636
-  regulation: partly
-  regulation_note: Ca. 2 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
-  grade: IV+
-  approximate: false
-  thresholds:
-    minimum: 6.0
-    optimum: 8.0
-    maximum: 10.0
-    impossible: 12.0
-    source: nokken.net
-  nokken_river: 54
-  nokken_section: 67
-  putin:
-  - 62.013708
-  - 7.865978
-  takeout:
-  - 62.00823
-  - 7.866316
 - id: jori
   name: Jori – Lower
   station: 2.303.0
@@ -776,31 +478,6 @@ rivers:
   takeout:
   - 62.0868424
   - 9.1012267
-- id: atna-lower
-  name: Atna – Lower I
-  station: 2.32.0
-  station_name: Atnasjø
-  station_pos:
-  - 61.85194
-  - 10.22212
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: III−
-  approximate: false
-  thresholds:
-    minimum: 15.0
-    optimum: 20.0
-    maximum: 60.0
-    impossible: 60.0
-    source: nokken.net
-  nokken_river: 1
-  nokken_section: 2
-  putin:
-  - 61.847407
-  - 10.257223
-  takeout:
-  - 61.843702
-  - 10.386494
 - id: otta-skjakbolgen
   name: Otta – Skjåkbølgen (play-spot)
   station: 2.434.0
@@ -848,31 +525,6 @@ rivers:
   takeout:
   - 61.076869
   - 11.346999
-- id: atna-doralen
-  name: Atna – Dørålen
-  station: 2.479.0
-  station_name: Li bru
-  station_pos:
-  - 62.00998
-  - 10.00027
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: IV
-  approximate: false
-  thresholds:
-    minimum: 5.3
-    optimum: 5.3
-    maximum: 7.3
-    impossible: 7.3
-    source: nokken.net
-  nokken_river: 1
-  nokken_section: 1
-  putin:
-  - 61.998384
-  - 9.812339
-  takeout:
-  - 62.008213
-  - 10.013872
 - id: imsa
   name: Imsa – Upper
   station: 2.578.0
@@ -948,31 +600,6 @@ rivers:
   takeout:
   - 61.849482
   - 9.425113
-- id: femundselva
-  name: Femundselva – Middle
-  station: 311.4.0
-  station_name: Femundsenden (Femunden)
-  station_pos:
-  - 61.91996
-  - 11.94004
-  regulation: partly
-  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
-  grade: III
-  approximate: false
-  thresholds:
-    minimum: 15.0
-    optimum: 25.0
-    maximum: 50.0
-    impossible: 90.0
-    source: nokken.net
-  nokken_river: 56
-  nokken_section: 188
-  putin:
-  - 61.81123
-  - 11.70768
-  takeout:
-  - 61.772455
-  - 11.631114
 - id: romoaa
   name: Rømoåa
   station: 311.460.0
@@ -1241,56 +868,6 @@ rivers:
   takeout:
   - 60.548008
   - 9.732457
-- id: fossbroyta
-  name: Fossbrøyta
-  station: 12.209.0
-  station_name: Urula
-  station_pos:
-  - 60.55814
-  - 9.87569
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: III−
-  approximate: true
-  thresholds:
-    minimum: 70.0
-    optimum: 70.0
-    maximum: 100.0
-    impossible: 100.0
-    source: nokken.net
-  nokken_river: 127
-  nokken_section: 183
-  putin:
-  - 60.613907
-  - 9.718048
-  takeout:
-  - 60.544651
-  - 9.831224
-- id: asli
-  name: Åsli
-  station: 12.209.0
-  station_name: Urula
-  station_pos:
-  - 60.55814
-  - 9.87569
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: IV
-  approximate: true
-  thresholds:
-    minimum: 39.0
-    optimum: 45.0
-    maximum: 58.0
-    impossible: 58.0
-    source: nokken.net
-  nokken_river: 61
-  nokken_section: 75
-  putin:
-  - 60.630283
-  - 9.618456
-  takeout:
-  - 60.613751
-  - 9.717774
 - id: aslielva-lower
   name: Åslielva – Lower
   station: 12.209.0
@@ -1411,31 +988,6 @@ rivers:
   takeout:
   - 62.1539
   - 10.1804
-- id: atna-lower-ii
-  name: Atna – Lower II
-  station: 2.32.0
-  station_name: Atnasjø
-  station_pos:
-  - 61.85194
-  - 10.22212
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: III
-  approximate: false
-  thresholds:
-    minimum: 15.0
-    optimum: 20.0
-    maximum: 60.0
-    impossible: 60.0
-    source: nokken.net
-  nokken_river: 1
-  nokken_section: 161
-  putin:
-  - 61.843702
-  - 10.386494
-  takeout:
-  - 61.787335
-  - 10.513862
 - id: setninga
   name: Setninga
   station: 2.32.0
@@ -1485,7 +1037,7 @@ rivers:
   takeout:
   - 61.8497
   - 10.2355
-- id: atna-lower-2
+- id: atna-lower
   name: Atna – Lower
   station: 2.32.0
   station_name: Atnasjø
@@ -1774,31 +1326,6 @@ rivers:
   takeout:
   - 61.8455
   - 8.5708
-- id: holerajuvet
-  name: Hølerajuvet
-  station: 12.171.0
-  station_name: Hølervatn
-  station_pos:
-  - 60.70962
-  - 9.45899
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: IV
-  approximate: true
-  thresholds:
-    minimum: 5.2
-    optimum: 7.0
-    maximum: 9.0
-    impossible: 9.0
-    source: nokken.net
-  nokken_river: 102
-  nokken_section: 124
-  putin:
-  - 60.710072
-  - 9.459717
-  takeout:
-  - 60.741628
-  - 9.549532
 - id: holera
   name: Hølera
   station: 12.171.0
@@ -1847,31 +1374,6 @@ rivers:
   takeout:
   - 59.7258
   - 9.8343
-- id: etna-lower
-  name: Etna – Lower
-  station: 12.70.0
-  station_name: Etna
-  station_pos:
-  - 60.95266
-  - 9.62473
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: IV
-  approximate: false
-  thresholds:
-    minimum: 16.0
-    optimum: 21.0
-    maximum: 41.0
-    impossible: 41.0
-    source: nokken.net
-  nokken_river: 13
-  nokken_section: 20
-  putin:
-  - 60.989739
-  - 9.567027
-  takeout:
-  - 60.97308
-  - 9.604592
 - id: etna-holjarast
   name: Etna – Høljarast
   station: 12.70.0
@@ -1897,31 +1399,6 @@ rivers:
   takeout:
   - 60.838118
   - 9.847347
-- id: etna-middle
-  name: Etna – Middle
-  station: 12.70.0
-  station_name: Etna
-  station_pos:
-  - 60.95266
-  - 9.62473
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: IV
-  approximate: false
-  thresholds:
-    minimum: 16.0
-    optimum: 21.0
-    maximum: 41.0
-    impossible: 41.0
-    source: nokken.net
-  nokken_river: 13
-  nokken_section: 184
-  putin:
-  - 61.039357
-  - 9.551311
-  takeout:
-  - 60.971846
-  - 9.608623
 - id: rotvolla
   name: Rotvolla
   station: 12.70.0
@@ -1947,31 +1424,6 @@ rivers:
   takeout:
   - 61.039533
   - 9.550721
-- id: synna
-  name: Synna
-  station: 12.70.0
-  station_name: Etna
-  station_pos:
-  - 60.95266
-  - 9.62473
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: IV
-  approximate: true
-  thresholds:
-    minimum: 45.0
-    optimum: 45.0
-    maximum: 52.0
-    impossible: 52.0
-    source: nokken.net
-  nokken_river: 51
-  nokken_section: 64
-  putin:
-  - 61.062406
-  - 9.949191
-  takeout:
-  - 61.001641
-  - 10.002196
 - id: etna-brendabrua-hestkinn
   name: Etna – Brendabrua - Hestkinn
   station: 12.70.0
@@ -2092,56 +1544,6 @@ rivers:
   takeout:
   - 60.2077
   - 9.3792
-- id: femundselva-upper
-  name: Femundselva – Upper
-  station: 311.4.0
-  station_name: Femundsenden (Femunden)
-  station_pos:
-  - 61.91996
-  - 11.94004
-  regulation: partly
-  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
-  grade: II
-  approximate: false
-  thresholds:
-    minimum: 25.0
-    optimum: 25.0
-    maximum: 50.0
-    impossible: 90.0
-    source: nokken.net
-  nokken_river: 56
-  nokken_section: 69
-  putin:
-  - 61.878988
-  - 11.747474
-  takeout:
-  - 61.83539
-  - 11.719085
-- id: femundselva-lower
-  name: Femundselva – Lower
-  station: 311.4.0
-  station_name: Femundsenden (Femunden)
-  station_pos:
-  - 61.91996
-  - 11.94004
-  regulation: partly
-  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
-  grade: II+
-  approximate: false
-  thresholds:
-    minimum: 25.0
-    optimum: 25.0
-    maximum: 50.0
-    impossible: 90.0
-    source: nokken.net
-  nokken_river: 56
-  nokken_section: 148
-  putin:
-  - 61.772455
-  - 11.631114
-  takeout:
-  - 61.7333482
-  - 11.6794805
 - id: glota
   name: Gløta
   station: 311.4.0
@@ -2191,31 +1593,6 @@ rivers:
   takeout:
   - 61.7223
   - 11.6858
-- id: folla-lower
-  name: Folla – Lower
-  station: 2.129.0
-  station_name: Dølplass
-  station_pos:
-  - 62.19223
-  - 10.45107
-  regulation: partly
-  regulation_note: Ca. 28 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
-  grade: II+
-  approximate: false
-  thresholds:
-    minimum: 15.0
-    optimum: 25.0
-    maximum: 50.0
-    impossible: 50.0
-    source: nokken.net
-  nokken_river: 15
-  nokken_section: 190
-  putin:
-  - 62.197921
-  - 10.385702
-  takeout:
-  - 62.191371
-  - 10.461304
 - id: folla-moan-dolplass
   name: Folla – Moan - Dolplass
   station: 2.129.0
@@ -2240,31 +1617,6 @@ rivers:
   takeout:
   - 62.1919
   - 10.4489
-- id: skjerva
-  name: Skjerva
-  station: 2.284.0
-  station_name: Sælatunga
-  station_pos:
-  - 61.88439
-  - 9.06212
-  regulation: partly
-  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
-  grade: IV+
-  approximate: true
-  thresholds:
-    minimum: 15.0
-    optimum: 15.0
-    maximum: 20.0
-    impossible: 20.0
-    source: nokken.net
-  nokken_river: 46
-  nokken_section: 59
-  putin:
-  - 62.005755
-  - 8.910557
-  takeout:
-  - 61.911608
-  - 8.989478
 - id: finna-canyon
   name: Finna – Canyon
   station: 2.284.0
@@ -2361,31 +1713,6 @@ rivers:
   takeout:
   - 61.9857
   - 8.9769
-- id: grona
-  name: Grøna
-  station: 2.303.0
-  station_name: Dombås
-  station_pos:
-  - 62.08677
-  - 9.10108
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: V
-  approximate: true
-  thresholds:
-    minimum: 9.0
-    optimum: 9.0
-    maximum: 12.0
-    impossible: 12.0
-    source: nokken.net
-  nokken_river: 18
-  nokken_section: 26
-  putin:
-  - 62.131819
-  - 9.09357
-  takeout:
-  - 62.111618
-  - 9.079525
 - id: grona-lower
   name: Grøna – Lower
   station: 2.303.0
@@ -2555,31 +1882,6 @@ rivers:
   takeout:
   - 59.511838
   - 9.321594
-- id: jondalselva
-  name: Jondalselva
-  station: 15.21.0
-  station_name: Jondalselv
-  station_pos:
-  - 59.70715
-  - 9.55527
-  regulation: partly
-  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
-  grade: III
-  approximate: true
-  thresholds:
-    minimum: 8.0
-    optimum: 11.0
-    maximum: 16.0
-    impossible: 16.0
-    source: nokken.net
-  nokken_river: 28
-  nokken_section: 36
-  putin:
-  - 59.725789
-  - 9.376492
-  takeout:
-  - 59.70719
-  - 9.600942
 - id: skirva
   name: Skirva
   station: 15.21.0
@@ -2822,31 +2124,6 @@ rivers:
   takeout:
   - 61.7109
   - 11.2423
-- id: smeddalselvi
-  name: Smeddalselvi
-  station: 12.215.0
-  station_name: Storeskar
-  station_pos:
-  - 60.8917
-  - 8.33272
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: V
-  approximate: true
-  thresholds:
-    minimum: 5.0
-    optimum: 5.0
-    maximum: 8.0
-    impossible: 8.0
-    source: nokken.net
-  nokken_river: 73
-  nokken_section: 88
-  putin:
-  - 61.139467
-  - 8.004442
-  takeout:
-  - 61.102223
-  - 8.010165
 - id: smeddalselvi-road-run
   name: Smeddalselvi – Road run
   station: 12.215.0
@@ -3014,31 +2291,6 @@ rivers:
   takeout:
   - 62.009869
   - 7.762013
-- id: otta-pollfoss
-  name: Otta – Pollfoss
-  station: 2.291.0
-  station_name: Tora
-  station_pos:
-  - 62.00772
-  - 7.86636
-  regulation: partly
-  regulation_note: Ca. 2 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
-  grade: IV
-  approximate: true
-  thresholds:
-    minimum: 15.0
-    optimum: 25.0
-    maximum: 40.0
-    impossible: 40.0
-    source: nokken.net
-  nokken_river: 40
-  nokken_section: 50
-  putin:
-  - 62.01183
-  - 7.80269
-  takeout:
-  - 61.970701
-  - 7.892508
 - id: foysa-foysstein
   name: Føysa – Føysstein
   station: 2.291.0
@@ -3355,31 +2607,6 @@ rivers:
   takeout:
   - 61.680592
   - 9.529813
-- id: sjoa-bru-bru
-  name: Sjoa – Bru-Bru
-  station: 2.595.0
-  station_name: Faukstad
-  station_pos:
-  - 61.70961
-  - 9.42517
-  regulation: partly
-  regulation_note: Overføringer berører ca. 695 km² av feltet (NVE). Noe påvirkning.
-  grade: II+
-  approximate: false
-  thresholds:
-    minimum: 40.0
-    optimum: 68.0
-    maximum: 92.0
-    impossible: 92.0
-    source: nokken.net
-  nokken_river: 44
-  nokken_section: 142
-  putin:
-  - 61.75401
-  - 9.289082
-  takeout:
-  - 61.734222
-  - 9.360306
 - id: sjoa-egglefossen
   name: Sjoa – Egglefossen
   station: 2.595.0
@@ -3524,31 +2751,6 @@ rivers:
   takeout:
   - 59.6613
   - 8.8907
-- id: speka
-  name: Speka
-  station: 2.265.0
-  station_name: Unsetåa
-  station_pos:
-  - 61.94611
-  - 11.08351
-  regulation: unregulated
-  regulation_note: Uregulert (NVE).
-  grade: IV
-  approximate: true
-  thresholds:
-    minimum: 12.0
-    optimum: 12.0
-    maximum: 20.0
-    impossible: 20.0
-    source: nokken.net
-  nokken_river: 50
-  nokken_section: 63
-  putin:
-  - 62.211175
-  - 11.097043
-  takeout:
-  - 62.201686
-  - 11.025214
 - id: speka-canyon
   name: Speka – Canyon
   station: 2.265.0
@@ -3741,7 +2943,7 @@ rivers:
   takeout:
   - 61.229
   - 9.7509
-- id: synna-2
+- id: synna
   name: Synna
   station: 12.8.0
   station_name: Grønvold bru

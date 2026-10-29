@@ -27,7 +27,7 @@ const STYLE: maplibregl.StyleSpecification = {
     },
   },
   layers: [{ id: 'topo', type: 'raster', source: 'topo', paint: dark()
-    ? { 'raster-brightness-min': 0.2, 'raster-brightness-max': 0.42, 'raster-saturation': -0.5 }
+    ? { 'raster-brightness-min': 0.24, 'raster-brightness-max': 0.4, 'raster-saturation': -0.5 }
     : { 'raster-brightness-min': 0.08, 'raster-contrast': -0.1 } }],
 }
 
