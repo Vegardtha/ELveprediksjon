@@ -3,6 +3,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from elvepred.model.train import train_all
+import joblib
 
-print(train_all())
+from elvepred.model.train import MODELS, train_all
+
+# --same-stations: samme stasjoner som modellene som ligger der nå, ellers alle med komplett rådata
+same = "--same-stations" in sys.argv
+print(train_all(joblib.load(MODELS / "h1_p50.joblib")["stations"] if same else None))

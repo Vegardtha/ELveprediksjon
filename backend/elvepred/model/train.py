@@ -10,6 +10,7 @@ import json
 import time
 
 import joblib
+import numpy as np
 import pandas as pd
 import xgboost as xgb
 
@@ -24,6 +25,29 @@ QUANTILES = {"p10": 0.1, "p50": 0.5, "p90": 0.9}
 N_ESTIMATORS = 600
 MODELS = DATA / "models"
 WEATHER, FC_MODEL = "wx_mixed", "metno_seamless"
+# Valgt med scripts/eval_fast.py: feltsignatur og resesjonskurve per stasjon (features.signature), vekt på rader
+# med ekte værprognose (W_FC) og på hendelser der elva stiger, faller eller det er meldt mye regn (W_EVENT)
+SIGNATURES = True
+W_FC, W_EVENT = 2.0, 3.0
+
+
+def event(d: pd.DataFrame) -> np.ndarray:
+    """Rader der elva er i bevegelse eller det er meldt mye regn – bestemt av features, ikke av fasit,
+    så vektingen ikke forskyver kvantilene."""
+    return ((d["rr_fsum"] >= 15) | (d["dlq1"].abs() >= 0.1)
+            | (d["dlq_max7"] > -0.05) & (d["lq_max7"] - d["lq_mean30"] > 0.3)).to_numpy()
+
+
+def weights(d: pd.DataFrame, w_fc: float = W_FC, w_event: float = W_EVENT) -> np.ndarray:
+    return (1 + (w_fc - 1) * d["wx_fc"].to_numpy()) * (1 + (w_event - 1) * event(d))
+
+
+def stations_with_data() -> list[str]:
+    """Stasjoner med all rådata, også prognosearkivet (nye stasjoner kommer med når hentingen er ferdig)."""
+    raw = DATA / "raw"
+    return [r["station"] for r in load_stations()
+            if all((raw / sub / f"{r['station']}.parquet").exists()
+                   for sub in ("hydapi", "gts", "hydapi_hourly", f"forecasts/{FC_MODEL}"))]
 
 
 def _device() -> str:
@@ -38,26 +62,30 @@ DEVICE = _device()
 
 
 def fit_quantile(X: pd.DataFrame, y: pd.Series, alpha: float, n_estimators: int, eval_set=None,
-                 early_stopping: int | None = None) -> xgb.XGBRegressor:
+                 early_stopping: int | None = None, sample_weight=None, **params) -> xgb.XGBRegressor:
     """Kvantilmodell; `station` må være pandas-kategori. Returneres klar for prediksjon på CPU."""
     m = xgb.XGBRegressor(objective="reg:quantileerror", quantile_alpha=alpha, n_estimators=n_estimators,
-                         device=DEVICE, early_stopping_rounds=early_stopping, **PARAMS)
-    m.fit(X, y, eval_set=eval_set, verbose=False)
+                         device=DEVICE, early_stopping_rounds=early_stopping, **(PARAMS | params))
+    m.fit(X, y, eval_set=eval_set, sample_weight=sample_weight, verbose=False)
     m.set_params(device="cpu")
     return m
 
 
-def train_all() -> dict:
-    stations = [r["station"] for r in load_stations()]
+def train_all(stations: list[str] | None = None) -> dict:
+    stations = stations or stations_with_data()
     MODELS.mkdir(parents=True, exist_ok=True)
     t0 = time.perf_counter()
+    sigs = {st: features.signature(features.load_station(st)) for st in stations} if SIGNATURES else None
     for h in features.HORIZONS:
-        d = features.dataset(stations, h, WEATHER, fc_model=FC_MODEL)
+        d = features.dataset(stations, h, WEATHER, fc_model=FC_MODEL, sig_until=SIGNATURES or None)
         cols = [c for c in d.columns if c not in features.NON_FEATURES]
+        w = weights(d)
         for name, a in QUANTILES.items():
-            m = fit_quantile(d[cols], d["y"], a, N_ESTIMATORS)
-            joblib.dump({"model": m, "cols": cols, "stations": stations}, MODELS / f"h{h}_{name}.joblib")
+            m = fit_quantile(d[cols], d["y"], a, N_ESTIMATORS, sample_weight=w)
+            joblib.dump({"model": m, "cols": cols, "stations": stations, "signatures": sigs},
+                        MODELS / f"h{h}_{name}.joblib")
     info = {"trained_at": pd.Timestamp.now().isoformat(), "train_seconds": time.perf_counter() - t0,
-            "weather": WEATHER, "fc_model": FC_MODEL, "library": f"xgboost {xgb.__version__}", "device": DEVICE}
+            "weather": WEATHER, "fc_model": FC_MODEL, "library": f"xgboost {xgb.__version__}", "device": DEVICE,
+            "stations": len(stations), "signatures": SIGNATURES, "w_fc": W_FC, "w_event": W_EVENT}
     (MODELS / "info.json").write_text(json.dumps(info, indent=1))
     return info

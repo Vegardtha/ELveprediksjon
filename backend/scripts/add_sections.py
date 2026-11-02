@@ -1,4 +1,5 @@
-"""Legger alle padleseksjoner med nivåer på Østlandet inn i config/rivers.yaml, fra nokken.net og whitewater.guide.
+"""Legger alle padleseksjoner med nivåer på Østlandet (med --norge: hele landet) inn i config/rivers.yaml, fra
+nokken.net og whitewater.guide.
 
 Én målestasjon kan ha mange seksjoner; prognosen er per stasjon, mens terskler, innsett/utsett og grad er per
 seksjon. Første oppføring per stasjon er «primær» (den evalueres). Seksjoner som allerede finnes hoppes over:
@@ -28,6 +29,12 @@ from elvepred.settings import CONFIG, DATA, load_rivers
 
 # Østlandet: hovedvassdrag 1–16 (Glomma til Skiensvassdraget) og Femund/Trysil (311)
 OSTLANDET = set(range(1, 17)) | {311}
+NORGE = "--norge" in sys.argv
+
+
+def in_region(code: str) -> bool:
+    return NORGE or int(code.split(".")[0]) in OSTLANDET
+
 # målestasjonen står i en annen (nabo)elv enn seksjonen, selv om elvenavnet er likt
 PROXY = {"12.171.0", "12.215.0", "311.460.0"}
 # Glomma ved Solbergfoss: 40 000 km², styrt av magasinslipp og uten nedbørfelt i NVEs kart (trengs for GTS).
@@ -109,7 +116,7 @@ def candidates() -> dict[str, list[dict]]:
     """Seksjoner med nivåer per stasjon: nokken først, så whitewater.guide."""
     out = {}
     for x in json.loads((DATA / "reference" / "nokken_sections.json").read_text(encoding="utf-8")):
-        if not x["station"] or int(x["station"].split(".")[0]) not in OSTLANDET:
+        if not x["station"] or not in_region(x["station"]):
             continue
         t = nokken_thresholds(x["bands"] or [])
         if t:
@@ -120,7 +127,7 @@ def candidates() -> dict[str, list[dict]]:
     ww = json.loads((DATA / "reference" / "wwguide_sections_raw.json").read_text(encoding="utf-8"))
     for x in ww["data"]["sections"]["nodes"]:
         river = x["river"]["name"].strip()
-        if not x["gauge"] or int(x["gauge"]["code"].split(".")[0]) not in OSTLANDET or (river, x["name"]) in SKIP_WW:
+        if not x["gauge"] or not in_region(x["gauge"]["code"]) or (river, x["name"]) in SKIP_WW:
             continue
         t = ww_thresholds(x["flows"])
         pos = lambda p: [round(p["coordinates"][1], 6), round(p["coordinates"][0], 6)] if p else None

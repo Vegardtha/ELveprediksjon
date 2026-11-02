@@ -1,8 +1,12 @@
 {
- "trained_at": "2026-10-29T02:32:03.607198",
- "train_seconds": 913.1156816002913,
+ "trained_at": "2026-11-02T13:09:42.680365",
+ "train_seconds": 1088.3502336000092,
  "weather": "wx_mixed",
  "fc_model": "metno_seamless",
  "library": "xgboost 3.2.0",
- "device": "cuda"
+ "device": "cuda",
+ "stations": 55,
+ "signatures": true,
+ "w_fc": 2.0,
+ "w_event": 3.0
 }

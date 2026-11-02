@@ -66,6 +66,8 @@ def hourly(station: str, model: str, start: str, end: str, wait_daily: bool = Tr
                     time.sleep(pause)
                     waited += pause
                     continue
+                if r.status_code >= 500:  # midlertidig serverfeil (f.eks. 503): prøv igjen som ved nettbrudd
+                    raise httpx.TransportError(f"HTTP {r.status_code}")
                 r.raise_for_status()
                 j = r.json()  # kan feile ved avkuttet svar
                 break

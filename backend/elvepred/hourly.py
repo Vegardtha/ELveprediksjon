@@ -11,6 +11,7 @@ kl. 12 UTC, siden dagens kjøringer da stort sett ikke finnes ennå). Timer før
 import numpy as np
 import pandas as pd
 
+from elvepred import features
 from elvepred.settings import DATA
 
 PAST = 72  # timer historikk i nedbørvinduet
@@ -36,8 +37,10 @@ def _window(a: np.ndarray, idx: np.ndarray, lead: np.ndarray) -> np.ndarray:
 
 
 def build(q: pd.Series, fc: pd.DataFrame, g: pd.DataFrame, issues: pd.DatetimeIndex, ks=K_TRAIN,
-          with_target: bool = True) -> pd.DataFrame:
-    """Én rad per (utstedelse, k). q er timesserie, fc har rr_l{N}/tm_l{N}, g er GTS per døgn."""
+          with_target: bool = True, sig: dict | None = None) -> pd.DataFrame:
+    """Én rad per (utstedelse, k). q er timesserie, fc har rr_l{N}/tm_l{N}, g er GTS per døgn.
+
+    sig: feltsignatur (features.signature) gir faste kolonner og `rec_k`, fallet de neste k timene hvis det er tørt."""
     start = issues.min() - pd.Timedelta(hours=PAST + 48)
     end = issues.max() + pd.Timedelta(hours=MAX_K)
     grid = pd.date_range(start.floor("h"), end.ceil("h"), freq="h")
@@ -70,6 +73,10 @@ def build(q: pd.Series, fc: pd.DataFrame, g: pd.DataFrame, issues: pd.DatetimeIn
         "lq_now": lq[i],
         **{f"dlq{h}h": lq[i] - lq[i - h] for h in (1, 3, 6, 12, 24, 48)},
         "lq_max24": lqs.rolling(24, min_periods=12).max().to_numpy()[i],
+        # avstand til og tid siden siste topp (72 t): skiller stigning, topp og tidlig/sen resesjon
+        "dlq_max72": lq[i] - lqs.rolling(72, min_periods=36).max().to_numpy()[i],
+        "h_since_max72": lqs.rolling(72, min_periods=36).apply(lambda x: len(x) - 1 - np.nanargmax(x), raw=True)
+        .to_numpy()[i],
         "lq_min24": lqs.rolling(24, min_periods=12).min().to_numpy()[i],
         "lq_mean72": lqs.rolling(72, min_periods=36).mean().to_numpy()[i],
         "rr_p6": s(-6, 0), "rr_p24": s(-24, 0), "rr_p72": s(-PAST, 0),
@@ -97,6 +104,10 @@ def build(q: pd.Series, fc: pd.DataFrame, g: pd.DataFrame, issues: pd.DatetimeIn
         f["hour_k_sin"] = np.sin(2 * np.pi * (f["hour"] + k) / 24)
         f["hour_k_cos"] = np.cos(2 * np.pi * (f["hour"] + k) / 24)
         f["fc_missing"] = s(0, k, nan_c)
+        if sig:
+            for c, v in sig.items():
+                f[c] = v
+            f["rec_k"] = features.recession(np.expm1(f["lq_now"].to_numpy()), k / 24, sig)
         if with_target:
             f["q0"] = Q[i]
             f["q_true"] = Q[i + k]
@@ -107,7 +118,8 @@ def build(q: pd.Series, fc: pd.DataFrame, g: pd.DataFrame, issues: pd.DatetimeIn
     return out.dropna(subset=["lq_now", "y"] if with_target else ["lq_now"])
 
 
-def dataset(stations: list[str]) -> pd.DataFrame:
+def dataset(stations: list[str], sigs: dict[str, dict] | None = None) -> pd.DataFrame:
+    """sigs: feltsignatur per stasjon (features.signature), eller None for å utelate signaturfeaturene."""
     parts = []
     for st in stations:
         q, fc, g = load(st)
@@ -115,7 +127,7 @@ def dataset(stations: list[str]) -> pd.DataFrame:
         t1 = min(fc.index.max(), q.dropna().index.max()) - pd.Timedelta(hours=1)
         issues = pd.date_range(t0.ceil("D"), t1, freq=f"{ISSUE_STEP}h")
         issues = issues[q.reindex(issues).notna().to_numpy()]
-        d = build(q, fc, g, issues)
+        d = build(q, fc, g, issues, sig=(sigs or {}).get(st))
         d["station"] = st
         parts.append(d)
     d = pd.concat(parts, ignore_index=True)

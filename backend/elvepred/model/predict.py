@@ -127,6 +127,9 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
                 break
             X = features.build(df, h, "wx_fc", hq=hq, hour=hour, fc=fc)
             X["station"] = pd.Categorical([st] * len(X), categories=models[(h, "p50")]["stations"])
+            sig = (models[(h, "p50")].get("signatures") or {}).get(st)
+            if sig:  # feltsignaturen er beregnet fra hele historikken ved trening
+                features.add_signature(X, sig, h)
             x = X.loc[[issue]]
             row = {"station": st, "issue_date": issue, "date": issue + pd.Timedelta(days=h),
                    "horizon": h, "q_yesterday": float(df.loc[issue, "q"]), "q_now": float(hq.iloc[-1]),
@@ -134,7 +137,8 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
             adj = {"p10": -calib[h]["p10"], "p50": 0.0, "p90": calib[h]["p90"]}
             for n in QUANTILES:
                 m = models[(h, n)]
-                row[n] = float(x["lq0"].iloc[0] + m["model"].predict(x[m["cols"]])[0] + adj[n])  # log1p
+                # reindex: stasjoner modellen ikke har signatur for får manglende verdier
+                row[n] = float(x["lq0"].iloc[0] + m["model"].predict(x.reindex(columns=m["cols"]))[0] + adj[n])  # log1p
             row["rr_forecast"] = float(df["rr"].get(row["date"]) if h == 1 else fc[f"rr_fc{h}"].get(issue))
             row["tm_forecast"] = float(df["tm"].get(row["date"]) if h == 1 else fc[f"tm_fc{h}"].get(issue))
             days.append(row)
@@ -187,7 +191,8 @@ def predict_hourly(station: str, hq: pd.Series, fch: pd.DataFrame, df: pd.DataFr
     `days` er døgnprognosene i log1p-rom (døgn h plottes kl. 12 UTC på dato issue + h).
     """
     T = hq.index[-1]
-    X = hourly.build(hq, fch, df, pd.DatetimeIndex([T]), ks=range(1, hourly.MAX_K + 1), with_target=False)
+    sig = (models["p50"].get("signatures") or {}).get(station)
+    X = hourly.build(hq, fch, df, pd.DatetimeIndex([T]), ks=range(1, hourly.MAX_K + 1), with_target=False, sig=sig)
     X["station"] = pd.Categorical([station] * len(X), categories=models["p50"]["stations"])
     k = X["k"].to_numpy()
     adj = {"p10": -np.interp(k, ks, [calib[x]["p10"] for x in ks]), "p50": 0.0,
@@ -197,7 +202,7 @@ def predict_hourly(station: str, hq: pd.Series, fch: pd.DataFrame, df: pd.DataFr
     pos = ((out["time"] - issue - pd.Timedelta(hours=12)) / pd.Timedelta(days=1)).to_numpy()
     hs = [d["horizon"] for d in days]
     for n, m in models.items():
-        lh = X["lq_now"].to_numpy() + m["model"].predict(X[m["cols"]]) + adj[n]
+        lh = X["lq_now"].to_numpy() + m["model"].predict(X.reindex(columns=m["cols"])) + adj[n]
         ld = np.interp(pos, hs, [d[n] for d in days]) if days else lh
         out[n] = np.expm1((1 - a) * lh + a * ld)
     out[["p10", "p50", "p90"]] = np.sort(out[["p10", "p50", "p90"]].to_numpy(), axis=1)

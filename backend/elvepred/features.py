@@ -44,6 +44,9 @@ def _past(df: pd.DataFrame) -> pd.DataFrame:
     f["lq_mean30"] = lq.rolling(30, min_periods=20).mean()
     f["lq_min30"] = lq.rolling(30, min_periods=20).min()
     f["lq_max7"] = lq.rolling(7, min_periods=5).max()
+    # hvor langt under siste topp og hvor lenge siden: skiller tidlig og sen resesjon
+    f["dlq_max7"] = lq - f["lq_max7"]
+    f["days_since_max"] = lq.rolling(7, min_periods=5).apply(lambda x: len(x) - 1 - np.argmax(x), raw=True)
     f["rr0"] = df["rr"]
     for k in (3, 7, 14, 30):
         f[f"rr_sum{k}"] = df["rr"].rolling(k, min_periods=1).sum()
@@ -89,8 +92,14 @@ def load_forecasts(station: str, model: str) -> pd.DataFrame | None:
 
 def _future_wx(df: pd.DataFrame, h: int, fc: pd.DataFrame | None, mixed: bool = False) -> pd.DataFrame:
     """Framtidig vær kun fra nedbør og temperatur. fc=None gir fasit (GTS-arkivet).
-    k=1 (GTS-døgnet som slutter 06 UTC i dag) er observert når modellen kjører, så det tas alltid fra GTS."""
+    k=1 (GTS-døgnet som slutter 06 UTC i dag) er observert når modellen kjører, så det tas alltid fra GTS.
+
+    `wx_fc` er 1 når været framover er en ekte prognose og 0 når det er fasit, så modellen kan lære hvor mye
+    den skal stole på været (i drift alltid 1). For h=1 sier den bare om raden er fra prognoseperioden."""
     rr, tm = {}, {}
+    from_fc = pd.Series(0.0 if fc is None else 1.0, index=df.index)
+    if fc is not None and mixed:
+        from_fc = fc["rr_fc2"].reindex(df.index).notna().astype(float)
     for k in range(1, h + 1):
         rr[k], tm[k] = df["rr"].shift(-k), df["tm"].shift(-k)
         if fc is not None and k >= 2:
@@ -98,8 +107,10 @@ def _future_wx(df: pd.DataFrame, h: int, fc: pd.DataFrame | None, mixed: bool = 
             if mixed:
                 has = frr.notna() & ftm.notna()
                 frr, ftm = frr.where(has, rr[k]), ftm.where(has, tm[k])
+                from_fc = from_fc.where(has, 0.0)
             rr[k], tm[k] = frr, ftm
     f = pd.DataFrame(index=df.index)
+    f["wx_fc"] = from_fc
     for k in range(1, h + 1):
         f[f"rr_f{k}"] = rr[k]
     R, T = pd.concat(rr.values(), axis=1), pd.concat(tm.values(), axis=1)
@@ -146,12 +157,70 @@ def build(df: pd.DataFrame, h: int, weather: str | None = "gts", hq: pd.Series |
     return X
 
 
+def signature(df: pd.DataFrame, until: str | None = None) -> dict[str, float]:
+    """Faste egenskaper ved feltet, beregnet fra stasjonens egen historikk (til og med `until`).
+
+    Gir modellen et mål på hvor fort akkurat denne elva faller og svinger, så raske felt med kort historikk
+    (f.eks. Lysakerelva fra 2020) ikke arver resesjonen til trege, innsjørike felt.
+    """
+    d = df.loc[:until] if until else df
+    lq = np.log1p(d["q"])
+    d1 = lq.diff()
+    dry = (d["rr"].rolling(3, min_periods=1).sum() < 3) & (d1 < 0)
+    high = lq > lq.quantile(0.9)
+    q = d["q"].dropna()
+    # Resesjonskurve -dq/dt = a·q^b (Brutsaert–Nieber), tilpasset medianer i 10 nivåbånd på tørre dager
+    dq = d["q"].diff()
+    ok = dry & (dq < 0) & (d["q"] > 0)
+    x, yv = np.log(((d["q"] + d["q"].shift()) / 2)[ok]), np.log(-dq[ok])
+    bins = pd.qcut(x, 10, duplicates="drop")
+    xb, yb = x.groupby(bins, observed=True).median(), yv.groupby(bins, observed=True).median()
+    b = float(np.clip(np.polyfit(xb, yb, 1)[0], 0.5, 3.0))
+    loga = float(np.median(yb - b * xb))  # konsistent med avklippet b
+    return {
+        "sig_rec": float(d1[dry].median()),  # typisk døgnlig fall i log-vannføring når det er tørt
+        "sig_rec_hi": float(d1[dry & high].median()),  # samme etter flomtopper
+        "sig_flash": float(q.diff().abs().sum() / q.sum()),  # Richards-Baker-indeks
+        "sig_lq_range": float(lq.quantile(0.95) - lq.quantile(0.05)),
+        "sig_rec_loga": float(loga),
+        "sig_rec_b": b,
+        "sig_q01": float(q.quantile(0.01)),
+    }
+
+
+def recession(q0: np.ndarray, h: float, sig: dict) -> np.ndarray:
+    """Endring i log1p-vannføring etter h døgn uten nedbør, fra stasjonens resesjonskurve."""
+    a, b = np.exp(sig["sig_rec_loga"]), sig["sig_rec_b"]
+    q0 = np.maximum(np.asarray(q0, dtype=float), 1e-6)
+    if abs(b - 1) < 0.02:
+        qh = q0 * np.exp(-a * h)
+    else:
+        base = q0 ** (1 - b) - (1 - b) * a * h
+        qh = np.where(base > 0, np.abs(base) ** (1 / (1 - b)), 0.0)
+    qh = np.clip(qh, min(sig["sig_q01"], q0.min()), q0)
+    return np.log1p(qh) - np.log1p(q0)
+
+
+def add_signature(X: pd.DataFrame, sig: dict, h: int) -> None:
+    """Feltsignatur som faste kolonner, pluss `rec_h`: forventet fall de neste h døgnene hvis det er tørt."""
+    for k, v in sig.items():
+        X[k] = v
+    X["rec_h"] = recession(np.expm1(X["lq0"].to_numpy()), h, sig)
+    if "lq_now" in X:  # samme fra siste timesmåling, som ligger 1 døgn + `hour` timer etter t
+        rest = np.clip(h - 1 - X["hour"].to_numpy() / 24, 0, None)
+        X["rec_h_now"] = recession(np.expm1(X["lq_now"].fillna(X["lq0"]).to_numpy()), rest, sig) + X["dlq_now"].fillna(0)
+
+
 def dataset(stations: list[str], h: int, weather: str | None = "gts", nowcast: bool = True,
-            fc_model: str = "ecmwf_ifs025") -> pd.DataFrame:
-    """Treningsdata for alle stasjoner. Kolonner utenom features: date, y, q0, q_true."""
+            fc_model: str = "ecmwf_ifs025", sig_until: str | bool | None = None) -> pd.DataFrame:
+    """Treningsdata for alle stasjoner. Kolonner utenom features: date, y, q0, q_true.
+
+    sig_until: legg til feltsignaturer (`signature`) beregnet til og med denne datoen, eller fra all historikk
+    hvis True."""
     parts = []
     for st in stations:
         df = load_station(st)
+        sig = signature(df, None if sig_until is True else sig_until) if sig_until else {}
         hq = load_hourly(st) if nowcast else None
         fc = load_forecasts(st, fc_model) if weather in ("wx_fc", "wx_mixed") else None
         if weather == "wx_fc" and fc is None:  # ingen ekte prognoser: radene skal falle ut av testen, ikke få fasit
@@ -159,6 +228,8 @@ def dataset(stations: list[str], h: int, weather: str | None = "gts", nowcast: b
         for hour in (HOURS if nowcast else (None,)):
             X = build(df, h, weather, hq, hour, fc)
             X["station"] = st
+            if sig:
+                add_signature(X, sig, h)
             X["q0"] = df["q"]
             X["q_true"] = df["q"].shift(-h)
             parts.append(X.dropna(subset=["y", "lq0", "dlq1"]))
