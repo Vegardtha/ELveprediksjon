@@ -42,6 +42,7 @@ GROUPS = {
     "dyn": ("dlq_max7", "days_since_max"),
     "sig": ("sig_rec", "sig_rec_hi", "sig_flash", "sig_lq_range", "sig_rec_loga", "sig_rec_b", "sig_q01"),
     "rec": ("rec_h", "rec_h_now"),
+    "up": ("up_share", "up_rel0", "up_rel_anom", "up_dlq1", "up_dlq3", "up_dlq_now", "up_dlq_now6h"),
 }
 
 # variant: featuregrupper som brukes, vekt på rader med ekte prognose (w_fc), vekt på hendelser med regn,
@@ -59,6 +60,7 @@ VARIANTS = {
     "fc5_sig_rec_ev3": dict(groups=("fc", "dyn", "sig", "rec"), w_fc=5, w_ev=3),
     "fc2_sig_rec_ev3": dict(groups=("fc", "dyn", "sig", "rec"), w_fc=2, w_ev=3),
     "fc_sig_rec_ev3": dict(groups=("fc", "dyn", "sig", "rec"), w_ev=3),
+    "fc2_sig_rec_ev3_up": dict(groups=("fc", "dyn", "sig", "rec", "up"), w_fc=2, w_ev=3),
     "trees1500": dict(params={"n_estimators": 1500}),
     "leaves63": dict(params={"max_leaves": 63}),
 }
@@ -89,8 +91,8 @@ def rec_mask(d: pd.DataFrame, h: int) -> np.ndarray:
 results = {}
 for h in horizons:
     t0 = time.perf_counter()
-    mixed = features.dataset(stations, h, "wx_mixed", fc_model=FC_MODEL, sig_until=SIG_UNTIL)
-    real = features.dataset(stations, h, "wx_fc", fc_model=FC_MODEL, sig_until=SIG_UNTIL)
+    mixed = features.dataset(stations, h, "wx_mixed", fc_model=FC_MODEL, sig_until=SIG_UNTIL, upstream=True)
+    real = features.dataset(stations, h, "wx_fc", fc_model=FC_MODEL, sig_until=SIG_UNTIL, upstream=True)
     assert (mixed["date"].values == real["date"].values).all()
     print(f"h={h}: {len(mixed)} rader ({time.perf_counter() - t0:.0f}s)", flush=True)
     target_date = mixed["date"] + pd.Timedelta(days=h)

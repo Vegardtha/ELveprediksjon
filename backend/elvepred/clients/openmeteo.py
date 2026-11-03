@@ -35,6 +35,41 @@ class DailyQuotaExceeded(RuntimeError):
     pass
 
 
+def _get(url: str, params: dict, wait_daily: bool = True) -> dict | list:
+    """GET med venting på kvoten og nye forsøk ved nettbrudd og serverfeil."""
+    attempt, waited = 0, 0
+    while True:
+        try:
+            r = httpx.get(url, timeout=300, params=params)
+            # gratiskvoten gjelder per minutt, time og døgn, og deles av alle API-ene (også ERA5-arkivet).
+            # Døgnkvoten nullstilles ved midnatt UTC: da ventes det til neste døgn, så store hentinger går over
+            # flere dager
+            if r.status_code == 429 and "daily" in r.text.lower():
+                if not wait_daily:
+                    raise DailyQuotaExceeded(r.text[:120])
+                reset = pd.Timestamp.now(tz="UTC").normalize() + pd.Timedelta(days=1, minutes=10)
+                print(f"Open-Meteo døgnkvote brukt opp, venter til {reset:%Y-%m-%d %H:%M} UTC", flush=True)
+                while pd.Timestamp.now(tz="UTC") < reset:  # korte søvner: tiden PC-en sover telles ikke av sleep()
+                    time.sleep(60)
+                continue
+            if r.status_code == 429 and waited < QUOTA_WAIT_S:
+                # for mange samtidige kall (f.eks. to hentinger på en gang) går over på sekunder
+                pause = 15 if "concurrent" in r.text.lower() else 65 if "minutely" in r.text.lower() else 300
+                print(f"Open-Meteo 429 ({r.text[:80]}), venter {pause}s", flush=True)
+                time.sleep(pause)
+                waited += pause
+                continue
+            if r.status_code >= 500:  # midlertidig serverfeil (f.eks. 503): prøv igjen som ved nettbrudd
+                raise httpx.TransportError(f"HTTP {r.status_code}")
+            r.raise_for_status()
+            return r.json()  # kan feile ved avkuttet svar
+        except (httpx.TransportError, ValueError):
+            attempt += 1
+            if attempt == 30:
+                raise
+            time.sleep(60)  # også nettbrudd (f.eks. DNS) som varer noen minutter
+
+
 def hourly(station: str, model: str, start: str, end: str, wait_daily: bool = True) -> pd.DataFrame:
     """Feltmiddel per time. Kolonner `rr_l{N}` (mm) og `tm_l{N}` (°C) for ledetid N døgn."""
     pts = points(station, N_POINTS.get(model, 4))
@@ -43,40 +78,10 @@ def hourly(station: str, model: str, start: str, end: str, wait_daily: bool = Tr
     parts, s = [], pd.Timestamp(start)
     while s <= pd.Timestamp(end):
         e = min(s + pd.DateOffset(months=6) - pd.Timedelta(days=1), pd.Timestamp(end))
-        attempt, waited = 0, 0
-        while True:
-            try:
-                r = httpx.get(URL, timeout=300, params={
-                    "latitude": ",".join(f"{p[0]:.4f}" for p in pts), "longitude": ",".join(f"{p[1]:.4f}" for p in pts),
-                    "hourly": ",".join(names), "models": model, "start_date": f"{s:%Y-%m-%d}", "end_date": f"{e:%Y-%m-%d}",
-                })
-                # gratiskvoten gjelder per minutt, time og døgn. Døgnkvoten (ca. 16 stasjoner arkiv) nullstilles
-                # ved midnatt UTC: da ventes det til neste døgn, så arkivet for mange nye stasjoner hentes over flere dager
-                if r.status_code == 429 and "daily" in r.text.lower():
-                    if not wait_daily:
-                        raise DailyQuotaExceeded(r.text[:120])
-                    reset = pd.Timestamp.now(tz="UTC").normalize() + pd.Timedelta(days=1, minutes=10)
-                    print(f"Open-Meteo døgnkvote brukt opp, venter til {reset:%Y-%m-%d %H:%M} UTC", flush=True)
-                    while pd.Timestamp.now(tz="UTC") < reset:  # korte søvner: tiden PC-en sover telles ikke av sleep()
-                        time.sleep(60)
-                    continue
-                if r.status_code == 429 and waited < QUOTA_WAIT_S:
-                    pause = 65 if "minutely" in r.text.lower() else 300
-                    print(f"Open-Meteo 429 ({r.text[:80]}), venter {pause}s", flush=True)
-                    time.sleep(pause)
-                    waited += pause
-                    continue
-                if r.status_code >= 500:  # midlertidig serverfeil (f.eks. 503): prøv igjen som ved nettbrudd
-                    raise httpx.TransportError(f"HTTP {r.status_code}")
-                r.raise_for_status()
-                j = r.json()  # kan feile ved avkuttet svar
-                break
-            except (httpx.TransportError, ValueError):
-                attempt += 1
-                if attempt == 30:
-                    raise
-                time.sleep(60)  # også nettbrudd (f.eks. DNS) som varer noen minutter
-        r.raise_for_status()
+        j = _get(URL, {
+            "latitude": ",".join(f"{p[0]:.4f}" for p in pts), "longitude": ",".join(f"{p[1]:.4f}" for p in pts),
+            "hourly": ",".join(names), "models": model, "start_date": f"{s:%Y-%m-%d}", "end_date": f"{e:%Y-%m-%d}",
+        }, wait_daily)
         js = j if isinstance(j, list) else [j]
         frames = [pd.DataFrame(j["hourly"]).set_index("time").rename(columns=names) for j in js]
         df = pd.concat(frames).groupby(level=0).mean()
@@ -84,6 +89,20 @@ def hourly(station: str, model: str, start: str, end: str, wait_daily: bool = Tr
         parts.append(df)
         s = e + pd.Timedelta(days=1)
     return pd.concat(parts)
+
+
+ERA5_URL = "https://archive-api.open-meteo.com/v1/archive"
+
+
+def era5_hourly(station: str, start: str, end: str, wait_daily: bool = True) -> pd.DataFrame:
+    """ERA5 (reanalyse, ~25 km) per time i ett punkt i feltet, kolonner `rr` og `tm`. Brukes bare til å fordele
+    seNorge-døgnnedbøren på timer (hourly.truth_weather), så ett grovt punkt holder."""
+    lat, lon = points(station, 1)[0]
+    j = _get(ERA5_URL, {"latitude": f"{lat:.4f}", "longitude": f"{lon:.4f}", "hourly": "precipitation,temperature_2m",
+                        "models": "era5", "start_date": start, "end_date": end}, wait_daily)
+    df = pd.DataFrame(j["hourly"]).set_index("time").rename(columns={"precipitation": "rr", "temperature_2m": "tm"})
+    df.index = pd.to_datetime(df.index)
+    return df
 
 
 def daily_forecasts(h: pd.DataFrame, horizons=range(2, 10)) -> pd.DataFrame:

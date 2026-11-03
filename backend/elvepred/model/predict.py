@@ -78,6 +78,23 @@ def measured(station: str, today: pd.Timestamp) -> tuple[pd.Series, pd.Series]:
     return q, hq
 
 
+def upstream_inputs(station: str, today: pd.Timestamp, inputs: dict) -> tuple[pd.Series, pd.Series] | None:
+    """Døgn- og timesvannføring ved stasjonen oppstrøms. Er den selv en prognosestasjon, er dataene allerede
+    hentet; ellers hentes de nå. None hvis det feiler (da mangler `up_*`, som modellen tåler)."""
+    if isinstance(inputs.get(station), tuple):
+        df, hq = inputs[station][:2]
+        return df["q"], hq
+    try:
+        start = today - pd.Timedelta(days=HISTORY_DAYS)
+        q = hydapi.daily_discharge(station, start.strftime("%Y-%m-%d"), today.strftime("%Y-%m-%d"))["q"]
+        hq = hydapi.hourly_discharge(station, (today - pd.Timedelta(hours=HOURLY_HISTORY)).strftime("%Y-%m-%d"),
+                                     today.strftime("%Y-%m-%d")).dropna()
+        return q, hq
+    except Exception as e:
+        print(f"::warning::{station} (oppstrøms): kunne ikke hente data ({type(e).__name__}: {e})", file=sys.stderr)
+        return None
+
+
 def fetch_all(stations: list[str], today: pd.Timestamp) -> dict[str, tuple | Exception]:
     """Henter inndata for alle stasjoner parallelt. En feilet stasjon gir unntaket i stedet for data."""
     def one(st):
@@ -96,6 +113,7 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
     hmodels = {n: joblib.load(MODELS / f"hourly_{n}.joblib") for n in QUANTILES}
     hcal = {int(k): v for k, v in json.loads((MODELS / "hourly_calibration.json").read_text()).items()}
     hk = sorted(hcal)
+    ups = models[(1, "p50")].get("upstream") or {}
     rivers = load_rivers()
     # seksjoner med `forecast: false` får bare målt vannføring
     observe = [r for r in rivers if r.get("forecast") is False]
@@ -122,10 +140,14 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
         days = []
         # klokkeslett (UTC) for siste timesmåling, regnet fra starten av dagen etter issue
         hour = int(min(23, (hq.index[-1] - issue - pd.Timedelta(days=1)) / pd.Timedelta(hours=1)))
+        up = None
+        if st in ups:
+            u = upstream_inputs(ups[st][0], today, inputs)
+            up = (*u, ups[st][1]) if u else None
         for h in features.HORIZONS:
             if h >= 2 and pd.isna(fc[f"rr_fc{h}"].get(issue)):
                 break
-            X = features.build(df, h, "wx_fc", hq=hq, hour=hour, fc=fc)
+            X = features.build(df, h, "wx_fc", hq=hq, hour=hour, fc=fc, up=up)
             X["station"] = pd.Categorical([st] * len(X), categories=models[(h, "p50")]["stations"])
             sig = (models[(h, "p50")].get("signatures") or {}).get(st)
             if sig:  # feltsignaturen er beregnet fra hele historikken ved trening

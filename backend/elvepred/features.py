@@ -17,6 +17,7 @@ Vær framover (`weather`):
 import numpy as np
 import pandas as pd
 
+from elvepred import upstream
 from elvepred.settings import DATA
 
 HORIZONS = list(range(1, 10))
@@ -138,9 +139,42 @@ def _nowcast(hq: pd.Series, index: pd.DatetimeIndex, hour: int) -> pd.DataFrame:
     return f
 
 
+def load_upstream(station: str) -> tuple[pd.Series, pd.Series, float] | None:
+    """(døgn- og timesvannføring, andel av feltet) for nærmeste stasjon oppstrøms, eller None."""
+    p = upstream.pairs().get(station)
+    if p is None or not (DATA / "raw" / "hydapi" / f"{p[0]}.parquet").exists():
+        return None
+    return pd.read_parquet(DATA / "raw" / "hydapi" / f"{p[0]}.parquet")["q"], load_hourly(p[0]), p[1]
+
+
+def _upstream(up: tuple[pd.Series, pd.Series, float], index: pd.DatetimeIndex, lq0: pd.Series,
+              hour: int | None) -> pd.DataFrame:
+    """Vannføring ved stasjonen oppstrøms. Et slipp fra magasin eller en flombølge der viser seg her
+    før den når stasjonen nedstrøms, og andelen av vannet som kommer ovenfra sier hvor mye det betyr."""
+    q, hq, share = up
+    lu = np.log1p(q.reindex(index))
+    f = pd.DataFrame(index=index)
+    f["up_share"] = share
+    f["up_rel0"] = lu - lq0
+    f["up_rel_anom"] = f["up_rel0"] - f["up_rel0"].rolling(30, min_periods=20).mean()
+    for k in (1, 3):
+        f[f"up_dlq{k}"] = lu - lu.shift(k)
+    if hour is not None:
+        lh = np.log1p(hq)
+        now = index + pd.Timedelta(days=1, hours=hour)
+        at = lambda ts: lh.reindex(ts, method="ffill", tolerance=pd.Timedelta("3h")).values
+        f["up_dlq_now"] = at(now) - lu
+        f["up_dlq_now6h"] = at(now) - at(now - pd.Timedelta(hours=6))
+    return f
+
+
 def build(df: pd.DataFrame, h: int, weather: str | None = "gts", hq: pd.Series | None = None,
-          hour: int | None = None, fc: pd.DataFrame | None = None) -> pd.DataFrame:
-    """Featurematrise for horisont h med mål `y` = log1p(q[t+h]) - log1p(q[t])."""
+          hour: int | None = None, fc: pd.DataFrame | None = None,
+          up: tuple[pd.Series, pd.Series, float] | None = None) -> pd.DataFrame:
+    """Featurematrise for horisont h med mål `y` = log1p(q[t+h]) - log1p(q[t]).
+
+    up: (døgn- og timesvannføring, feltandel) for stasjonen oppstrøms (`load_upstream`); uten den mangler
+    `up_*`-kolonnene, og modellen behandler dem som manglende verdier."""
     parts = [_past(df)]
     if weather == "gts":
         parts.append(_future(df, h))
@@ -150,6 +184,8 @@ def build(df: pd.DataFrame, h: int, weather: str | None = "gts", hq: pd.Series |
         parts.append(_future_wx(df, h, fc, mixed=weather == "wx_mixed"))
     if hq is not None:
         parts.append(_nowcast(hq, df.index, hour))
+    if up is not None:
+        parts.append(_upstream(up, df.index, parts[0]["lq0"], hour if hq is not None else None))
     X = pd.concat(parts, axis=1)
     if hq is not None:
         X["dlq_now"] = X["lq_now"] - X["lq0"]
@@ -212,21 +248,23 @@ def add_signature(X: pd.DataFrame, sig: dict, h: int) -> None:
 
 
 def dataset(stations: list[str], h: int, weather: str | None = "gts", nowcast: bool = True,
-            fc_model: str = "ecmwf_ifs025", sig_until: str | bool | None = None) -> pd.DataFrame:
+            fc_model: str = "ecmwf_ifs025", sig_until: str | bool | None = None,
+            upstream: bool = False) -> pd.DataFrame:
     """Treningsdata for alle stasjoner. Kolonner utenom features: date, y, q0, q_true.
 
     sig_until: legg til feltsignaturer (`signature`) beregnet til og med denne datoen, eller fra all historikk
-    hvis True."""
+    hvis True. upstream: legg til vannføring ved stasjonen oppstrøms (`up_*`)."""
     parts = []
     for st in stations:
         df = load_station(st)
         sig = signature(df, None if sig_until is True else sig_until) if sig_until else {}
         hq = load_hourly(st) if nowcast else None
+        up = load_upstream(st) if upstream else None
         fc = load_forecasts(st, fc_model) if weather in ("wx_fc", "wx_mixed") else None
         if weather == "wx_fc" and fc is None:  # ingen ekte prognoser: radene skal falle ut av testen, ikke få fasit
             fc = pd.DataFrame(columns=[f"{v}_fc{k}" for v in ("rr", "tm") for k in HORIZONS], dtype=float)
         for hour in (HOURS if nowcast else (None,)):
-            X = build(df, h, weather, hq, hour, fc)
+            X = build(df, h, weather, hq, hour, fc, up)
             X["station"] = st
             if sig:
                 add_signature(X, sig, h)

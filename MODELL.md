@@ -34,6 +34,9 @@ målestasjon og deles av alle seksjonene som bruker samme stasjon.
   −dq/dt = a·qᵇ, som gir `rec_h`: hvor elva havner etter h døgn hvis det holder seg tørt. Signaturen lagres i
   modellfilen, siden driften bare har 60 døgn historikk. Uten den arvet raske elver med kort historikk
   (f.eks. Lysakerelva fra 2020) den tregere nedgangen til store, innsjørike felt.
+- **Stasjon oppstrøms** (12 av 55 stasjoner, funnet fra nedbørfeltene i `elvepred/upstream.py`): andel av feltet,
+  forholdet mellom vannføringene og avviket fra det normale forholdet, endring siste 1 og 3 døgn og siste
+  timesmålinger. Fanger flombølger og slipp fra magasiner før de når stasjonen. Paret lagres i modellfilen.
 - **Vekting i treningen:** rader med ekte prognose teller 2×, og hendelser teller 3×. En hendelse er meldt regn
   ≥ 15 mm, endring ≥ 10 % siste døgn, eller nær en topp som ligger godt over 30-døgnsnittet. Hendelsene bestemmes
   bare av features, ikke av fasit, så kvantilene forskyves ikke. 5× vekt på prognoserader ga mer treg nedgang
@@ -78,12 +81,14 @@ målestasjon og deles av alle seksjonene som bruker samme stasjon.
 
   | Dag | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
   |---|---|---|---|---|---|---|---|---|---|
-  | Modell | 0.976 | 0.888 | 0.810 | 0.754 | 0.698 | 0.644 | 0.597 | 0.550 | 0.512 |
+  | Modell | 0.976 | 0.888 | 0.812 | 0.755 | 0.699 | 0.646 | 0.597 | 0.549 | 0.512 |
   | Før 2026-11-02 | 0.972 | 0.880 | 0.807 | 0.748 | 0.691 | 0.635 | 0.589 | 0.541 | 0.497 |
   | Persistens (i dag = i morgen) | 0.948 | 0.773 | 0.550 | 0.404 | 0.273 | 0.162 | 0.068 | −0.004 | −0.049 |
 
-  F1 for padlbar vannføring går opp på alle dagene (dag 5: 0.629 → 0.645). 37–41 av 55 stasjoner blir bedre.
-  Svakest er store, regulerte elver med målestasjoner oppstrøms (Jori, Gudbrandsdalslågen, Mistra). Tallene i
+  F1 for padlbar vannføring går opp på alle dagene (dag 5: 0.629 → 0.644). 37–41 av 55 stasjoner blir bedre.
+  Svakest er store, regulerte elver (Jori, Gudbrandsdalslågen, Mistra). Stasjon oppstrøms ga i `eval_fast.py`
+  NSE 0.714 → 0.720 på dag 4 for de 12 stasjonene som har en (Gudbrandsdalslågen +0.02), og ingen endring for
+  de andre. Gevinsten er liten fordi vannet bruker timer, ikke døgn, og dagens timesmålinger allerede er med. Tallene i
   tidligere versjoner (0.98/0.90/0.82/0.71/0.61/0.51) kom fra `scripts/evaluate_fc.py` med early stopping og
   er ikke direkte sammenlignbare.
 - **Rask evaluering av varianter:** `scripts/eval_fast.py` bruker fire halvårsperioder fra 2025, der hver

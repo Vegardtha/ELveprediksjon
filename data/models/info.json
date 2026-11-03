@@ -1,6 +1,6 @@
 {
- "trained_at": "2026-11-02T13:09:42.680365",
- "train_seconds": 1088.3502336000092,
+ "trained_at": "2026-11-03T11:32:11.483416",
+ "train_seconds": 1121.3464026995935,
  "weather": "wx_mixed",
  "fc_model": "metno_seamless",
  "library": "xgboost 3.2.0",
@@ -8,5 +8,6 @@
  "stations": 55,
  "signatures": true,
  "w_fc": 2.0,
- "w_event": 3.0
+ "w_event": 3.0,
+ "upstream": 12
 }

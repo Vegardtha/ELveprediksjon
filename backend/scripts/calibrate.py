@@ -20,8 +20,8 @@ import pandas as pd
 
 from elvepred import features
 from elvepred.evaluation import scores
-from elvepred.model.train import (FC_MODEL, MODELS, N_ESTIMATORS, QUANTILES, SIGNATURES, WEATHER, fit_quantile,
-                                  weights)
+from elvepred.model.train import (FC_MODEL, MODELS, N_ESTIMATORS, QUANTILES, SIGNATURES, UPSTREAM, WEATHER,
+                                  fit_quantile, weights)
 from elvepred.settings import DATA
 
 VAL_START, TEST_START = "2024-11-01", "2025-07-01"
@@ -34,8 +34,9 @@ calibration, metrics = {}, {}
 for h in features.HORIZONS:
     t0 = time.perf_counter()
     sig = VAL_START if SIGNATURES and not BASELINE else None
-    mixed = features.dataset(stations, h, WEATHER, fc_model=FC_MODEL, sig_until=sig)
-    real = features.dataset(stations, h, "wx_fc", fc_model=FC_MODEL, sig_until=sig)
+    up = UPSTREAM and not BASELINE
+    mixed = features.dataset(stations, h, WEATHER, fc_model=FC_MODEL, sig_until=sig, upstream=up)
+    real = features.dataset(stations, h, "wx_fc", fc_model=FC_MODEL, sig_until=sig, upstream=up)
     target = mixed["date"] + pd.Timedelta(days=h)
     has_fc = real["rr_fsum"].notna()
     tr = (target < VAL_START).to_numpy()

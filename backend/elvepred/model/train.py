@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 import xgboost as xgb
 
-from elvepred import features
+from elvepred import features, upstream
 from elvepred.settings import DATA, load_stations
 
 # tilsvarer tidligere LightGBM-oppsett (num_leaves=31, min_child_samples=40)
@@ -28,6 +28,8 @@ WEATHER, FC_MODEL = "wx_mixed", "metno_seamless"
 # Valgt med scripts/eval_fast.py: feltsignatur og resesjonskurve per stasjon (features.signature), vekt på rader
 # med ekte værprognose (W_FC) og på hendelser der elva stiger, faller eller det er meldt mye regn (W_EVENT)
 SIGNATURES = True
+# vannføring ved nærmeste målestasjon oppstrøms (elvepred.upstream), for stasjonene som har en
+UPSTREAM = True
 W_FC, W_EVENT = 2.0, 3.0
 
 
@@ -76,16 +78,20 @@ def train_all(stations: list[str] | None = None) -> dict:
     MODELS.mkdir(parents=True, exist_ok=True)
     t0 = time.perf_counter()
     sigs = {st: features.signature(features.load_station(st)) for st in stations} if SIGNATURES else None
+    # lagres i modellen, så nye stasjoner i catchments.geojson ikke bytter oppstrømsstasjon uten ny trening
+    ups = {st: p for st, p in upstream.pairs().items() if st in stations} if UPSTREAM else {}
     for h in features.HORIZONS:
-        d = features.dataset(stations, h, WEATHER, fc_model=FC_MODEL, sig_until=SIGNATURES or None)
+        d = features.dataset(stations, h, WEATHER, fc_model=FC_MODEL, sig_until=SIGNATURES or None,
+                             upstream=UPSTREAM)
         cols = [c for c in d.columns if c not in features.NON_FEATURES]
         w = weights(d)
         for name, a in QUANTILES.items():
             m = fit_quantile(d[cols], d["y"], a, N_ESTIMATORS, sample_weight=w)
-            joblib.dump({"model": m, "cols": cols, "stations": stations, "signatures": sigs},
+            joblib.dump({"model": m, "cols": cols, "stations": stations, "signatures": sigs, "upstream": ups},
                         MODELS / f"h{h}_{name}.joblib")
     info = {"trained_at": pd.Timestamp.now().isoformat(), "train_seconds": time.perf_counter() - t0,
             "weather": WEATHER, "fc_model": FC_MODEL, "library": f"xgboost {xgb.__version__}", "device": DEVICE,
-            "stations": len(stations), "signatures": SIGNATURES, "w_fc": W_FC, "w_event": W_EVENT}
+            "stations": len(stations), "signatures": SIGNATURES, "w_fc": W_FC, "w_event": W_EVENT,
+            "upstream": len(ups)}
     (MODELS / "info.json").write_text(json.dumps(info, indent=1))
     return info
