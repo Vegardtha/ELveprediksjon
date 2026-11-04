@@ -20,7 +20,8 @@ Kort logg over stegene, fra start til nå, og hva som kommer. Detaljer om modell
 | 02.11 | Samme features i timesmodellen | Ingen gevinst, ikke tatt med |
 | 02.11 | 92 nye stasjoner i hele Norge (254 seksjoner) lagt inn lokalt; henting av prognosearkiv startet | 75 av 145 stasjoner hentet |
 | 03.11 | Oppstrømsstasjoner som features (12 av 55 stasjoner har en) | NSE dag 4 for disse: 0.714 → 0.720; Gudbrandsdalslågen +0.02. I driftsmodellen |
-| 03.11 | Timesmodell på historiske flommer: ERA5 hentes rundt kraftige nedbørsdøgn fra 1990, seNorge-nedbøren fordeles på timer | Henting pågår (~10–12 t) |
+| 03.11 | Timesmodell på historiske flommer: ERA5 hentes rundt kraftige nedbørsdøgn fra 1990, seNorge-nedbøren fordeles på timer | ERA5 hentet for de 55 stasjonene |
+| 04.11 | Timesmodellen trent på arkiv + flommer fra 1990, hendelser 3× vekt | NSE 48 t: 0.740 → 0.781; flomtest 2019–2024: 0.497 → 0.698. I driftsmodellen |
 
 **Testet og forkastet:** egen MET Nordic-nedbør dag 1–2, prognoseflagg uten vekting, 5× vekt på prognoserader
 (tregere nedgang etter topper), feltsignatur i timesmodellen.
@@ -41,9 +42,6 @@ Kort logg over stegene, fra start til nå, og hva som kommer. Detaljer om modell
 
 ## Videre
 
-1. **Nå:** committe oppstrømsstasjonene (trent og testet).
-2. **Timesmodellen på flommer:** når ERA5 er hentet, sammenligne bare arkiv / med historikk / med historikk og
-   hendelsesvekt, på vanlig test og på flommene 2019–2024 (bl.a. Hans).
-3. **Nye stasjoner i hele Norge:** prognosearkivet ferdig (~4–5 døgn), ny trening, raskere driftsjobb (under
-   20 min på GitHub), publisere.
-4. **Resten av tiltakene,** i rekkefølgen 7 → 6 → 4 → 5 → 8 → 9.
+1. **Nye stasjoner i hele Norge:** ERA5 og prognosearkivet ferdig (~4–5 døgn), ny trening, raskere driftsjobb
+   (under 20 min på GitHub), publisere.
+2. **Resten av tiltakene,** i rekkefølgen 7 → 6 → 4 → 5 → 8 → 9.

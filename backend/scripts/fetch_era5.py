@@ -21,7 +21,7 @@ from elvepred.clients import openmeteo
 from elvepred.model.train import MODELS
 from elvepred.settings import DATA, load_stations
 
-WORKERS = 2  # hvert kall tar ~30 s; med 4 samtidig (og prognosehentingen) avviser Open-Meteo «too many concurrent»
+WORKERS = 1  # Open-Meteo avviser samtidige kall («too many concurrent») når prognosehentingen også går
 
 out = DATA / "raw" / "era5"
 out.mkdir(parents=True, exist_ok=True)

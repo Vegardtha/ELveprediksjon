@@ -54,9 +54,23 @@ målestasjon og deles av alle seksjonene som bruker samme stasjon.
   - timesvannføring de siste 72 timene
   - prognosenedbør som sum over 6, 12 og 24 timer før T+k, og største timesverdi
   - temperatur, tid på døgnet ved T+k, og snø og markvann fra GTS
-- **Trent bare på prognosearkivet** (fra mars 2024), med 800 trær. Den har derfor sett få og bare moderate
-  flommer (se TODO.md). Feltsignatur, resesjonskurve og avstand til topp ga ingen gevinst her (likt til 24 t,
-  litt dårligere ved 36–48 t), så de er ikke med.
+- **Trening på historiske flommer:** prognosearkivet (fra mars 2024) har bare moderate flommer. Derfor er også
+  dagene rundt kraftige nedbørsdøgn fra 1990 med (nedbør ≥ maks(15 mm, stasjonens 99-persentil), fra 2 døgn før
+  til 1 døgn etter). Fasitværet er seNorge-nedbøren fordelt på timer etter mønsteret i ERA5 (døgnet går 06–06 UTC),
+  og ERA5-temperatur justert til GTS-døgnmiddelet. Radene har prognoseflagg `wx_fc` = 0, og hendelser vektes 3×.
+  800 trær.
+- **Gevinst** (NSE; flomtest = dager med kraftig nedbør 2019–2024, utenfor treningen):
+
+  | Timer fram | 6 | 12 | 24 | 36 | 48 |
+  |---|---|---|---|---|---|
+  | Vanlig test, bare arkiv | 0.966 | 0.926 | 0.859 | 0.796 | 0.740 |
+  | Vanlig test, med historikk | 0.970 | 0.937 | 0.884 | 0.831 | 0.781 |
+  | Flomtest, bare arkiv | 0.956 | 0.881 | 0.729 | 0.610 | 0.497 |
+  | Flomtest, med historikk | 0.966 | 0.921 | 0.835 | 0.767 | 0.698 |
+
+  Ved flomtopper var modellen bare med arkiv for lav (skjevhet −0.58 i log ved 48 t); med historikk −0.23.
+- Feltsignatur, resesjonskurve og avstand til topp ga ingen gevinst her (likt til 24 t, litt dårligere ved
+  36–48 t), så de er ikke med.
 - **Blanding med døgnprognosen:** timesprognosen trekkes gradvis mot døgnprognosen fra 6 til 48 timer.
   Vekten øker lineært fra 0 til 1, så de to møtes uten sprang. Backtest ga NSE 0.72 mot 0.65 ved 48 timer.
 
