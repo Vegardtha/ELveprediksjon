@@ -3,6 +3,7 @@
 `<var>_previous_dayN` for et tidspunkt er verdien fra modellkjøringen N døgn før tidspunktets dato.
 Brukes til å trene og evaluere på ekte prognoser i stedet for fasitvær.
 """
+import threading
 import time
 
 import httpx
@@ -131,16 +132,20 @@ def daily_forecasts(h: pd.DataFrame, horizons=range(2, 10)) -> pd.DataFrame:
 
 
 LIVE_URL = "https://api.open-meteo.com/v1/forecast"
+# Open-Meteo avviser mange samtidige kall («too many concurrent»), særlig fra delte GitHub-runnere, mens
+# HydAPI og GTS tåler flere. Driften henter derfor med flere tråder, men maks to mot Open-Meteo om gangen.
+LIVE_SLOTS = threading.Semaphore(2)
 
 
 def live_hourly(station: str, model: str, past_days: int = 3, forecast_days: int = 10) -> pd.DataFrame:
     """Siste prognose per time med kolonner rr_l{N}/tm_l{N}. Én kjøring, så alle ledetider er like."""
     pts = points(station, N_POINTS.get(model, 4))
-    r = http.get(LIVE_URL, timeout=60, params={
-        "latitude": ",".join(f"{p[0]:.4f}" for p in pts), "longitude": ",".join(f"{p[1]:.4f}" for p in pts),
-        "hourly": "precipitation,temperature_2m", "models": model, "past_days": past_days,
-        "forecast_days": forecast_days,
-    })
+    with LIVE_SLOTS:
+        r = http.get(LIVE_URL, attempts=8, timeout=60, params={
+            "latitude": ",".join(f"{p[0]:.4f}" for p in pts), "longitude": ",".join(f"{p[1]:.4f}" for p in pts),
+            "hourly": "precipitation,temperature_2m", "models": model, "past_days": past_days,
+            "forecast_days": forecast_days,
+        })
     js = r.json() if isinstance(r.json(), list) else [r.json()]
     df = pd.concat(pd.DataFrame(j["hourly"]).set_index("time") for j in js).groupby(level=0).mean()
     df.index = pd.to_datetime(df.index)

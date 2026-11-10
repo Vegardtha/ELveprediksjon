@@ -126,7 +126,7 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
     inputs = fetch_all(list(dict.fromkeys(r["station"] for r in rivers)), today)
     timing = {"fetch_s": time.perf_counter() - t0, "predict_s": 0.0,
               "gts_cached": sum(1 for v in inputs.values() if not isinstance(v, Exception) and v[4])}
-    rows, obs, hrows, failed = [], [], [], []
+    rows, obs, hrows, failed, errors = [], [], [], [], {}
     by_station = {}
     for r in rivers:
         by_station.setdefault(r["station"], []).append(r)
@@ -134,6 +134,7 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
         if isinstance(inputs[st], Exception):
             e = inputs[st]
             print(f"::warning::{st}: kunne ikke hente data ({type(e).__name__}: {e})", file=sys.stderr)
+            errors[st] = f"henting: {type(e).__name__}: {str(e)[:200]}"
             failed.extend(r["id"] for r in secs)
             continue
         try:  # én stasjon med uventede data skal ikke stoppe de andre
@@ -185,6 +186,7 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
             timing["predict_s"] += time.perf_counter() - t0
         except Exception as e:
             print(f"::warning::{st}: prognosen feilet ({type(e).__name__}: {e})", file=sys.stderr)
+            errors[st] = f"prognose: {type(e).__name__}: {str(e)[:200]}"
             failed.extend(r["id"] for r in secs)
     for r in observe:
         try:
@@ -202,7 +204,8 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
     out.to_parquet(OUT / "latest.parquet")
     pd.concat(obs, ignore_index=True).to_parquet(OUT / "observed.parquet")
     pd.concat(hrows, ignore_index=True).to_parquet(OUT / "hourly.parquet")
-    (OUT / "run.json").write_text(json.dumps({"run_at": pd.Timestamp.now(tz="UTC").isoformat(), "failed": failed, **timing}))
+    (OUT / "run.json").write_text(json.dumps({"run_at": pd.Timestamp.now(tz="UTC").isoformat(), "failed": failed,
+                                           "errors": errors, **timing}))
     return out, timing
 
 
