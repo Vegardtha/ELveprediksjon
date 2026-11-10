@@ -17,7 +17,9 @@ målestasjon og deles av alle seksjonene som bruker samme stasjon.
 ## Døgnmodellen (dag 1–9)
 
 - **Én modell per horisont h = 1–9 og kvantil (p10, p50, p90).** Det blir 27 XGBoost-modeller. De er felles
-  for alle stasjoner, og stasjonen er en kategorisk feature.
+  for alle 145 stasjoner, og stasjonen er en kategorisk feature. Trærne har opptil 127 blader: med 145 stasjoner
+  ga det i `eval_fast.py` NSE +0.014 (dag 2) og +0.024 (dag 5) mot 31 blader, likt i alle fire halvår. Lik vekt
+  per stasjon ga ingen gevinst.
 - **Målet er endringen i log-vannføring:** `y = log1p(q[t+h]) − log1p(q[t])`, der t er siste hele døgn med
   måling. Fordi modellen predikerer endring, kan små og store elver trenes sammen.
 - **Features om fortiden:**
@@ -34,7 +36,7 @@ målestasjon og deles av alle seksjonene som bruker samme stasjon.
   −dq/dt = a·qᵇ, som gir `rec_h`: hvor elva havner etter h døgn hvis det holder seg tørt. Signaturen lagres i
   modellfilen, siden driften bare har 60 døgn historikk. Uten den arvet raske elver med kort historikk
   (f.eks. Lysakerelva fra 2020) den tregere nedgangen til store, innsjørike felt.
-- **Stasjon oppstrøms** (12 av 55 stasjoner, funnet fra nedbørfeltene i `elvepred/upstream.py`): andel av feltet,
+- **Stasjon oppstrøms** (31 av 145 stasjoner, funnet fra nedbørfeltene i `elvepred/upstream.py`): andel av feltet,
   forholdet mellom vannføringene og avviket fra det normale forholdet, endring siste 1 og 3 døgn og siste
   timesmålinger. Fanger flombølger og slipp fra magasiner før de når stasjonen. Paret lagres i modellfilen.
 - **Vekting i treningen:** rader med ekte prognose teller 2×, og hendelser teller 3×. En hendelse er meldt regn
@@ -58,8 +60,8 @@ målestasjon og deles av alle seksjonene som bruker samme stasjon.
   dagene rundt kraftige nedbørsdøgn fra 1990 med (nedbør ≥ maks(15 mm, stasjonens 99-persentil), fra 2 døgn før
   til 1 døgn etter). Fasitværet er seNorge-nedbøren fordelt på timer etter mønsteret i ERA5 (døgnet går 06–06 UTC),
   og ERA5-temperatur justert til GTS-døgnmiddelet. Radene har prognoseflagg `wx_fc` = 0, og hendelser vektes 3×.
-  800 trær.
-- **Gevinst** (NSE; flomtest = dager med kraftig nedbør 2019–2024, utenfor treningen):
+  800 trær med opptil 127 blader.
+- **Gevinst** (NSE, 55 stasjoner og 31 blader; flomtest = dager med kraftig nedbør 2019–2024, utenfor treningen):
 
   | Timer fram | 6 | 12 | 24 | 36 | 48 |
   |---|---|---|---|---|---|
@@ -71,6 +73,7 @@ målestasjon og deles av alle seksjonene som bruker samme stasjon.
   Ved flomtopper var modellen bare med arkiv for lav (skjevhet −0.58 i log ved 48 t); med historikk −0.23.
 - Feltsignatur, resesjonskurve og avstand til topp ga ingen gevinst her (likt til 24 t, litt dårligere ved
   36–48 t), så de er ikke med.
+- **145 stasjoner og 127 blader:** NSE ved 48 t 0.752 for alle; for de 55 gamle 0.791 (mot 0.781).
 - **Blanding med døgnprognosen:** timesprognosen trekkes gradvis mot døgnprognosen fra 6 til 48 timer.
   Vekten øker lineært fra 0 til 1, så de to møtes uten sprang. Backtest ga NSE 0.72 mot 0.65 ved 48 timer.
 
@@ -90,17 +93,20 @@ målestasjon og deles av alle seksjonene som bruker samme stasjon.
 
 - **Tidssplitt:** trening til okt. 2024, validering og kalibrering nov. 2024–juni 2025, test fra juli 2025 til i
   dag. Testen bruker ekte arkiverte værprognoser.
-- **NSE på testsettet** (snitt av NSE per stasjon, 55 stasjoner), med samme oppsett som i drift
+- **NSE på testsettet** (snitt av NSE per stasjon), med samme oppsett som i drift
   (600 trær, ingen early stopping; `scripts/calibrate.py`, `--baseline` for oppsettet før 2026-11-02):
 
   | Dag | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
   |---|---|---|---|---|---|---|---|---|---|
-  | Modell | 0.976 | 0.888 | 0.812 | 0.755 | 0.699 | 0.646 | 0.597 | 0.549 | 0.512 |
+  | Modell, 145 stasjoner (127 blader), de 55 gamle | 0.981 | 0.897 | 0.820 | 0.764 | 0.707 | 0.654 | 0.610 | 0.565 | 0.528 |
+  | Modell, 145 stasjoner (127 blader), de 90 nye | 0.964 | 0.844 | 0.770 | 0.713 | 0.648 | 0.588 | 0.537 | 0.485 | 0.442 |
+  | Modell, 55 stasjoner (31 blader) | 0.976 | 0.888 | 0.812 | 0.755 | 0.699 | 0.646 | 0.597 | 0.549 | 0.512 |
   | Før 2026-11-02 | 0.972 | 0.880 | 0.807 | 0.748 | 0.691 | 0.635 | 0.589 | 0.541 | 0.497 |
   | Persistens (i dag = i morgen) | 0.948 | 0.773 | 0.550 | 0.404 | 0.273 | 0.162 | 0.068 | −0.004 | −0.049 |
 
   F1 for padlbar vannføring går opp på alle dagene (dag 5: 0.629 → 0.644). 37–41 av 55 stasjoner blir bedre.
-  Svakest er store, regulerte elver (Jori, Gudbrandsdalslågen, Mistra). Stasjon oppstrøms ga i `eval_fast.py`
+  Svakest er store, regulerte elver (Jori, Gudbrandsdalslågen, Mistra). Med 145 stasjoner ble Jori dårligere
+  (dag 5: 0.378 → 0.246), trolig slipp fra magasin som modellen ikke ser. Stasjon oppstrøms ga i `eval_fast.py`
   NSE 0.714 → 0.720 på dag 4 for de 12 stasjonene som har en (Gudbrandsdalslågen +0.02), og ingen endring for
   de andre. Gevinsten er liten fordi vannet bruker timer, ikke døgn, og dagens timesmålinger allerede er med. Tallene i
   tidligere versjoner (0.98/0.90/0.82/0.71/0.61/0.51) kom fra `scripts/evaluate_fc.py` med early stopping og

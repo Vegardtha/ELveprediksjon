@@ -22,6 +22,10 @@ Kort logg over stegene, fra start til nå, og hva som kommer. Detaljer om modell
 | 03.11 | Oppstrømsstasjoner som features (12 av 55 stasjoner har en) | NSE dag 4 for disse: 0.714 → 0.720; Gudbrandsdalslågen +0.02. I driftsmodellen |
 | 03.11 | Timesmodell på historiske flommer: ERA5 hentes rundt kraftige nedbørsdøgn fra 1990, seNorge-nedbøren fordeles på timer | ERA5 hentet for de 55 stasjonene |
 | 04.11 | Timesmodellen trent på arkiv + flommer fra 1990, hendelser 3× vekt | NSE 48 t: 0.740 → 0.781; flomtest 2019–2024: 0.497 → 0.698. I driftsmodellen |
+| 05.–09.11 | Prognosearkiv og ERA5 for alle 145 stasjoner; vaktsjekk som starter hentingen på nytt etter dvale (`fetch_supervised.py`) | Ferdig 09.11 |
+| 09.11 | Trening med alle 145 stasjoner, samme oppsett | De 55 gamle litt dårligere fra dag 3 (dag 5: 0.699 → 0.687) |
+| 09.11 | Mer kapasitet (31 → 63 → 127 blader) og lik vekt per stasjon testet i `eval_fast.py` | 127 blader best i alle halvår; lik vekt ingen gevinst |
+| 10.11 | Driftsmodell med 145 stasjoner og 127 blader | De 55 gamle dag 5: 0.699 → 0.707; nye 90: 0.648; timer 48 t: 0.781 → 0.791. Jori dårligere. Modellfilene 65 → 360 MB |
 
 **Testet og forkastet:** egen MET Nordic-nedbør dag 1–2, prognoseflagg uten vekting, 5× vekt på prognoserader
 (tregere nedgang etter topper), feltsignatur i timesmodellen.
@@ -33,7 +37,7 @@ Kort logg over stegene, fra start til nå, og hva som kommer. Detaljer om modell
 | 1 | Rask og pålitelig evaluering | Gjort (mangler pinball-tap, Brier, bootstrap) |
 | 2 | Prognoseflagg og vekting av prognoserader | Gjort (2×), pluss hendelsesvekt 3× |
 | 3 | Oppstrømsstasjoner som features | Gjort (liten gevinst) |
-| 4 | Hyperparametre / én modell for alle kvantiler | Gjenstår |
+| 4 | Hyperparametre / én modell for alle kvantiler | Delvis: 127 blader (10.11) |
 | 5 | Snøsmelting som egen feature | Gjenstår |
 | 6 | Sjekk ledetid i prognosearkivet (dag 2–3, dag 9) | Gjenstår |
 | 7 | Bedre kalibrering (kryssvalidert, skalert med bredde) | Gjenstår; dekning 76–82 % mot 80 % |
@@ -42,6 +46,7 @@ Kort logg over stegene, fra start til nå, og hva som kommer. Detaljer om modell
 
 ## Videre
 
-1. **Nye stasjoner i hele Norge:** ERA5 og prognosearkivet ferdig (~4–5 døgn), ny trening, raskere driftsjobb
-   (under 20 min på GitHub), publisere.
-2. **Resten av tiltakene,** i rekkefølgen 7 → 6 → 4 → 5 → 8 → 9.
+1. **Publisere de 90 nye stasjonene:** sjekke at driftsjobben holder seg under 20 min på GitHub, så committe
+   `rivers.yaml` og `catchments.geojson`.
+2. **Mindre modellfiler** (komprimering eller utenfor git), siden hver ny trening legger ~360 MB til repoet.
+3. **Resten av tiltakene,** i rekkefølgen 7 → 6 → 4 → 5 → 8 → 9.

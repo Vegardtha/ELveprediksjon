@@ -17,8 +17,8 @@ import xgboost as xgb
 from elvepred import features, upstream
 from elvepred.settings import DATA, load_stations
 
-# tilsvarer tidligere LightGBM-oppsett (num_leaves=31, min_child_samples=40)
-PARAMS = dict(learning_rate=0.03, max_depth=0, max_leaves=31, grow_policy="lossguide", min_child_weight=40,
+# 127 blader: med 145 stasjoner ga det NSE +0.014 (dag 2) og +0.024 (dag 5) mot 31 i eval_fast
+PARAMS = dict(learning_rate=0.03, max_depth=0, max_leaves=127, grow_policy="lossguide", min_child_weight=40,
               subsample=0.8, colsample_bytree=0.8, reg_lambda=1.0, tree_method="hist", enable_categorical=True,
               max_cat_to_onehot=1, n_jobs=8)
 QUANTILES = {"p10": 0.1, "p50": 0.5, "p90": 0.9}

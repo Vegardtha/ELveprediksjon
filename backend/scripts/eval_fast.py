@@ -61,6 +61,12 @@ VARIANTS = {
     "fc2_sig_rec_ev3": dict(groups=("fc", "dyn", "sig", "rec"), w_fc=2, w_ev=3),
     "fc_sig_rec_ev3": dict(groups=("fc", "dyn", "sig", "rec"), w_ev=3),
     "fc2_sig_rec_ev3_up": dict(groups=("fc", "dyn", "sig", "rec", "up"), w_fc=2, w_ev=3),
+    # med 145 stasjoner: mer kapasitet og lik vekt per stasjon (bal), oppå driftsoppsettet
+    "prod_l63": dict(groups=("fc", "dyn", "sig", "rec", "up"), w_fc=2, w_ev=3, params={"max_leaves": 63}),
+    "prod_l127": dict(groups=("fc", "dyn", "sig", "rec", "up"), w_fc=2, w_ev=3, params={"max_leaves": 127}),
+    "prod_bal": dict(groups=("fc", "dyn", "sig", "rec", "up"), w_fc=2, w_ev=3, bal=True),
+    "prod_l63_bal": dict(groups=("fc", "dyn", "sig", "rec", "up"), w_fc=2, w_ev=3, bal=True,
+                         params={"max_leaves": 63}),
     "trees1500": dict(params={"n_estimators": 1500}),
     "leaves63": dict(params={"max_leaves": 63}),
 }
@@ -81,6 +87,7 @@ args = p.parse_args()
 variants = args.variants.split(",")
 horizons = [int(h) for h in args.horizons.split(",")]
 stations = joblib.load(MODELS / "h1_p50.joblib")["stations"]
+OLD = set(json.loads((DATA / "eval" / "before_145" / "metrics_prod.json").read_text(encoding="utf-8"))["stations"])
 
 
 def rec_mask(d: pd.DataFrame, h: int) -> np.ndarray:
@@ -112,6 +119,10 @@ for h in horizons:
             cols = [c for c in mixed.columns if c not in features.NON_FEATURES and (c not in OPTIONAL or c in use)]
             weight = ((1 + (cfg.get("w_fc", 1) - 1) * mixed.loc[tr, "wx_fc"].to_numpy())
                       * (1 + (cfg.get("w_ev", 1) - 1) * event(mixed[tr])))
+            if cfg.get("bal"):  # hver stasjon teller like mye, uansett hvor lang serie den har
+                st = mixed.loc[tr, "station"].astype(str)
+                n_st = st.map(st.value_counts()).to_numpy(float)
+                weight = weight * n_st.mean() / n_st
             extra = dict(cfg.get("params", {}))
             n = extra.pop("n_estimators", N_ESTIMATORS)
             t1 = time.perf_counter()
@@ -139,6 +150,8 @@ for h in horizons:
         y = t["y"].to_numpy()
         rmse = lambda s: float(np.sqrt(np.mean(err[s] ** 2)))
         res[v] = {"NSE": float(np.mean(list(per_st.values()))), "NSE_fold": per_fold,
+                  "NSE_old": float(np.mean([x for k, x in per_st.items() if k in OLD])),
+                  "NSE_new": float(np.mean([x for k, x in per_st.items() if k not in OLD])),
                   "rmse_rise": rmse(y > 0.2), "rmse_fall": rmse(y < -0.2), "rmse_all": rmse(np.ones_like(y, bool)),
                   "rec_bias": float(np.median(err[rec])), "rec_n": int(rec.sum()),
                   "lysaker_rec_bias": float(np.median(err[lys])) if lys.any() else None,
@@ -147,7 +160,7 @@ for h in horizons:
     for v in variants:
         d = np.array(res[v]["NSE_fold"]) - np.array(base)
         res[v]["dNSE"] = [float(d.mean()), float(d.std())]
-        print(f"h={h} {v:14s} NSE {res[v]['NSE']:.3f}  dNSE {d.mean():+.3f} ± {d.std():.3f}  "
+        print(f"h={h} {v:14s} NSE {res[v]['NSE']:.3f} (gamle {res[v]['NSE_old']:.3f}, nye {res[v]['NSE_new']:.3f})  dNSE {d.mean():+.3f} ± {d.std():.3f}  "
               f"perioder {' '.join(f'{x:.3f}' for x in res[v]['NSE_fold'])}  RMSE opp {res[v]['rmse_rise']:.3f} "
               f"ned {res[v]['rmse_fall']:.3f}  rec_bias {res[v]['rec_bias']:+.3f} "
               f"(Lysaker {res[v]['lysaker_rec_bias']})", flush=True)
