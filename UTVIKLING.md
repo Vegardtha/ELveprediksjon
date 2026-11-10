@@ -26,6 +26,7 @@ Kort logg over stegene, fra start til nå, og hva som kommer. Detaljer om modell
 | 09.11 | Trening med alle 145 stasjoner, samme oppsett | De 55 gamle litt dårligere fra dag 3 (dag 5: 0.699 → 0.687) |
 | 09.11 | Mer kapasitet (31 → 63 → 127 blader) og lik vekt per stasjon testet i `eval_fast.py` | 127 blader best i alle halvår; lik vekt ingen gevinst |
 | 10.11 | Driftsmodell med 145 stasjoner og 127 blader | De 55 gamle dag 5: 0.699 → 0.707; nye 90: 0.648; timer 48 t: 0.781 → 0.791. Jori dårligere. Modellfilene 65 → 360 MB |
+| 10.11 | 90 nye stasjoner publisert (391 seksjoner); én stasjon med feil stopper ikke lenger kjøringen; 8 parallelle hentinger og 45 min grense | Full kjøring uten hurtiglager: 14 min lokalt |
 
 **Testet og forkastet:** egen MET Nordic-nedbør dag 1–2, prognoseflagg uten vekting, 5× vekt på prognoserader
 (tregere nedgang etter topper), feltsignatur i timesmodellen.
@@ -46,7 +47,6 @@ Kort logg over stegene, fra start til nå, og hva som kommer. Detaljer om modell
 
 ## Videre
 
-1. **Publisere de 90 nye stasjonene:** sjekke at driftsjobben holder seg under 20 min på GitHub, så committe
-   `rivers.yaml` og `catchments.geojson`.
+1. **Følge med på driftsjobben** med 145 stasjoner (ca. 13 min henting uten GTS-hurtiglager; grense 45 min).
 2. **Mindre modellfiler** (komprimering eller utenfor git), siden hver ny trening legger ~360 MB til repoet.
 3. **Resten av tiltakene,** i rekkefølgen 7 → 6 → 4 → 5 → 8 → 9.

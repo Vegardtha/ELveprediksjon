@@ -3450,3 +3450,6162 @@ rivers:
   takeout:
   - 59.266
   - 11.1034
+- id: fossbroyta
+  name: Fossbrøyta
+  station: 12.209.0
+  station_name: Urula
+  station_pos:
+  - 60.55814
+  - 9.87569
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III−
+  approximate: true
+  thresholds:
+    minimum: 70.0
+    optimum: 70.0
+    maximum: 100.0
+    impossible: 100.0
+    source: nokken.net
+  nokken_river: 127
+  nokken_section: 183
+  putin:
+  - 60.613907
+  - 9.718048
+  takeout:
+  - 60.544651
+  - 9.831224
+- id: urula
+  name: Urula
+  station: 12.209.0
+  station_name: Urula
+  station_pos:
+  - 60.55814
+  - 9.87569
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV−
+  approximate: true
+  thresholds:
+    minimum: 8.0
+    optimum: 9.4
+    maximum: 21.0
+    impossible: 34.8
+    source: nokken.net
+  nokken_river: 60
+  nokken_section: 74
+  putin:
+  - 60.544651
+  - 9.831224
+  takeout:
+  - 60.553045
+  - 9.904659
+- id: asli
+  name: Åsli
+  station: 12.209.0
+  station_name: Urula
+  station_pos:
+  - 60.55814
+  - 9.87569
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 39.0
+    optimum: 45.0
+    maximum: 58.0
+    impossible: 58.0
+    source: nokken.net
+  nokken_river: 61
+  nokken_section: 75
+  putin:
+  - 60.630283
+  - 9.618456
+  takeout:
+  - 60.613751
+  - 9.717774
+- id: atna-doralen
+  name: Atna – Dørålen
+  station: 2.479.0
+  station_name: Li bru
+  station_pos:
+  - 62.00998
+  - 10.00027
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 5.3
+    optimum: 5.3
+    maximum: 7.3
+    impossible: 7.3
+    source: nokken.net
+  nokken_river: 1
+  nokken_section: 1
+  putin:
+  - 61.998384
+  - 9.812339
+  takeout:
+  - 62.008213
+  - 10.013872
+- id: atna-lower-i
+  name: Atna – Lower I
+  station: 2.32.0
+  station_name: Atnasjø
+  station_pos:
+  - 61.85194
+  - 10.22212
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III−
+  approximate: true
+  thresholds:
+    minimum: 15.0
+    optimum: 20.0
+    maximum: 60.0
+    impossible: 60.0
+    source: nokken.net
+  nokken_river: 1
+  nokken_section: 2
+  putin:
+  - 61.847407
+  - 10.257223
+  takeout:
+  - 61.843702
+  - 10.386494
+- id: atna-lower-ii
+  name: Atna – Lower II
+  station: 2.32.0
+  station_name: Atnasjø
+  station_pos:
+  - 61.85194
+  - 10.22212
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III
+  approximate: true
+  thresholds:
+    minimum: 15.0
+    optimum: 20.0
+    maximum: 60.0
+    impossible: 60.0
+    source: nokken.net
+  nokken_river: 1
+  nokken_section: 161
+  putin:
+  - 61.843702
+  - 10.386494
+  takeout:
+  - 61.787335
+  - 10.513862
+- id: bua-canyon
+  name: Bua – Canyon
+  station: 122.14.0
+  station_name: Lillebudal bru
+  station_pos:
+  - 62.82336
+  - 10.54863
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 8.0
+    optimum: 8.0
+    maximum: 15.0
+    impossible: 20.0
+    source: nokken.net
+  nokken_river: 79
+  nokken_section: 95
+  putin:
+  - 62.885227
+  - 10.493147
+  takeout:
+  - 62.97063
+  - 10.47409
+- id: bua-canyon-lower
+  name: Bua – Canyon Lower
+  station: 122.14.0
+  station_name: Lillebudal bru
+  station_pos:
+  - 62.82336
+  - 10.54863
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 8.0
+    optimum: 8.0
+    maximum: 15.0
+    impossible: 20.0
+    source: nokken.net
+  nokken_river: 79
+  nokken_section: 158
+  putin:
+  - 62.97063
+  - 10.47409
+  takeout:
+  - 62.993101
+  - 10.497418
+- id: ena
+  name: Ena
+  station: 122.14.0
+  station_name: Lillebudal bru
+  station_pos:
+  - 62.82336
+  - 10.54863
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 15.0
+    optimum: 15.0
+    maximum: 20.0
+    impossible: 20.0
+    source: nokken.net
+  nokken_river: 81
+  nokken_section: 99
+  putin:
+  - 62.79584
+  - 10.426607
+  takeout:
+  - 62.88012
+  - 10.476043
+- id: bua-lower
+  name: Bua – Lower
+  station: 122.14.0
+  station_name: Lillebudal bru
+  station_pos:
+  - 62.82336
+  - 10.54863
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 12
+    optimum: 20
+    maximum: 30
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: 036386f2-632d-11e8-88aa-cb8cbbcd849f
+  putin:
+  - 62.9707
+  - 10.4741
+  takeout:
+  - 62.9929
+  - 10.4974
+- id: bua-upper
+  name: Bua – Upper
+  station: 122.14.0
+  station_name: Lillebudal bru
+  station_pos:
+  - 62.82336
+  - 10.54863
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 9
+    optimum: 18
+    maximum: 25
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: c3ec2bf6-4942-11f0-b68d-efb90235f5f1
+  putin:
+  - 62.7957
+  - 10.6249
+  takeout:
+  - 62.8178
+  - 10.5693
+- id: ena-lower-gorge
+  name: Ena – Lower gorge
+  station: 122.14.0
+  station_name: Lillebudal bru
+  station_pos:
+  - 62.82336
+  - 10.54863
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 12
+    optimum: 15
+    maximum: 20
+    impossible: 25
+    source: whitewater.guide
+  wwguide_section: 03f8e63e-632d-11e8-88aa-5361e0349604
+  putin:
+  - 62.8793
+  - 10.4748
+  takeout:
+  - 62.8905
+  - 10.4858
+- id: ena-middle
+  name: Ena – Middle
+  station: 122.14.0
+  station_name: Lillebudal bru
+  station_pos:
+  - 62.82336
+  - 10.54863
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III–IV
+  approximate: true
+  thresholds:
+    minimum: 12
+    optimum: 15
+    maximum: 25
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 03915334-632d-11e8-88aa-832fa42f3fd1
+  putin:
+  - 62.8218
+  - 10.4546
+  takeout:
+  - 62.8793
+  - 10.4749
+- id: ena-upper
+  name: Ena – Upper
+  station: 122.14.0
+  station_name: Lillebudal bru
+  station_pos:
+  - 62.82336
+  - 10.54863
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 12
+    optimum: 15
+    maximum: 25
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 0390d648-632d-11e8-88aa-ef7db85253eb
+  putin:
+  - 62.7964
+  - 10.4274
+  takeout:
+  - 62.8218
+  - 10.4546
+- id: holerajuvet
+  name: Hølerajuvet
+  station: 12.171.0
+  station_name: Hølervatn
+  station_pos:
+  - 60.70962
+  - 9.45899
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 5.2
+    optimum: 7.0
+    maximum: 9.0
+    impossible: 9.0
+    source: nokken.net
+  nokken_river: 102
+  nokken_section: 124
+  putin:
+  - 60.710072
+  - 9.459717
+  takeout:
+  - 60.741628
+  - 9.549532
+- id: driva-kongsvoll
+  name: Driva – Kongsvoll
+  station: 109.9.0
+  station_name: Driva v/Risefoss
+  station_pos:
+  - 62.51146
+  - 9.59233
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 12.0
+    optimum: 12.0
+    maximum: 20.0
+    impossible: 20.0
+    source: nokken.net
+  nokken_river: 80
+  nokken_section: 96
+  putin:
+  - 62.306782
+  - 9.607467
+  takeout:
+  - 62.363202
+  - 9.636976
+- id: driva-oppdal
+  name: Driva – Oppdal
+  station: 109.20.0
+  station_name: Driva v/Grensehølen
+  station_pos:
+  - 62.57209
+  - 9.15903
+  regulation: partly
+  regulation_note: Ca. 21 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 20.0
+    optimum: 30.0
+    maximum: 74.0
+    impossible: 74.0
+    source: nokken.net
+  nokken_river: 80
+  nokken_section: 97
+  putin:
+  - 62.576332
+  - 9.63659
+  takeout:
+  - 62.574605
+  - 9.387787
+- id: driva-graura
+  name: Driva – Gråura
+  station: 109.20.0
+  station_name: Driva v/Grensehølen
+  station_pos:
+  - 62.57209
+  - 9.15903
+  regulation: partly
+  regulation_note: Ca. 21 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 9.5
+    optimum: 25.0
+    maximum: 46.0
+    impossible: 64.0
+    source: nokken.net
+  nokken_river: 80
+  nokken_section: 98
+  putin:
+  - 62.574605
+  - 9.387787
+  takeout:
+  - 62.572914
+  - 9.149203
+- id: driva-play-run
+  name: Driva – Play run
+  station: 109.20.0
+  station_name: Driva v/Grensehølen
+  station_pos:
+  - 62.57209
+  - 9.15903
+  regulation: partly
+  regulation_note: Ca. 21 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 20
+    optimum: 50
+    maximum: 100
+    impossible: 400
+    source: whitewater.guide
+  wwguide_section: 037c930e-632d-11e8-88aa-870ed99ca60c
+  putin:
+  - 62.5762
+  - 9.6363
+  takeout:
+  - 62.6049
+  - 9.5435
+- id: driva-romfo
+  name: Driva – Romfo
+  station: 109.20.0
+  station_name: Driva v/Grensehølen
+  station_pos:
+  - 62.57209
+  - 9.15903
+  regulation: partly
+  regulation_note: Ca. 21 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 10
+    optimum: 70
+    maximum: 150
+    impossible: 300
+    source: whitewater.guide
+  wwguide_section: 0382ea06-632d-11e8-88aa-6f5fc2b35a65
+  putin:
+  - 62.601
+  - 8.9437
+  takeout:
+  - 62.6228
+  - 8.8889
+- id: grovu-gorge
+  name: Grøvu – Gorge
+  station: 109.20.0
+  station_name: Driva v/Grensehølen
+  station_pos:
+  - 62.57209
+  - 9.15903
+  regulation: partly
+  regulation_note: Ca. 21 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 30
+    optimum: 40
+    maximum: 60
+    impossible: 100
+    source: whitewater.guide
+  wwguide_section: 346c6036-4242-11e8-aa0e-0775d12d0ee2
+  putin:
+  - 62.509
+  - 9.0669
+  takeout:
+  - 62.5367
+  - 9.0979
+- id: dorja
+  name: Dørja
+  station: 12.193.0
+  station_name: Fiskum
+  station_pos:
+  - 59.69721
+  - 9.7902
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV−
+  approximate: false
+  thresholds:
+    minimum: 4.0
+    optimum: 4.0
+    maximum: 6.0
+    impossible: 6.0
+    source: nokken.net
+  nokken_river: 10
+  nokken_section: 16
+  putin:
+  - 59.744766
+  - 9.711906
+  takeout:
+  - 59.72562
+  - 9.833788
+- id: etna-lower
+  name: Etna – Lower
+  station: 12.70.0
+  station_name: Etna
+  station_pos:
+  - 60.95266
+  - 9.62473
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 16.0
+    optimum: 21.0
+    maximum: 41.0
+    impossible: 41.0
+    source: nokken.net
+  nokken_river: 13
+  nokken_section: 20
+  putin:
+  - 60.989739
+  - 9.567027
+  takeout:
+  - 60.97308
+  - 9.604592
+- id: etna-middle
+  name: Etna – Middle
+  station: 12.70.0
+  station_name: Etna
+  station_pos:
+  - 60.95266
+  - 9.62473
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 16.0
+    optimum: 21.0
+    maximum: 41.0
+    impossible: 41.0
+    source: nokken.net
+  nokken_river: 13
+  nokken_section: 184
+  putin:
+  - 61.039357
+  - 9.551311
+  takeout:
+  - 60.971846
+  - 9.608623
+- id: synna-2
+  name: Synna
+  station: 12.70.0
+  station_name: Etna
+  station_pos:
+  - 60.95266
+  - 9.62473
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 45.0
+    optimum: 45.0
+    maximum: 52.0
+    impossible: 52.0
+    source: nokken.net
+  nokken_river: 51
+  nokken_section: 64
+  putin:
+  - 61.062406
+  - 9.949191
+  takeout:
+  - 61.001641
+  - 10.002196
+- id: femundselva-upper
+  name: Femundselva – Upper
+  station: 311.4.0
+  station_name: Femundsenden (Femunden)
+  station_pos:
+  - 61.91996
+  - 11.94004
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: II
+  approximate: true
+  thresholds:
+    minimum: 25.0
+    optimum: 25.0
+    maximum: 50.0
+    impossible: 90.0
+    source: nokken.net
+  nokken_river: 56
+  nokken_section: 69
+  putin:
+  - 61.878988
+  - 11.747474
+  takeout:
+  - 61.83539
+  - 11.719085
+- id: femundselva-lower
+  name: Femundselva – Lower
+  station: 311.4.0
+  station_name: Femundsenden (Femunden)
+  station_pos:
+  - 61.91996
+  - 11.94004
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: II+
+  approximate: true
+  thresholds:
+    minimum: 25.0
+    optimum: 25.0
+    maximum: 50.0
+    impossible: 90.0
+    source: nokken.net
+  nokken_river: 56
+  nokken_section: 148
+  putin:
+  - 61.772455
+  - 11.631114
+  takeout:
+  - 61.7333482
+  - 11.6794805
+- id: femundselva-middle
+  name: Femundselva – Middle
+  station: 311.4.0
+  station_name: Femundsenden (Femunden)
+  station_pos:
+  - 61.91996
+  - 11.94004
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: III
+  approximate: true
+  thresholds:
+    minimum: 15.0
+    optimum: 25.0
+    maximum: 50.0
+    impossible: 90.0
+    source: nokken.net
+  nokken_river: 56
+  nokken_section: 188
+  putin:
+  - 61.81123
+  - 11.70768
+  takeout:
+  - 61.772455
+  - 11.631114
+- id: folla-upper
+  name: Folla – Upper
+  station: 2.129.0
+  station_name: Dølplass
+  station_pos:
+  - 62.19223
+  - 10.45107
+  regulation: partly
+  regulation_note: Ca. 28 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV−
+  approximate: false
+  thresholds:
+    minimum: 15.0
+    optimum: 25.0
+    maximum: 50.0
+    impossible: 50.0
+    source: nokken.net
+  nokken_river: 15
+  nokken_section: 23
+  putin:
+  - 62.187921
+  - 10.276324
+  takeout:
+  - 62.197921
+  - 10.385702
+- id: folla-lower
+  name: Folla – Lower
+  station: 2.129.0
+  station_name: Dølplass
+  station_pos:
+  - 62.19223
+  - 10.45107
+  regulation: partly
+  regulation_note: Ca. 28 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: II+
+  approximate: false
+  thresholds:
+    minimum: 15.0
+    optimum: 25.0
+    maximum: 50.0
+    impossible: 50.0
+    source: nokken.net
+  nokken_river: 15
+  nokken_section: 190
+  putin:
+  - 62.197921
+  - 10.385702
+  takeout:
+  - 62.191371
+  - 10.461304
+- id: finna
+  name: Finna
+  station: 2.284.0
+  station_name: Sælatunga
+  station_pos:
+  - 61.88439
+  - 9.06212
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 5.4
+    optimum: 14.0
+    maximum: 22.0
+    impossible: 32.0
+    source: nokken.net
+  nokken_river: 14
+  nokken_section: 22
+  putin:
+  - 61.922703
+  - 8.986934
+  takeout:
+  - 61.88046
+  - 9.081028
+- id: skjerva
+  name: Skjerva
+  station: 2.284.0
+  station_name: Sælatunga
+  station_pos:
+  - 61.88439
+  - 9.06212
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV+
+  approximate: true
+  thresholds:
+    minimum: 15.0
+    optimum: 15.0
+    maximum: 20.0
+    impossible: 20.0
+    source: nokken.net
+  nokken_river: 46
+  nokken_section: 59
+  putin:
+  - 62.005755
+  - 8.910557
+  takeout:
+  - 61.911608
+  - 8.989478
+- id: fiplingdalselva-store
+  name: Fiplingdalselva – Store
+  station: 151.15.0
+  station_name: Nervoll
+  station_pos:
+  - 65.43762
+  - 13.98603
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 40.0
+    optimum: 40.0
+    maximum: 50.0
+    impossible: 50.0
+    source: nokken.net
+  nokken_river: 94
+  nokken_section: 114
+  putin:
+  - 65.489709
+  - 13.714862
+  takeout:
+  - 65.522777
+  - 13.713816
+- id: susna
+  name: Susna
+  station: 151.15.0
+  station_name: Nervoll
+  station_pos:
+  - 65.43762
+  - 13.98603
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 20.0
+    optimum: 20.0
+    maximum: 30.0
+    impossible: 40.0
+    source: nokken.net
+  nokken_river: 99
+  nokken_section: 119
+  putin:
+  - 65.421943
+  - 13.968773
+  takeout:
+  - 65.520626
+  - 14.012005
+- id: skarmodalselva
+  name: Skarmodalselva
+  station: 151.15.0
+  station_name: Nervoll
+  station_pos:
+  - 65.43762
+  - 13.98603
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV+
+  approximate: true
+  thresholds:
+    minimum: 40.0
+    optimum: 40.0
+    maximum: 50.0
+    impossible: 50.0
+    source: nokken.net
+  nokken_river: 97
+  nokken_section: 117
+  putin:
+  - 65.42556
+  - 14.652123
+  takeout:
+  - 65.487747
+  - 14.312177
+- id: stavasselva
+  name: Stavasselva
+  station: 151.15.0
+  station_name: Nervoll
+  station_pos:
+  - 65.43762
+  - 13.98603
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV−
+  approximate: true
+  thresholds:
+    minimum: 40.0
+    optimum: 40.0
+    maximum: 50.0
+    impossible: 50.0
+    source: nokken.net
+  nokken_river: 98
+  nokken_section: 118
+  putin:
+  - 65.486155
+  - 13.294047
+  takeout:
+  - 65.509191
+  - 13.36985
+- id: krutaga
+  name: Krutåga
+  station: 151.15.0
+  station_name: Nervoll
+  station_pos:
+  - 65.43762
+  - 13.98603
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 40
+    optimum: 50
+    maximum: 60
+    impossible: 100
+    source: whitewater.guide
+  wwguide_section: d75fae38-59de-11e9-a297-279bbbd494fa
+  putin:
+  - 65.6926
+  - 14.3393
+  takeout:
+  - 65.6815
+  - 14.1808
+- id: orjedalsbekken-orjedal
+  name: Ørjedalsbekken – Ørjedal
+  station: 151.15.0
+  station_name: Nervoll
+  station_pos:
+  - 65.43762
+  - 13.98603
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 60
+    optimum: 70
+    maximum: 80
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: 3030ab46-4774-11f0-8660-135f54c5e953
+  putin:
+  - 65.4478
+  - 14.042
+  takeout:
+  - 65.4573
+  - 14.0051
+- id: storfiplingelva
+  name: Storfiplingelva
+  station: 151.15.0
+  station_name: Nervoll
+  station_pos:
+  - 65.43762
+  - 13.98603
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 30
+    maximum: 45
+    impossible: 55
+    source: whitewater.guide
+  wwguide_section: ed6cad6e-80a0-11e9-be30-43b5cb47da3e
+  putin:
+  - 65.4897
+  - 13.7149
+  takeout:
+  - 65.523
+  - 13.7151
+- id: susna-classic
+  name: Susna – Classic
+  station: 151.15.0
+  station_name: Nervoll
+  station_pos:
+  - 65.43762
+  - 13.98603
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 40
+    maximum: 70
+    impossible: 110
+    source: whitewater.guide
+  wwguide_section: b9d41dc8-86f1-11e9-9a11-d36021cc2917
+  putin:
+  - 65.368
+  - 14.2281
+  takeout:
+  - 65.3624
+  - 14.0927
+- id: susna-lower-canyon
+  name: Susna – Lower Canyon
+  station: 151.15.0
+  station_name: Nervoll
+  station_pos:
+  - 65.43762
+  - 13.98603
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 18
+    optimum: 20
+    maximum: 25
+    impossible: 27
+    source: whitewater.guide
+  wwguide_section: 6eea937a-8771-11e9-98a1-b3be2b3f1ca3
+  putin:
+  - 65.4677
+  - 14.0144
+  takeout:
+  - 65.5223
+  - 14.0105
+- id: susna-upper-canyon
+  name: Susna – Upper canyon
+  station: 151.15.0
+  station_name: Nervoll
+  station_pos:
+  - 65.43762
+  - 13.98603
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 30
+    maximum: 40
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: 6c1d52d2-996d-11e9-b51b-2b7ebd16a64a
+  putin:
+  - 65.3381
+  - 14.303
+  takeout:
+  - 65.3681
+  - 14.228
+- id: forra
+  name: Forra
+  station: 124.2.0
+  station_name: Høggås bru
+  station_pos:
+  - 63.49292
+  - 11.35831
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V−
+  approximate: false
+  thresholds:
+    minimum: 8.0
+    optimum: 10.0
+    maximum: 17.0
+    impossible: 20.0
+    source: nokken.net
+  nokken_river: 83
+  nokken_section: 101
+  putin:
+  - 63.534689
+  - 11.466027
+  takeout:
+  - 63.498011
+  - 11.427452
+- id: vigda
+  name: Vigda
+  station: 124.2.0
+  station_name: Høggås bru
+  station_pos:
+  - 63.49292
+  - 11.35831
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 40.0
+    optimum: 40.0
+    maximum: 70.0
+    impossible: 70.0
+    source: nokken.net
+  nokken_river: 92
+  nokken_section: 111
+  putin:
+  - 63.53552
+  - 11.524508
+  takeout:
+  - 63.496532
+  - 11.43784
+- id: gaula-upper
+  name: Gaula – Upper
+  station: 122.11.0
+  station_name: Eggafoss
+  station_pos:
+  - 62.89011
+  - 11.18388
+  regulation: partly
+  regulation_note: Ca. 30 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: false
+  thresholds:
+    minimum: 20.0
+    optimum: 20.0
+    maximum: 40.0
+    impossible: 40.0
+    source: nokken.net
+  nokken_river: 123
+  nokken_section: 176
+  putin:
+  - 62.817957
+  - 11.409248
+  takeout:
+  - 62.808679
+  - 11.350053
+- id: gaula-eggafossen
+  name: Gaula – Eggafossen
+  station: 122.11.0
+  station_name: Eggafoss
+  station_pos:
+  - 62.89011
+  - 11.18388
+  regulation: partly
+  regulation_note: Ca. 30 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: false
+  thresholds:
+    minimum: 30.0
+    optimum: 30.0
+    maximum: 50.0
+    impossible: 50.0
+    source: nokken.net
+  nokken_river: 123
+  nokken_section: 177
+  putin:
+  - 62.860538
+  - 11.212532
+- id: gaula-eafossen
+  name: Gaula – Eafossen
+  station: 122.11.0
+  station_name: Eggafoss
+  station_pos:
+  - 62.89011
+  - 11.18388
+  regulation: partly
+  regulation_note: Ca. 30 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 40
+    maximum: 60
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: 041334a8-632d-11e8-88aa-b75d5114e270
+  putin:
+  - 62.8577
+  - 11.2136
+  takeout:
+  - 62.86
+  - 11.2128
+- id: tya-esfossen
+  name: Tya – Esfossen
+  station: 122.11.0
+  station_name: Eggafoss
+  station_pos:
+  - 62.89011
+  - 11.18388
+  regulation: partly
+  regulation_note: Ca. 30 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 40
+    maximum: 60
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 1cddffe2-8c2b-11f1-9ecd-37987e4c513d
+  putin:
+  - 62.9792
+  - 11.7319
+  takeout:
+  - 62.9831
+  - 11.7276
+- id: garbergselva
+  name: Garbergselva
+  station: 123.31.0
+  station_name: Kjeldstad i Garbergelva
+  station_pos:
+  - 63.26608
+  - 11.13076
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 6.0
+    optimum: 12.0
+    maximum: 18.0
+    impossible: 25.0
+    source: nokken.net
+  nokken_river: 84
+  nokken_section: 102
+  putin:
+  - 63.276892
+  - 11.205052
+  takeout:
+  - 63.267657
+  - 11.13444
+- id: gargbergelva
+  name: Gargbergelva
+  station: 123.31.0
+  station_name: Kjeldstad i Garbergelva
+  station_pos:
+  - 63.26608
+  - 11.13076
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 14
+    optimum: 23
+    maximum: 30
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: 03a4aea2-632d-11e8-88aa-bbd13e2fe5d0
+  putin:
+  - 63.276
+  - 11.1964
+  takeout:
+  - 63.2674
+  - 11.1353
+- id: sona
+  name: Sona
+  station: 123.31.0
+  station_name: Kjeldstad i Garbergelva
+  station_pos:
+  - 63.26608
+  - 11.13076
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 6
+    optimum: 9
+    maximum: 15
+    impossible: 20
+    source: whitewater.guide
+  wwguide_section: 9d2c096e-1ced-11ef-8be9-236928b3480c
+  putin:
+  - 63.3746
+  - 11.3216
+  takeout:
+  - 63.3801
+  - 11.2865
+- id: sona-upper
+  name: Sona – Upper
+  station: 123.31.0
+  station_name: Kjeldstad i Garbergelva
+  station_pos:
+  - 63.26608
+  - 11.13076
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 6
+    optimum: 9
+    maximum: 15
+    impossible: 20
+    source: whitewater.guide
+  wwguide_section: 70a1f93c-877c-11e9-9dec-e7cd4079842e
+  putin:
+  - 63.3766
+  - 11.3333
+  takeout:
+  - 63.3745
+  - 11.3217
+- id: grona
+  name: Grøna
+  station: 2.303.0
+  station_name: Dombås
+  station_pos:
+  - 62.08677
+  - 9.10108
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 9.0
+    optimum: 9.0
+    maximum: 12.0
+    impossible: 12.0
+    source: nokken.net
+  nokken_river: 18
+  nokken_section: 26
+  putin:
+  - 62.131819
+  - 9.09357
+  takeout:
+  - 62.111618
+  - 9.079525
+- id: jondalselva
+  name: Jondalselva
+  station: 15.21.0
+  station_name: Jondalselv
+  station_pos:
+  - 59.70715
+  - 9.55527
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: III
+  approximate: true
+  thresholds:
+    minimum: 8.0
+    optimum: 11.0
+    maximum: 16.0
+    impossible: 16.0
+    source: nokken.net
+  nokken_river: 28
+  nokken_section: 36
+  putin:
+  - 59.725789
+  - 9.376492
+  takeout:
+  - 59.70719
+  - 9.600942
+- id: horndola
+  name: Horndøla
+  station: 89.1.0
+  station_name: Hornindalsvatn
+  station_pos:
+  - 61.91916
+  - 6.11954
+  regulation: partly
+  regulation_note: Ca. 8 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 20.0
+    optimum: 20.0
+    maximum: 30.0
+    impossible: 30.0
+    source: nokken.net
+  nokken_river: 65
+  nokken_section: 79
+  putin:
+  - 61.998748
+  - 6.64086
+  takeout:
+  - 61.989494
+  - 6.536762
+- id: horndola-classic
+  name: Horndøla – Classic
+  station: 89.1.0
+  station_name: Hornindalsvatn
+  station_pos:
+  - 61.91916
+  - 6.11954
+  regulation: partly
+  regulation_note: Ca. 8 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 25
+    optimum: 32
+    maximum: 38
+    impossible: 45
+    source: whitewater.guide
+  wwguide_section: 03b1d050-632d-11e8-88aa-d33f6dc65769
+  putin:
+  - 61.9988
+  - 6.6406
+  takeout:
+  - 61.9892
+  - 6.5361
+- id: horndola-lower
+  name: Horndøla – Lower
+  station: 89.1.0
+  station_name: Hornindalsvatn
+  station_pos:
+  - 61.91916
+  - 6.11954
+  regulation: partly
+  regulation_note: Ca. 8 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 25
+    maximum: 30
+    impossible: 34
+    source: whitewater.guide
+  wwguide_section: 04158546-632d-11e8-88aa-43f2effdc972
+  putin:
+  - 61.9892
+  - 6.5365
+  takeout:
+  - 61.9865
+  - 6.5134
+- id: langedalselva-upper
+  name: Langedalselva – Upper
+  station: 89.1.0
+  station_name: Hornindalsvatn
+  station_pos:
+  - 61.91916
+  - 6.11954
+  regulation: partly
+  regulation_note: Ca. 8 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 25
+    optimum: 30
+    maximum: 35
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: 03db4f5c-632d-11e8-88aa-4f80e721531b
+  putin:
+  - 62.0574
+  - 6.7913
+  takeout:
+  - 62.0748
+  - 6.8204
+- id: sokna
+  name: Sokna
+  station: 122.17.0
+  station_name: Hugdal bru
+  station_pos:
+  - 62.99406
+  - 10.24644
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 35.0
+    optimum: 35.0
+    maximum: 60.0
+    impossible: 60.0
+    source: nokken.net
+  nokken_river: 89
+  nokken_section: 107
+  putin:
+  - 62.94513
+  - 10.19093
+  takeout:
+  - 63.032477
+  - 10.295227
+- id: hauka
+  name: Hauka
+  station: 122.17.0
+  station_name: Hugdal bru
+  station_pos:
+  - 62.99406
+  - 10.24644
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 20.0
+    optimum: 25.0
+    maximum: 35.0
+    impossible: 40.0
+    source: nokken.net
+  nokken_river: 85
+  nokken_section: 103
+  putin:
+  - 62.913623
+  - 10.330016
+  takeout:
+  - 62.992816
+  - 10.248089
+- id: ila
+  name: Ila
+  station: 122.17.0
+  station_name: Hugdal bru
+  station_pos:
+  - 62.99406
+  - 10.24644
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 25.0
+    optimum: 25.0
+    maximum: 40.0
+    impossible: 40.0
+    source: nokken.net
+  nokken_river: 86
+  nokken_section: 104
+  putin:
+  - 62.924056
+  - 10.152985
+  takeout:
+  - 62.937844
+  - 10.190056
+- id: stavilla-upper
+  name: Stavilla – Upper
+  station: 122.17.0
+  station_name: Hugdal bru
+  station_pos:
+  - 62.99406
+  - 10.24644
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV−
+  approximate: true
+  thresholds:
+    minimum: 24.0
+    optimum: 24.0
+    maximum: 35.0
+    impossible: 35.0
+    source: nokken.net
+  nokken_river: 90
+  nokken_section: 108
+  putin:
+  - 62.785544
+  - 10.212727
+  takeout:
+  - 62.865013
+  - 10.226472
+- id: stavilla-lower
+  name: Stavilla – Lower
+  station: 122.17.0
+  station_name: Hugdal bru
+  station_pos:
+  - 62.99406
+  - 10.24644
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 24.0
+    optimum: 24.0
+    maximum: 35.0
+    impossible: 35.0
+    source: nokken.net
+  nokken_river: 90
+  nokken_section: 109
+  putin:
+  - 62.865013
+  - 10.226472
+  takeout:
+  - 62.952711
+  - 10.188584
+- id: sokna-soknedal
+  name: Sokna – Soknedal
+  station: 122.17.0
+  station_name: Hugdal bru
+  station_pos:
+  - 62.99406
+  - 10.24644
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: II–III
+  approximate: false
+  thresholds:
+    minimum: 30
+    optimum: 50
+    maximum: 65
+    impossible: 150
+    source: whitewater.guide
+  wwguide_section: 0412be92-632d-11e8-88aa-436434a29a3a
+  putin:
+  - 62.9523
+  - 10.1891
+  takeout:
+  - 63.028
+  - 10.2669
+- id: jolstra
+  name: Jølstra
+  station: 84.15.0
+  station_name: Jølstervatn ndf.
+  station_pos:
+  - 61.4906
+  - 6.10724
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 2 magasiner, 100 % av feltet regulert, magasinene rommer 9 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 20.0
+    optimum: 30.0
+    maximum: 50.0
+    impossible: 50.0
+    source: nokken.net
+  nokken_river: 67
+  nokken_section: 81
+  putin:
+  - 61.493689
+  - 6.113734
+  takeout:
+  - 61.452754
+  - 6.011763
+- id: lomma
+  name: Lomma
+  station: 8.2.0
+  station_name: Bjørnegårdssvingen
+  station_pos:
+  - 59.8935
+  - 10.50789
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: null
+  approximate: true
+  thresholds:
+    minimum: 10.0
+    optimum: 15.0
+    maximum: 40.0
+    impossible: 80.0
+    source: nokken.net
+  nokken_river: 132
+  nokken_section: 194
+- id: mistra
+  name: Mistra
+  station: 2.267.0
+  station_name: Mistra bru
+  station_pos:
+  - 61.71112
+  - 11.24189
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 9.0
+    optimum: 14.0
+    maximum: 24.0
+    impossible: 30.0
+    source: nokken.net
+  nokken_river: 33
+  nokken_section: 42
+  putin:
+  - 61.786386
+  - 11.403501
+  takeout:
+  - 61.69716
+  - 11.202837
+- id: myrkdal-upper
+  name: Myrkdal – Upper
+  station: 62.10.0
+  station_name: Myrkdalsvatn
+  station_pos:
+  - 60.79921
+  - 6.50157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 16.0
+    optimum: 16.0
+    maximum: 30.0
+    impossible: 30.0
+    source: nokken.net
+  nokken_river: 70
+  nokken_section: 84
+  putin:
+  - 60.899944
+  - 6.48312
+  takeout:
+  - 60.858869
+  - 6.497388
+- id: myrkdal-lower
+  name: Myrkdal – Lower
+  station: 62.10.0
+  station_name: Myrkdalsvatn
+  station_pos:
+  - 60.79921
+  - 6.50157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV+
+  approximate: false
+  thresholds:
+    minimum: 6.0
+    optimum: 8.0
+    maximum: 12.0
+    impossible: 12.0
+    source: nokken.net
+  nokken_river: 70
+  nokken_section: 130
+  putin:
+  - 60.858869
+  - 6.497388
+  takeout:
+  - 60.833077
+  - 6.457368
+- id: strandaelva-lower
+  name: Strandaelva – Lower
+  station: 62.10.0
+  station_name: Myrkdalsvatn
+  station_pos:
+  - 60.79921
+  - 6.50157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: III+
+  approximate: true
+  thresholds:
+    minimum: 7.0
+    optimum: 15.0
+    maximum: 40.0
+    impossible: 60.0
+    source: nokken.net
+  nokken_river: 76
+  nokken_section: 91
+  putin:
+  - 60.740706
+  - 6.490258
+  takeout:
+  - 60.719585
+  - 6.490408
+- id: strandaelva-upper
+  name: Strandaelva – Upper
+  station: 62.10.0
+  station_name: Myrkdalsvatn
+  station_pos:
+  - 60.79921
+  - 6.50157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: II+
+  approximate: true
+  thresholds:
+    minimum: 8.0
+    optimum: 15.0
+    maximum: 30.0
+    impossible: 30.0
+    source: nokken.net
+  nokken_river: 76
+  nokken_section: 145
+  putin:
+  - 60.79077
+  - 6.506307
+  takeout:
+  - 60.755457
+  - 6.498434
+- id: myrkdalselvi-lower
+  name: Myrkdalselvi – Lower
+  station: 62.10.0
+  station_name: Myrkdalsvatn
+  station_pos:
+  - 60.79921
+  - 6.50157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 17
+    maximum: 26
+    impossible: 34
+    source: whitewater.guide
+  wwguide_section: 03e3cd62-632d-11e8-88aa-133c9e18bbec
+  putin:
+  - 60.8582
+  - 6.4971
+  takeout:
+  - 60.833
+  - 6.4582
+- id: myrkdalselvi-upper
+  name: Myrkdalselvi – Upper
+  station: 62.10.0
+  station_name: Myrkdalsvatn
+  station_pos:
+  - 60.79921
+  - 6.50157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 14
+    optimum: 24
+    maximum: 38
+    impossible: 45
+    source: whitewater.guide
+  wwguide_section: 03e2b526-632d-11e8-88aa-cf14d790b4b3
+  putin:
+  - 60.8925
+  - 6.494
+  takeout:
+  - 60.8582
+  - 6.4971
+- id: strandelvi-lower
+  name: Strandelvi – Lower
+  station: 62.10.0
+  station_name: Myrkdalsvatn
+  station_pos:
+  - 60.79921
+  - 6.50157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: III–IV
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 25
+    maximum: 50
+    impossible: 75
+    source: whitewater.guide
+  wwguide_section: 041788b4-632d-11e8-88aa-cb69280f6563
+  putin:
+  - 60.7392
+  - 6.4905
+  takeout:
+  - 60.7192
+  - 6.4901
+- id: strandelvi-middle
+  name: Strandelvi – Middle
+  station: 62.10.0
+  station_name: Myrkdalsvatn
+  station_pos:
+  - 60.79921
+  - 6.50157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: III
+  approximate: true
+  thresholds:
+    minimum: 14
+    optimum: 25
+    maximum: 45
+    impossible: 65
+    source: whitewater.guide
+  wwguide_section: 699c6a08-7dbe-11ea-b144-57b10746d180
+  putin:
+  - 60.782
+  - 6.4886
+  takeout:
+  - 60.744
+  - 6.4911
+- id: strandelvi-moneydrop
+  name: Strandelvi – Moneydrop
+  station: 62.10.0
+  station_name: Myrkdalsvatn
+  station_pos:
+  - 60.79921
+  - 6.50157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 14
+    optimum: 25
+    maximum: 40
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: b95ed0c6-7dbe-11ea-95f0-a3c6a8456827
+  putin:
+  - 60.744
+  - 6.4911
+  takeout:
+  - 60.7399
+  - 6.4905
+- id: strandelvi-upper
+  name: Strandelvi – Upper
+  station: 62.10.0
+  station_name: Myrkdalsvatn
+  station_pos:
+  - 60.79921
+  - 6.50157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 25
+    maximum: 35
+    impossible: 45
+    source: whitewater.guide
+  wwguide_section: 04180ec4-632d-11e8-88aa-2bc1d214bb0f
+  putin:
+  - 60.7903
+  - 6.5058
+  takeout:
+  - 60.782
+  - 6.4886
+- id: tverrelvi-steine
+  name: Tverrelvi – Steine
+  station: 62.10.0
+  station_name: Myrkdalsvatn
+  station_pos:
+  - 60.79921
+  - 6.50157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 45
+    optimum: 60
+    maximum: 80
+    impossible: 90
+    source: whitewater.guide
+  wwguide_section: d0eedbe2-7aef-11e8-b9db-6347ca797dbc
+  putin:
+  - 60.6671
+  - 6.2094
+  takeout:
+  - 60.6597
+  - 6.1752
+- id: smeddalselvi
+  name: Smeddalselvi
+  station: 12.215.0
+  station_name: Storeskar
+  station_pos:
+  - 60.8917
+  - 8.33272
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 5.0
+    optimum: 5.0
+    maximum: 8.0
+    impossible: 8.0
+    source: nokken.net
+  nokken_river: 73
+  nokken_section: 88
+  putin:
+  - 61.139467
+  - 8.004442
+  takeout:
+  - 61.102223
+  - 8.010165
+- id: numedalslagen-dagali
+  name: Numedalslågen – Dagali
+  station: 15.79.0
+  station_name: Ossjøen
+  station_pos:
+  - 60.3821
+  - 8.26392
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 1 magasiner, 100 % av feltet regulert, magasinene rommer 5 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 15.0
+    optimum: 15.0
+    maximum: 170.0
+    impossible: 300.0
+    source: nokken.net
+  nokken_river: 38
+  nokken_section: 47
+  putin:
+  - 60.381356
+  - 8.257758
+  takeout:
+  - 60.40234
+  - 8.439039
+- id: numedalslagen-vrangfoss-play-spot
+  name: Numedalslågen – Vrangfoss play spot
+  station: 15.61.0
+  station_name: Holmfoss i Numedalslågen
+  station_pos:
+  - 59.18906
+  - 9.99414
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 59 magasiner, 94 % av feltet regulert, magasinene rommer 33 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 60.0
+    optimum: 70.0
+    maximum: 120.0
+    impossible: 120.0
+    source: nokken.net
+  nokken_river: 38
+  nokken_section: 154
+  putin:
+  - 59.350409
+  - 9.917133
+  takeout:
+  - 59.343751
+  - 9.913725
+- id: otta-pollfoss
+  name: Otta – Pollfoss
+  station: 2.291.0
+  station_name: Tora
+  station_pos:
+  - 62.00772
+  - 7.86636
+  regulation: partly
+  regulation_note: Ca. 2 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 15.0
+    optimum: 25.0
+    maximum: 40.0
+    impossible: 40.0
+    source: nokken.net
+  nokken_river: 40
+  nokken_section: 50
+  putin:
+  - 62.01183
+  - 7.80269
+  takeout:
+  - 61.970701
+  - 7.892508
+- id: tora
+  name: Tora
+  station: 2.291.0
+  station_name: Tora
+  station_pos:
+  - 62.00772
+  - 7.86636
+  regulation: partly
+  regulation_note: Ca. 2 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV+
+  approximate: true
+  thresholds:
+    minimum: 6.0
+    optimum: 8.0
+    maximum: 10.0
+    impossible: 12.0
+    source: nokken.net
+  nokken_river: 54
+  nokken_section: 67
+  putin:
+  - 62.013708
+  - 7.865978
+  takeout:
+  - 62.00823
+  - 7.866316
+- id: raundal-upper-mjolfjell
+  name: Raundal – Upper (Mjølfjell)
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 11.0
+    optimum: 11.0
+    maximum: 17.0
+    impossible: 23.0
+    source: nokken.net
+  nokken_river: 72
+  nokken_section: 86
+  putin:
+  - 60.7019
+  - 6.937126
+  takeout:
+  - 60.678033
+  - 6.731798
+- id: raundal-skytebanen
+  name: Raundal – Skytebanen
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 16.0
+    optimum: 20.0
+    maximum: 50.0
+    impossible: 65.0
+    source: nokken.net
+  nokken_river: 72
+  nokken_section: 87
+  putin:
+  - 60.674542
+  - 6.682851
+  takeout:
+  - 60.6767983
+  - 6.6292737
+- id: raundal-upper-reimegrend
+  name: Raundal – Upper (Reimegrend)
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 15.0
+    optimum: 15.0
+    maximum: 25.0
+    impossible: 25.0
+    source: nokken.net
+  nokken_river: 72
+  nokken_section: 131
+  putin:
+  - 60.678033
+  - 6.731798
+  takeout:
+  - 60.674542
+  - 6.682851
+- id: raundal-lower-meringi-tundal
+  name: Raundal – Lower (Meringi-Tundal)
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: V−
+  approximate: false
+  thresholds:
+    minimum: 10.0
+    optimum: 10.0
+    maximum: 15.0
+    impossible: 15.0
+    source: nokken.net
+  nokken_river: 72
+  nokken_section: 132
+  putin:
+  - 60.670582
+  - 6.56086
+  takeout:
+  - 60.659894
+  - 6.542524
+- id: raundalselvi-marine-canyon
+  name: Raundalselvi – Marine Canyon
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 28
+    maximum: 40
+    impossible: 55
+    source: whitewater.guide
+  wwguide_section: 0406cc54-632d-11e8-88aa-5b94cc3d7852
+  putin:
+  - 60.6677
+  - 6.5452
+  takeout:
+  - 60.6426
+  - 6.5258
+- id: raundalselvi-play-run
+  name: Raundalselvi – Play run
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: III–IV
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 60
+    maximum: 90
+    impossible: 300
+    source: whitewater.guide
+  wwguide_section: 04064fe0-632d-11e8-88aa-97707fa3f707
+  putin:
+  - 60.6782
+  - 6.6165
+  takeout:
+  - 60.6706
+  - 6.5606
+- id: raundalselvi-rafting-section
+  name: Raundalselvi – Rafting section
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 50
+    maximum: 80
+    impossible: 200
+    source: whitewater.guide
+  wwguide_section: 0405d470-632d-11e8-88aa-5b5ddd12e247
+  putin:
+  - 60.6769
+  - 6.6834
+  takeout:
+  - 60.6782
+  - 6.6166
+- id: raundalselvi-reimegrend
+  name: Raundalselvi – Reimegrend
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 12
+    optimum: 45
+    maximum: 60
+    impossible: 100
+    source: whitewater.guide
+  wwguide_section: 04053e02-632d-11e8-88aa-bff89411a36c
+  putin:
+  - 60.6779
+  - 6.7316
+  takeout:
+  - 60.6769
+  - 6.6834
+- id: raundalselvi-upper
+  name: Raundalselvi – Upper
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 25
+    optimum: 40
+    maximum: 70
+    impossible: 110
+    source: whitewater.guide
+  wwguide_section: 03ff1b4e-632d-11e8-88aa-83b53f6c2b09
+  putin:
+  - 60.7017
+  - 6.9372
+  takeout:
+  - 60.6695
+  - 6.7886
+- id: raundalselvi-v-canyon
+  name: Raundalselvi – V-Canyon
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 7
+    optimum: 12
+    maximum: 15
+    impossible: 20
+    source: whitewater.guide
+  wwguide_section: adb19968-8546-11ea-93c0-af66ae905946
+  putin:
+  - 60.6706
+  - 6.5606
+  takeout:
+  - 60.6598
+  - 6.5419
+- id: raundalselvi-vetlehelvetet
+  name: Raundalselvi – Vetlehelvetet
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 18
+    maximum: 22
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 60265faa-8b16-11ea-b40f-1f930cd0384a
+  putin:
+  - 60.6363
+  - 6.4671
+  takeout:
+  - 60.6315
+  - 6.4408
+- id: raundalselvi-voll-section
+  name: Raundalselvi – Voll section
+  station: 62.15.0
+  station_name: Kinne
+  station_pos:
+  - 60.63039
+  - 6.49937
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 12
+    optimum: 30
+    maximum: 40
+    impossible: 45
+    source: whitewater.guide
+  wwguide_section: 5f4ed326-7ae9-11e8-9300-eb4fb8692d31
+  putin:
+  - 60.6695
+  - 6.7887
+  takeout:
+  - 60.6778
+  - 6.7319
+- id: rauma-upper
+  name: Rauma – Upper
+  station: 103.3.0
+  station_name: Rauma v/Stuguflåten
+  station_pos:
+  - 62.2766
+  - 8.15311
+  regulation: partly
+  regulation_note: Ca. 2 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 8.0
+    optimum: 8.0
+    maximum: 13.0
+    impossible: 13.0
+    source: nokken.net
+  nokken_river: 71
+  nokken_section: 85
+  putin:
+  - 62.2629136
+  - 8.1954712
+  takeout:
+  - 62.283575
+  - 8.139517
+- id: grona-rauma-trib
+  name: Grøna – Rauma trib
+  station: 103.3.0
+  station_name: Rauma v/Stuguflåten
+  station_pos:
+  - 62.2766
+  - 8.15311
+  regulation: partly
+  regulation_note: Ca. 2 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 20
+    maximum: 25
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 035a23c8-632d-11e8-88aa-db62aba7e1ef
+  putin:
+  - 62.2054
+  - 8.3158
+  takeout:
+  - 62.2244
+  - 8.3249
+- id: sjoa-bru-bru
+  name: Sjoa – Bru-Bru
+  station: 2.595.0
+  station_name: Faukstad
+  station_pos:
+  - 61.70961
+  - 9.42517
+  regulation: partly
+  regulation_note: Overføringer berører ca. 695 km² av feltet (NVE). Noe påvirkning.
+  grade: II+
+  approximate: false
+  thresholds:
+    minimum: 40.0
+    optimum: 68.0
+    maximum: 92.0
+    impossible: 92.0
+    source: nokken.net
+  nokken_river: 44
+  nokken_section: 142
+  putin:
+  - 61.75401
+  - 9.289082
+  takeout:
+  - 61.734222
+  - 9.360306
+- id: skogsaa
+  name: Skogsåa
+  station: 16.155.0
+  station_name: Sønnlandsvatn
+  station_pos:
+  - 59.70388
+  - 8.85882
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 3 magasiner, 70 % av feltet regulert, magasinene rommer 33 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 5.4
+    optimum: 8.3
+    maximum: 19.0
+    impossible: 19.0
+    source: nokken.net
+  nokken_river: 48
+  nokken_section: 61
+  putin:
+  - 59.704443
+  - 8.859727
+  takeout:
+  - 59.626614
+  - 8.946038
+- id: speka
+  name: Speka
+  station: 2.265.0
+  station_name: Unsetåa
+  station_pos:
+  - 61.94611
+  - 11.08351
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 12.0
+    optimum: 12.0
+    maximum: 20.0
+    impossible: 20.0
+    source: nokken.net
+  nokken_river: 50
+  nokken_section: 63
+  putin:
+  - 62.211175
+  - 11.097043
+  takeout:
+  - 62.201686
+  - 11.025214
+- id: sogndalselva-upper
+  name: Sogndalselva – Upper
+  station: 77.3.0
+  station_name: Sogndalsvatn
+  station_pos:
+  - 61.30136
+  - 7.00595
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 8.0
+    optimum: 8.0
+    maximum: 13.0
+    impossible: 13.0
+    source: nokken.net
+  nokken_river: 74
+  nokken_section: 89
+  putin:
+  - 61.292117
+  - 7.00489
+  takeout:
+  - 61.253497
+  - 7.020007
+- id: sogndalselva-lower
+  name: Sogndalselva – Lower
+  station: 77.3.0
+  station_name: Sogndalsvatn
+  station_pos:
+  - 61.30136
+  - 7.00595
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V−
+  approximate: false
+  thresholds:
+    minimum: 8.0
+    optimum: 8.0
+    maximum: 13.0
+    impossible: 13.0
+    source: nokken.net
+  nokken_river: 74
+  nokken_section: 187
+  putin:
+  - 61.253497
+  - 7.020007
+  takeout:
+  - 61.229025
+  - 7.098158
+- id: sogndalselva-playrun
+  name: Sogndalselva – Playrun
+  station: 77.3.0
+  station_name: Sogndalsvatn
+  station_pos:
+  - 61.30136
+  - 7.00595
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 8
+    optimum: 15
+    maximum: 22
+    impossible: 25
+    source: whitewater.guide
+  wwguide_section: ccb5507e-791f-11f1-b274-47672d36f034
+  putin:
+  - 61.232
+  - 7.0479
+  takeout:
+  - 61.2278
+  - 7.1047
+- id: toaa
+  name: Toåa
+  station: 111.5.0
+  station_name: Toåa v/Talgøyfoss
+  station_pos:
+  - 62.79668
+  - 8.78269
+  regulation: partly
+  regulation_note: Ca. 29 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV−
+  approximate: false
+  thresholds:
+    minimum: 5.0
+    optimum: 10.0
+    maximum: 15.0
+    impossible: 15.0
+    source: nokken.net
+  nokken_river: 113
+  nokken_section: 162
+  putin:
+  - 62.781479
+  - 8.875701
+  takeout:
+  - 62.796385
+  - 8.786398
+- id: vindola-upper
+  name: Vindøla – Upper
+  station: 111.5.0
+  station_name: Toåa v/Talgøyfoss
+  station_pos:
+  - 62.79668
+  - 8.78269
+  regulation: partly
+  regulation_note: Ca. 29 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 15
+    maximum: 20
+    impossible: 25
+    source: whitewater.guide
+  wwguide_section: 0356cf84-632d-11e8-88aa-e77ebc09bcad
+  putin:
+  - 62.9443
+  - 8.9865
+  takeout:
+  - 62.9605
+  - 8.9731
+- id: ulvaa-upper
+  name: Ulvåa – Upper
+  station: 103.1.0
+  station_name: Ulvåa v/Storhølen
+  station_pos:
+  - 62.28008
+  - 8.11848
+  regulation: partly
+  regulation_note: Ca. 4 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 20.0
+    optimum: 20.0
+    maximum: 45.0
+    impossible: 45.0
+    source: nokken.net
+  nokken_river: 77
+  nokken_section: 92
+  putin:
+  - 62.24285
+  - 7.948834
+  takeout:
+  - 62.272793
+  - 8.041518
+- id: ulvaa-lower
+  name: Ulvåa – Lower
+  station: 103.1.0
+  station_name: Ulvåa v/Storhølen
+  station_pos:
+  - 62.28008
+  - 8.11848
+  regulation: partly
+  regulation_note: Ca. 4 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV+
+  approximate: false
+  thresholds:
+    minimum: 10.0
+    optimum: 10.0
+    maximum: 15.0
+    impossible: 15.0
+    source: nokken.net
+  nokken_river: 77
+  nokken_section: 133
+  putin:
+  - 62.272793
+  - 8.041518
+  takeout:
+  - 62.26691
+  - 8.096205
+- id: asbjornsae-lower
+  name: Asbjørnsåe – Lower
+  station: 103.1.0
+  station_name: Ulvåa v/Storhølen
+  station_pos:
+  - 62.28008
+  - 8.11848
+  regulation: partly
+  regulation_note: Ca. 4 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: II
+  approximate: true
+  thresholds:
+    minimum: 30
+    optimum: 40
+    maximum: 50
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 0330ae58-632d-11e8-88aa-1b5243c9baf5
+  putin:
+  - 62.2357
+  - 8.1437
+  takeout:
+  - 62.2703
+  - 8.1069
+- id: asbjornsae-middle
+  name: Asbjørnsåe – Middle
+  station: 103.1.0
+  station_name: Ulvåa v/Storhølen
+  station_pos:
+  - 62.28008
+  - 8.11848
+  regulation: partly
+  regulation_note: Ca. 4 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 28
+    maximum: 35
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: 0341a9ba-632d-11e8-88aa-5f12e25f845e
+  putin:
+  - 62.2246
+  - 8.1514
+  takeout:
+  - 62.2357
+  - 8.1437
+- id: asbjornsae-upper
+  name: Asbjørnsåe – Upper
+  station: 103.1.0
+  station_name: Ulvåa v/Storhølen
+  station_pos:
+  - 62.28008
+  - 8.11848
+  regulation: partly
+  regulation_note: Ca. 4 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 28
+    maximum: 35
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: 035d66fa-632d-11e8-88aa-e7b36928c830
+  putin:
+  - 62.2095
+  - 8.1468
+  takeout:
+  - 62.2244
+  - 8.1515
+- id: ulvaa-slides
+  name: Ulvåa – Slides
+  station: 103.1.0
+  station_name: Ulvåa v/Storhølen
+  station_pos:
+  - 62.28008
+  - 8.11848
+  regulation: partly
+  regulation_note: Ca. 4 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V–VI
+  approximate: false
+  thresholds:
+    minimum: 14
+    optimum: 18
+    maximum: 26
+    impossible: 32
+    source: whitewater.guide
+  wwguide_section: 0421f330-632d-11e8-88aa-6b3a1fbada5e
+  putin:
+  - 62.2769
+  - 8.1162
+  takeout:
+  - 62.2926
+  - 8.1241
+- id: ulvaa
+  name: Ulvåa
+  station: 103.1.0
+  station_name: Ulvåa v/Storhølen
+  station_pos:
+  - 62.28008
+  - 8.11848
+  regulation: partly
+  regulation_note: Ca. 4 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 20
+    optimum: 35
+    maximum: 50
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: 0420ebfc-632d-11e8-88aa-77c709937179
+  putin:
+  - 62.2428
+  - 7.948
+  takeout:
+  - 62.2701
+  - 8.0612
+- id: verma-vermedalen
+  name: Verma – Vermedalen
+  station: 103.1.0
+  station_name: Ulvåa v/Storhølen
+  station_pos:
+  - 62.28008
+  - 8.11848
+  regulation: partly
+  regulation_note: Ca. 4 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 16
+    optimum: 24
+    maximum: 30
+    impossible: 35
+    source: whitewater.guide
+  wwguide_section: 1cbd4726-6a33-11f1-a301-07225531a791
+  putin:
+  - 62.35
+  - 7.9994
+  takeout:
+  - 62.341
+  - 8.0291
+- id: valldola-upper
+  name: Valldøla – Upper
+  station: 100.1.0
+  station_name: Valldøla v/Alstad
+  station_pos:
+  - 62.32937
+  - 7.4842
+  regulation: partly
+  regulation_note: Ca. 8 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 18.0
+    optimum: 18.0
+    maximum: 24.0
+    impossible: 24.0
+    source: nokken.net
+  nokken_river: 78
+  nokken_section: 93
+  putin:
+  - 62.402781
+  - 7.618899
+  takeout:
+  - 62.388748
+  - 7.580473
+- id: valldola-lower
+  name: Valldøla – Lower
+  station: 100.1.0
+  station_name: Valldøla v/Alstad
+  station_pos:
+  - 62.32937
+  - 7.4842
+  regulation: partly
+  regulation_note: Ca. 8 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III−
+  approximate: false
+  thresholds:
+    minimum: 25.0
+    optimum: 25.0
+    maximum: 50.0
+    impossible: 50.0
+    source: nokken.net
+  nokken_river: 78
+  nokken_section: 94
+  putin:
+  - 62.337052
+  - 7.388875
+  takeout:
+  - 62.298204
+  - 7.258493
+- id: valldola-middle
+  name: Valldøla – Middle
+  station: 100.1.0
+  station_name: Valldøla v/Alstad
+  station_pos:
+  - 62.32937
+  - 7.4842
+  regulation: partly
+  regulation_note: Ca. 8 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV−
+  approximate: false
+  thresholds:
+    minimum: 18.0
+    optimum: 20.0
+    maximum: 31.0
+    impossible: 31.0
+    source: nokken.net
+  nokken_river: 78
+  nokken_section: 134
+  putin:
+  - 62.373703
+  - 7.55676
+  takeout:
+  - 62.329578
+  - 7.510557
+- id: myklebustelva-mickey-mouse-run
+  name: Myklebustelva – Mickey Mouse run
+  station: 100.1.0
+  station_name: Valldøla v/Alstad
+  station_pos:
+  - 62.32937
+  - 7.4842
+  regulation: partly
+  regulation_note: Ca. 8 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 15
+    maximum: 32
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: 03e1893a-632d-11e8-88aa-4f70d28fc7fd
+  putin:
+  - 62.3446
+  - 7.3479
+  takeout:
+  - 62.3381
+  - 7.3459
+- id: stordalselva-classic
+  name: Stordalselva – Classic
+  station: 100.1.0
+  station_name: Valldøla v/Alstad
+  station_pos:
+  - 62.32937
+  - 7.4842
+  regulation: partly
+  regulation_note: Ca. 8 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 18
+    maximum: 25
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 04150c9c-632d-11e8-88aa-87feeb17881b
+  putin:
+  - 62.3889
+  - 7.204
+  takeout:
+  - 62.3738
+  - 7.1147
+- id: nausta-styggelifossen
+  name: Nausta – Styggelifossen
+  station: 84.11.0
+  station_name: Hovefoss
+  station_pos:
+  - 61.53279
+  - 5.75214
+  regulation: partly
+  regulation_note: Overføringer berører ca. 15 km² av feltet (NVE). Noe påvirkning.
+  grade: V
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 20
+    maximum: 25
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 8a75e422-429d-11ef-a6ba-5780e92de35d
+  putin:
+  - 61.5764
+  - 5.895
+  takeout:
+  - 61.5706
+  - 5.8095
+- id: anga-forde
+  name: Anga – Førde
+  station: 84.11.0
+  station_name: Hovefoss
+  station_pos:
+  - 61.53279
+  - 5.75214
+  regulation: partly
+  regulation_note: Overføringer berører ca. 15 km² av feltet (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 40
+    optimum: 60
+    maximum: 80
+    impossible: 90
+    source: whitewater.guide
+  wwguide_section: 6bcad9e4-d66b-11ef-b6df-579a04eea7ac
+  putin:
+  - 61.4709
+  - 5.9263
+  takeout:
+  - 61.4599
+  - 5.8898
+- id: anjavasselva
+  name: Anjavasselva
+  station: 196.26.0
+  station_name: Høgskarhus
+  station_pos:
+  - 68.84438
+  - 19.57821
+  regulation: partly
+  regulation_note: Ca. 6 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 25
+    maximum: 35
+    impossible: 35
+    source: whitewater.guide
+  wwguide_section: 4c6c8b58-7eb0-11f1-9dcd-d38e37c34ac7
+  putin:
+  - 68.6723
+  - 19.6692
+  takeout:
+  - 68.7245
+  - 19.7517
+- id: jostedola-elvepurka
+  name: Jostedøla – Elvepurka
+  station: 76.10.0
+  station_name: Myklemyr
+  station_pos:
+  - 61.5074
+  - 7.27368
+  regulation: partly
+  regulation_note: Ca. 26 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 75
+    maximum: 130
+    impossible: 200
+    source: whitewater.guide
+  wwguide_section: 294b6f22-853d-11ea-9371-d718294664da
+  putin:
+  - 61.5986
+  - 7.2858
+  takeout:
+  - 61.5828
+  - 7.2905
+- id: austerdalselvi-hike-in
+  name: AusterdalSelvi – Hike In
+  station: 76.10.0
+  station_name: Myklemyr
+  station_pos:
+  - 61.5074
+  - 7.27368
+  regulation: partly
+  regulation_note: Ca. 26 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III–IV
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 30
+    maximum: 60
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 95939392-89f7-11f1-a9fd-ebbc9d8a700c
+  putin:
+  - 61.5842
+  - 7.0023
+  takeout:
+  - 61.5272
+  - 6.9761
+- id: jostedola-fluffy-bunnys
+  name: Jostedøla – Fluffy bunnys
+  station: 76.10.0
+  station_name: Myklemyr
+  station_pos:
+  - 61.5074
+  - 7.27368
+  regulation: partly
+  regulation_note: Ca. 26 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 40
+    maximum: 75
+    impossible: 150
+    source: whitewater.guide
+  wwguide_section: 77e02164-853d-11ea-b495-6f3bfc0c9386
+  putin:
+  - 61.5828
+  - 7.291
+  takeout:
+  - 61.5677
+  - 7.2934
+- id: jostedola-upper-canyons
+  name: Jostedøla – Upper canyons
+  station: 76.10.0
+  station_name: Myklemyr
+  station_pos:
+  - 61.5074
+  - 7.27368
+  regulation: partly
+  regulation_note: Ca. 26 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: false
+  thresholds:
+    minimum: 22
+    optimum: 35
+    maximum: 65
+    impossible: 65
+    source: whitewater.guide
+  wwguide_section: 03d24704-632d-11e8-88aa-e3f6b758fe36
+  putin:
+  - 61.6682
+  - 7.3231
+  takeout:
+  - 61.6187
+  - 7.2782
+- id: morkriselvi-morkridsdalen
+  name: Mørkriselvi – Mørkridsdalen
+  station: 76.10.0
+  station_name: Myklemyr
+  station_pos:
+  - 61.5074
+  - 7.27368
+  regulation: partly
+  regulation_note: Ca. 26 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 40
+    maximum: 60
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: 69c114be-8205-11f1-a54d-43dc20176c89
+  putin:
+  - 61.6307
+  - 7.5803
+  takeout:
+  - 61.5496
+  - 7.6218
+- id: vigdal-vigdola
+  name: Vigdal – Vigdøla
+  station: 76.10.0
+  station_name: Myklemyr
+  station_pos:
+  - 61.5074
+  - 7.27368
+  regulation: partly
+  regulation_note: Ca. 26 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III–IV
+  approximate: true
+  thresholds:
+    minimum: 60
+    optimum: 100
+    maximum: 150
+    impossible: 170
+    source: whitewater.guide
+  wwguide_section: 333d0400-5fbe-11ee-8ec8-bfab9827a666
+  putin:
+  - 61.5094
+  - 7.3406
+  takeout:
+  - 61.5094
+  - 7.3226
+- id: austervefsna-festival-run
+  name: Austervefsna – Festival run
+  station: 151.21.0
+  station_name: Joibakken
+  station_pos:
+  - 65.52928
+  - 13.45521
+  regulation: partly
+  regulation_note: Ca. 6 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III–IV
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 150
+    maximum: 300
+    impossible: 450
+    source: whitewater.guide
+  wwguide_section: 61c54854-808a-11e9-a001-e3777cc0512b
+  putin:
+  - 65.5187
+  - 13.5375
+  takeout:
+  - 65.5322
+  - 13.4085
+- id: austervefsna-hattfjelldal-canyon
+  name: Austervefsna – Hattfjelldal Canyon
+  station: 151.21.0
+  station_name: Joibakken
+  station_pos:
+  - 65.52928
+  - 13.45521
+  regulation: partly
+  regulation_note: Ca. 6 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 50
+    optimum: 100
+    maximum: 150
+    impossible: 200
+    source: whitewater.guide
+  wwguide_section: 3c7e3c54-807b-11e9-9458-ef22d593f11a
+  putin:
+  - 65.5938
+  - 13.9612
+  takeout:
+  - 65.5828
+  - 13.8997
+- id: austervefsna-ragnarokk
+  name: Austervefsna – Ragnarokk
+  station: 151.21.0
+  station_name: Joibakken
+  station_pos:
+  - 65.52928
+  - 13.45521
+  regulation: partly
+  regulation_note: Ca. 6 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 100
+    maximum: 200
+    impossible: 400
+    source: whitewater.guide
+  wwguide_section: 7e677b86-97ef-11e9-807c-a701ceb412b8
+  putin:
+  - 65.5184
+  - 13.6299
+  takeout:
+  - 65.5186
+  - 13.5379
+- id: austervefsna-wilderness-canyon
+  name: Austervefsna – Wilderness Canyon
+  station: 151.21.0
+  station_name: Joibakken
+  station_pos:
+  - 65.52928
+  - 13.45521
+  regulation: partly
+  regulation_note: Ca. 6 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 50
+    optimum: 80
+    maximum: 150
+    impossible: 200
+    source: whitewater.guide
+  wwguide_section: e2bfb2c8-8085-11e9-a50c-270a2d486b36
+  putin:
+  - 65.5828
+  - 13.8997
+  takeout:
+  - 65.5184
+  - 13.6301
+- id: bergebyelva-suovvejohka
+  name: Bergebyelva – Suovvejohka
+  station: 240.3.0
+  station_name: Vestre Jakobselv
+  station_pos:
+  - 70.13451
+  - 29.31296
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 8
+    optimum: 15
+    maximum: 30
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: a19b068a-db2d-11f0-bc3d-1fd17029b260
+  putin:
+  - 70.173
+  - 28.898
+  takeout:
+  - 70.1482
+  - 28.8987
+- id: bjerkreimsani-fotlandsfossen
+  name: Bjerkreimsåni – Fotlandsfossen
+  station: 27.25.0
+  station_name: Gjedlakleiv
+  station_pos:
+  - 58.57358
+  - 6.06604
+  regulation: partly
+  regulation_note: Ca. 17 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 30
+    optimum: 60
+    maximum: 100
+    impossible: 130
+    source: whitewater.guide
+  wwguide_section: 041c27e8-632d-11e8-88aa-3fcd7d60ebb8
+  putin:
+  - 58.4884
+  - 6.003
+  takeout:
+  - 58.4785
+  - 5.9954
+- id: bjerkreimsani-hegelstad
+  name: Bjerkreimsåni – Hegelstad
+  station: 27.25.0
+  station_name: Gjedlakleiv
+  station_pos:
+  - 58.57358
+  - 6.06604
+  regulation: partly
+  regulation_note: Ca. 17 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 40
+    optimum: 80
+    maximum: 120
+    impossible: 150
+    source: whitewater.guide
+  wwguide_section: 0357b020-632d-11e8-88aa-0b4856a6afca
+  putin:
+  - 58.6671
+  - 6.163
+  takeout:
+  - 58.6413
+  - 6.1272
+- id: bjerkreimsani-stavtjorn-grotteland
+  name: Bjerkreimsåni – Stavtjorn/Grotteland
+  station: 27.15.0
+  station_name: Austrumdal (Austrumdalsvatnet)
+  station_pos:
+  - 58.68172
+  - 6.23135
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 4
+    optimum: 8
+    maximum: 12
+    impossible: 16
+    source: whitewater.guide
+  wwguide_section: 0358b86c-632d-11e8-88aa-5f6b4a83307e
+  putin:
+  - 58.7092
+  - 6.3408
+  takeout:
+  - 58.7079
+  - 6.3299
+- id: bjollaga
+  name: Bjollåga
+  station: 161.7.0
+  station_name: Tollåga
+  station_pos:
+  - 66.89693
+  - 14.85457
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 6
+    optimum: 9
+    maximum: 12
+    impossible: 15
+    source: whitewater.guide
+  wwguide_section: 7e01a702-8c64-11e9-8756-8f45479ca0df
+  putin:
+  - 66.5292
+  - 14.9717
+  takeout:
+  - 66.5102
+  - 14.9689
+- id: bjoreio-middle
+  name: Bjoreio – Middle
+  station: 50.3.0
+  station_name: Eidfjordvatn
+  station_pos:
+  - 60.44957
+  - 7.09805
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 3 magasiner, 54 % av feltet regulert, magasinene rommer 29 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 50
+    optimum: 70
+    maximum: 90
+    impossible: 100
+    source: whitewater.guide
+  wwguide_section: 03eab050-632d-11e8-88aa-978422de9d23
+  putin:
+  - 60.4037
+  - 7.368
+  takeout:
+  - 60.4195
+  - 7.2585
+- id: veig-eidfjord
+  name: Veig – Eidfjord
+  station: 50.3.0
+  station_name: Eidfjordvatn
+  station_pos:
+  - 60.44957
+  - 7.09805
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 3 magasiner, 54 % av feltet regulert, magasinene rommer 29 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 30
+    optimum: 50
+    maximum: 70
+    impossible: 100
+    source: whitewater.guide
+  wwguide_section: 8b63ed4a-32f6-11ef-88ba-c715e1145cf3
+  putin:
+  - 60.4047
+  - 7.1302
+  takeout:
+  - 60.4244
+  - 7.1167
+- id: veig-upper
+  name: Veig – Upper
+  station: 50.3.0
+  station_name: Eidfjordvatn
+  station_pos:
+  - 60.44957
+  - 7.09805
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 3 magasiner, 54 % av feltet regulert, magasinene rommer 29 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 60
+    optimum: 80
+    maximum: 100
+    impossible: 100
+    source: whitewater.guide
+  wwguide_section: 039d9586-632d-11e8-88aa-07456f8e1ece
+  putin:
+  - 60.2955
+  - 7.1601
+  takeout:
+  - 60.3523
+  - 7.152
+- id: bjorndalselvi
+  name: Bjørndalselvi
+  station: 55.5.0
+  station_name: Dyrdalsvatn
+  station_pos:
+  - 60.3491
+  - 5.52008
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 1.5
+    optimum: 3
+    maximum: 6
+    impossible: 8
+    source: whitewater.guide
+  wwguide_section: 22258d24-d103-11ef-a5bc-cb7167d613ae
+  putin:
+  - 60.3757
+  - 5.4994
+  takeout:
+  - 60.3735
+  - 5.4773
+- id: bonnaga-boner-fossen-climax-slide
+  name: Bønnåga – Boner fossen, Climax slide
+  station: 149.1.0
+  station_name: Møllehusfoss
+  station_pos:
+  - 65.60209
+  - 12.82592
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 12
+    optimum: 20
+    maximum: 30
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: 54a678d2-10d7-11ee-9905-cb870d7c69a5
+  putin:
+  - 65.6574
+  - 12.76
+  takeout:
+  - 65.6447
+  - 12.7509
+- id: eiteraga-upper-upper
+  name: Eiteråga – Upper upper
+  station: 149.1.0
+  station_name: Møllehusfoss
+  station_pos:
+  - 65.60209
+  - 12.82592
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 14
+    maximum: 18
+    impossible: 20
+    source: whitewater.guide
+  wwguide_section: 8afc25e2-15c0-11ee-9a06-27a1f803d08b
+  putin:
+  - 65.5399
+  - 13.1515
+  takeout:
+  - 65.55
+  - 13.1751
+- id: gasvasselva-upper-and-lower
+  name: Gåsvasselva – Upper and lower
+  station: 149.1.0
+  station_name: Møllehusfoss
+  station_pos:
+  - 65.60209
+  - 12.82592
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 12
+    optimum: 20
+    maximum: 30
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: b7b297f4-86dd-11e9-aa90-7bba66883d54
+  putin:
+  - 65.3148
+  - 13.221
+  takeout:
+  - 65.3669
+  - 13.3441
+- id: lomsdalselva
+  name: Lomsdalselva
+  station: 149.1.0
+  station_name: Møllehusfoss
+  station_pos:
+  - 65.60209
+  - 12.82592
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 18
+    maximum: 24
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 6ee3740c-86ed-11e9-84a1-2b4f2b444ee7
+  putin:
+  - 65.4323
+  - 13.0333
+  takeout:
+  - 65.4669
+  - 12.7728
+- id: stavvasselva-star-wars-elva
+  name: Stavvasselva – Star Wars elva
+  station: 149.1.0
+  station_name: Møllehusfoss
+  station_pos:
+  - 65.60209
+  - 12.82592
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 14
+    optimum: 20
+    maximum: 26
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: cc2e3c06-59e2-11e9-990e-5794c4f0387a
+  putin:
+  - 65.4865
+  - 13.2981
+  takeout:
+  - 65.5111
+  - 13.3772
+- id: naeroydalselvi-roadside
+  name: Nærøydalselvi – Roadside
+  station: 71.1.0
+  station_name: Skjerping
+  station_pos:
+  - 60.85894
+  - 6.793
+  regulation: partly
+  regulation_note: Ca. 40 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 25
+    maximum: 40
+    impossible: 45
+    source: whitewater.guide
+  wwguide_section: ec0c62b0-45c3-11ee-b882-9b3ab9fa635b
+  putin:
+  - 60.8607
+  - 6.8051
+  takeout:
+  - 60.88
+  - 6.8424
+- id: brandsetelva-classic
+  name: Brandsetelva – Classic
+  station: 71.1.0
+  station_name: Skjerping
+  station_pos:
+  - 60.85894
+  - 6.793
+  regulation: partly
+  regulation_note: Ca. 40 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 23
+    optimum: 30
+    maximum: 40
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: 035fc3fa-632d-11e8-88aa-e3615ea82c3c
+  putin:
+  - 60.7887
+  - 6.695
+  takeout:
+  - 60.8014
+  - 6.6773
+- id: brekkedalen
+  name: Brekkedalen
+  station: 71.1.0
+  station_name: Skjerping
+  station_pos:
+  - 60.85894
+  - 6.793
+  regulation: partly
+  regulation_note: Ca. 40 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 30
+    optimum: 45
+    maximum: 55
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 47595e7c-27ee-11ef-ae76-9765ae48c590
+  putin:
+  - 60.8579
+  - 6.6632
+  takeout:
+  - 60.8472
+  - 6.6824
+- id: jordalselvi-lower
+  name: Jordalselvi – Lower
+  station: 71.1.0
+  station_name: Skjerping
+  station_pos:
+  - 60.85894
+  - 6.793
+  regulation: partly
+  regulation_note: Ca. 40 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 18
+    optimum: 25
+    maximum: 32
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: 0419cade-632d-11e8-88aa-fb5dd5927869
+  putin:
+  - 60.8943
+  - 6.7201
+  takeout:
+  - 60.8715
+  - 6.7244
+- id: jordalselvi-upper
+  name: Jordalselvi – Upper
+  station: 71.1.0
+  station_name: Skjerping
+  station_pos:
+  - 60.85894
+  - 6.793
+  regulation: partly
+  regulation_note: Ca. 40 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 30
+    maximum: 40
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: 03b68730-632d-11e8-88aa-d3cac292e0a5
+  putin:
+  - 60.9219
+  - 6.7462
+  takeout:
+  - 60.8943
+  - 6.7201
+- id: undredalselvi-goat-run
+  name: Undredalselvi – Goat Run
+  station: 71.1.0
+  station_name: Skjerping
+  station_pos:
+  - 60.85894
+  - 6.793
+  regulation: partly
+  regulation_note: Ca. 40 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 35
+    maximum: 50
+    impossible: 70
+    source: whitewater.guide
+  wwguide_section: 74e00492-4f91-11f0-b5c5-b735847d5c45
+  putin:
+  - 60.8995
+  - 7.0583
+  takeout:
+  - 60.9258
+  - 7.079
+- id: undredalselvi-lower
+  name: Undredalselvi – Lower
+  station: 71.1.0
+  station_name: Skjerping
+  station_pos:
+  - 60.85894
+  - 6.793
+  regulation: partly
+  regulation_note: Ca. 40 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 35
+    maximum: 50
+    impossible: 70
+    source: whitewater.guide
+  wwguide_section: 8a0cbcd8-d670-11ef-9ef2-83538eadda8c
+  putin:
+  - 60.9404
+  - 7.0901
+  takeout:
+  - 60.9512
+  - 7.1079
+- id: bygdelva-lower
+  name: Bygdelva – Lower
+  station: 98.4.0
+  station_name: Øye ndf.
+  station_pos:
+  - 62.06826
+  - 6.93157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 8
+    optimum: 12
+    maximum: 16
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 03645528-632d-11e8-88aa-43cc70c2c262
+  putin:
+  - 62.0734
+  - 6.9118
+  takeout:
+  - 62.0758
+  - 6.8965
+- id: bygdelva-race-course
+  name: Bygdelva – Race course
+  station: 98.4.0
+  station_name: Øye ndf.
+  station_pos:
+  - 62.06826
+  - 6.93157
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 2
+    optimum: 6
+    maximum: 10
+    impossible: 14
+    source: whitewater.guide
+  wwguide_section: 03661c00-632d-11e8-88aa-eb01516d0e7e
+  putin:
+  - 62.0683
+  - 6.9307
+  takeout:
+  - 62.0702
+  - 6.9268
+- id: teigdalselvi-lower
+  name: Teigdalselvi – Lower
+  station: 62.17.0
+  station_name: Mestad
+  station_pos:
+  - 60.67532
+  - 6.097
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 2 magasiner, 60 % av feltet regulert, magasinene rommer 15 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV–V
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 22
+    maximum: 30
+    impossible: 35
+    source: whitewater.guide
+  wwguide_section: 6441a648-4009-11ee-884f-7be6b88a9f16
+  putin:
+  - 60.729
+  - 6.1349
+  takeout:
+  - 60.6566
+  - 6.0912
+- id: daleelva-lower
+  name: Daleelva – Lower
+  station: 62.17.0
+  station_name: Mestad
+  station_pos:
+  - 60.67532
+  - 6.097
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 2 magasiner, 60 % av feltet regulert, magasinene rommer 15 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 40
+    optimum: 60
+    maximum: 80
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: 1a358512-682f-11ee-b08d-577b80c41cc3
+  putin:
+  - 60.5859
+  - 5.8439
+  takeout:
+  - 60.587
+  - 5.8214
+- id: teigdalselvi-upper
+  name: Teigdalselvi – Upper
+  station: 62.17.0
+  station_name: Mestad
+  station_pos:
+  - 60.67532
+  - 6.097
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 2 magasiner, 60 % av feltet regulert, magasinene rommer 15 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: V
+  approximate: false
+  thresholds:
+    minimum: 22
+    optimum: 30
+    maximum: 38
+    impossible: 43
+    source: whitewater.guide
+  wwguide_section: 041ac682-632d-11e8-88aa-43a5bb660eb4
+  putin:
+  - 60.7257
+  - 6.1808
+  takeout:
+  - 60.7307
+  - 6.1366
+- id: daleelva-rullestadjuvet
+  name: Daleelva – Rullestadjuvet
+  station: 48.5.0
+  station_name: Reinsnosvatn
+  station_pos:
+  - 59.96939
+  - 6.72526
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 35
+    maximum: 50
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 9dc651c6-2355-11eb-ace0-53a91eac0b2e
+  putin:
+  - 59.8893
+  - 6.4703
+  takeout:
+  - 59.8777
+  - 6.4596
+- id: hildalselvi-upper
+  name: Hildalselvi – Upper
+  station: 48.5.0
+  station_name: Reinsnosvatn
+  station_pos:
+  - 59.96939
+  - 6.72526
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 30
+    maximum: 50
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: 190db0e0-15b1-11ee-9f16-b3165ef49c20
+  putin:
+  - 60.0103
+  - 6.6428
+  takeout:
+  - 59.9857
+  - 6.5946
+- id: seljestadelva-seljestadjuvet
+  name: Seljestadelva – Seljestadjuvet
+  station: 48.5.0
+  station_name: Reinsnosvatn
+  station_pos:
+  - 59.96939
+  - 6.72526
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 17
+    optimum: 26
+    maximum: 34
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: 66e45bca-73c3-11f1-a029-f7e4173924fa
+  putin:
+  - 59.9018
+  - 6.6368
+  takeout:
+  - 59.9138
+  - 6.6118
+- id: dalsana-austena
+  name: Dalsåna – Austenå
+  station: 20.2.0
+  station_name: Austenå
+  station_pos:
+  - 58.83963
+  - 8.10052
+  regulation: partly
+  regulation_note: Ca. 25 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 16
+    maximum: 25
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 0659feec-4e14-11f1-914d-3bf9e440abea
+  putin:
+  - 58.8659
+  - 8.0601
+  takeout:
+  - 58.8381
+  - 8.1001
+- id: driva-upper
+  name: Driva – Upper
+  station: 109.21.0
+  station_name: Driva v/Svoni
+  station_pos:
+  - 62.25589
+  - 9.54368
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 7
+    optimum: 14
+    maximum: 20
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 037c0286-632d-11e8-88aa-d7b3358fd4f8
+  putin:
+  - 62.3066
+  - 9.6071
+  takeout:
+  - 62.3628
+  - 9.637
+- id: eida
+  name: Eida
+  station: 139.13.0
+  station_name: Grongstadvatn
+  station_pos:
+  - 64.56294
+  - 12.19391
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: II
+  approximate: true
+  thresholds:
+    minimum: 35
+    optimum: 40
+    maximum: 50
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: 821ccce6-c3b2-11ea-a2e0-2bb23b7c2d4a
+  putin:
+  - 64.5588
+  - 12.1883
+  takeout:
+  - 64.5541
+  - 12.1818
+- id: embla-lower
+  name: Embla – Lower
+  station: 97.1.0
+  station_name: Fetvatn (Fitjavatnet)
+  station_pos:
+  - 62.33236
+  - 6.59336
+  regulation: partly
+  regulation_note: Overføringer berører ca. 10 km² av feltet (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 5
+    optimum: 10
+    maximum: 15
+    impossible: 20
+    source: whitewater.guide
+  wwguide_section: 039055d8-632d-11e8-88aa-33655f93a1c4
+  putin:
+  - 62.2414
+  - 6.9059
+  takeout:
+  - 62.3068
+  - 6.948
+- id: orskogelva-dynjafossen
+  name: Ørskogelva – Dynjafossen
+  station: 97.1.0
+  station_name: Fetvatn (Fitjavatnet)
+  station_pos:
+  - 62.33236
+  - 6.59336
+  regulation: partly
+  regulation_note: Overføringer berører ca. 10 km² av feltet (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 30
+    maximum: 40
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: 6157263e-0011-11ee-83c3-f7fc9f64044a
+  putin:
+  - 62.5115
+  - 6.9237
+  takeout:
+  - 62.4919
+  - 6.8774
+- id: solnorelva-aquapark
+  name: Solnørelva – Aquapark
+  station: 97.1.0
+  station_name: Fetvatn (Fitjavatnet)
+  station_pos:
+  - 62.33236
+  - 6.59336
+  regulation: partly
+  regulation_note: Overføringer berører ca. 10 km² av feltet (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 25
+    maximum: 35
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: 0d7e10cc-0052-11ee-a880-2f99411655da
+  putin:
+  - 62.5089
+  - 6.8238
+  takeout:
+  - 62.4987
+  - 6.7968
+- id: flamselvi-kardalsfossen
+  name: Flåmselvi – Kårdalsfossen
+  station: 72.77.0
+  station_name: Flåm bru
+  station_pos:
+  - 60.83693
+  - 7.12165
+  regulation: partly
+  regulation_note: Ca. 93 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: false
+  thresholds:
+    minimum: 25
+    optimum: 40
+    maximum: 50
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 191733fc-0000-11ee-bb61-0f08cac69432
+  putin:
+  - 60.7519
+  - 7.1079
+  takeout:
+  - 60.753
+  - 7.108
+- id: flattadalselva-lower
+  name: Flåttådalselva – Lower
+  station: 139.20.0
+  station_name: Moen
+  station_pos:
+  - 64.92564
+  - 13.07912
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III–IV
+  approximate: true
+  thresholds:
+    minimum: 8
+    optimum: 16
+    maximum: 22
+    impossible: 28
+    source: whitewater.guide
+  wwguide_section: 845bb138-8e4b-11f1-92bf-2b9782bd7f49
+  putin:
+  - 64.838
+  - 12.8782
+  takeout:
+  - 64.7832
+  - 12.8899
+- id: lindseta
+  name: Lindseta
+  station: 139.20.0
+  station_name: Moen
+  station_pos:
+  - 64.92564
+  - 13.07912
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III
+  approximate: true
+  thresholds:
+    minimum: 6
+    optimum: 15
+    maximum: 23
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 5d474fce-c2f7-11ea-89ee-2f8ba3e23a3d
+  putin:
+  - 64.7395
+  - 12.7132
+  takeout:
+  - 64.7244
+  - 12.7953
+- id: fusta
+  name: Fusta
+  station: 152.4.0
+  station_name: Fustvatn
+  station_pos:
+  - 65.90524
+  - 13.30759
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: II–III
+  approximate: false
+  thresholds:
+    minimum: 20
+    optimum: 40
+    maximum: 70
+    impossible: 100
+    source: whitewater.guide
+  wwguide_section: 076c8510-87b6-11e9-be4e-fb5e24703365
+  putin:
+  - 65.8885
+  - 13.2498
+  takeout:
+  - 65.9031
+  - 13.1677
+- id: hattelva
+  name: Hattelva
+  station: 152.4.0
+  station_name: Fustvatn
+  station_pos:
+  - 65.90524
+  - 13.30759
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III
+  approximate: true
+  thresholds:
+    minimum: 50
+    optimum: 100
+    maximum: 150
+    impossible: 150
+    source: whitewater.guide
+  wwguide_section: 0318f1b4-87bc-11e9-9183-77f808e561d1
+  putin:
+  - 66.0177
+  - 13.4551
+  takeout:
+  - 65.9993
+  - 13.4406
+- id: herringelva-lower
+  name: Herringelva – Lower
+  station: 152.4.0
+  station_name: Fustvatn
+  station_pos:
+  - 65.90524
+  - 13.30759
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 40
+    optimum: 60
+    maximum: 80
+    impossible: 100
+    source: whitewater.guide
+  wwguide_section: d37df71e-f08d-11eb-b713-a3faef74cc13
+  putin:
+  - 65.8322
+  - 13.5135
+  takeout:
+  - 65.8411
+  - 13.5066
+- id: herringelva
+  name: Herringelva
+  station: 152.4.0
+  station_name: Fustvatn
+  station_pos:
+  - 65.90524
+  - 13.30759
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 40
+    optimum: 60
+    maximum: 80
+    impossible: 100
+    source: whitewater.guide
+  wwguide_section: 365358ec-87b9-11e9-9da5-efdaf55f2bc7
+  putin:
+  - 65.8221
+  - 13.5196
+  takeout:
+  - 65.8303
+  - 13.5153
+- id: gaua-gaudalen
+  name: Gaua – Gaudalen
+  station: 122.16.0
+  station_name: Gaua
+  station_pos:
+  - 63.10217
+  - 10.20299
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 7
+    optimum: 12
+    maximum: 16
+    impossible: 20
+    source: whitewater.guide
+  wwguide_section: fc3fbd94-7e14-11f1-b70a-4f18e0ad3142
+  putin:
+  - 63.0794
+  - 10.1902
+  takeout:
+  - 63.1052
+  - 10.2109
+- id: gaula-8-lakes-and-falls
+  name: Gaula – 8 Lakes and Falls
+  station: 83.2.0
+  station_name: Viksvatn (Hestadfjorden)
+  station_pos:
+  - 61.33369
+  - 5.88976
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: V–VI
+  approximate: false
+  thresholds:
+    minimum: 60
+    optimum: 80
+    maximum: 100
+    impossible: 110
+    source: whitewater.guide
+  wwguide_section: 7aab94f8-0057-11ee-a83a-dfd78dad0888
+  putin:
+  - 61.3352
+  - 5.8832
+  takeout:
+  - 61.3673
+  - 5.6752
+- id: gaula-gaulfossen
+  name: Gaula – Gaulfossen
+  station: 122.9.0
+  station_name: Gaulfoss
+  station_pos:
+  - 63.1082
+  - 10.22859
+  regulation: partly
+  regulation_note: Ca. 18 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 20
+    optimum: 150
+    maximum: 250
+    impossible: 450
+    source: whitewater.guide
+  wwguide_section: 03a5b6d0-632d-11e8-88aa-27bd04d3abdf
+  putin:
+  - 63.1082
+  - 10.2299
+  takeout:
+  - 63.115
+  - 10.2388
+- id: gisna-roadside
+  name: Gisna – Roadside
+  station: 121.29.0
+  station_name: Gisnås
+  station_pos:
+  - 62.70466
+  - 9.91503
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 6
+    optimum: 14
+    maximum: 22
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: f50daa1c-f660-11ec-98cd-4f5feb5ca580
+  putin:
+  - 62.7244
+  - 9.9687
+  takeout:
+  - 62.7343
+  - 9.9777
+- id: gjengedalselva-upper
+  name: Gjengedalselva – Upper
+  station: 86.10.0
+  station_name: Åvatn (Ommedalsvatnet)
+  station_pos:
+  - 61.71941
+  - 5.9213
+  regulation: partly
+  regulation_note: Overføringer berører ca. 17 km² av feltet (NVE). Noe påvirkning.
+  grade: IV–V
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 20
+    maximum: 25
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: e0d5aef4-1ded-11ee-84de-bb2e790457d8
+  putin:
+  - 61.6568
+  - 5.9877
+  takeout:
+  - 61.6588
+  - 5.9486
+- id: junkerdalselva
+  name: Junkerdalselva
+  station: 163.5.0
+  station_name: Junkerdalselv
+  station_pos:
+  - 66.81491
+  - 15.41267
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 30
+    maximum: 60
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: 3d7214c0-8c27-11e9-895e-c78731b949a8
+  putin:
+  - 66.8236
+  - 15.5061
+  takeout:
+  - 66.8143
+  - 15.4058
+- id: graddiselva-graddiselva-junkerdalselva
+  name: Graddiselva – Graddiselva-Junkerdalselva
+  station: 163.5.0
+  station_name: Junkerdalselv
+  station_pos:
+  - 66.81491
+  - 15.41267
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 20
+    maximum: 30
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: 74a9a882-fd44-11eb-a9d9-6300d15c1874
+  putin:
+  - 66.7505
+  - 15.7155
+  takeout:
+  - 66.777
+  - 15.632
+- id: junkerdalselva-upper
+  name: Junkerdalselva – Upper
+  station: 163.5.0
+  station_name: Junkerdalselv
+  station_pos:
+  - 66.81491
+  - 15.41267
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: II–III
+  approximate: false
+  thresholds:
+    minimum: 10
+    optimum: 20
+    maximum: 50
+    impossible: 100
+    source: whitewater.guide
+  wwguide_section: c5491a3a-3c39-11ee-af37-0b5b8e3b7592
+  putin:
+  - 66.7772
+  - 15.6319
+  takeout:
+  - 66.8053
+  - 15.58
+- id: lonsdal-lower
+  name: Lønsdal – Lower
+  station: 163.5.0
+  station_name: Junkerdalselv
+  station_pos:
+  - 66.81491
+  - 15.41267
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 17
+    maximum: 25
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 01120e4a-8c2c-11e9-8e19-6f8b4850030f
+  putin:
+  - 66.7647
+  - 15.4761
+  takeout:
+  - 66.8029
+  - 15.4256
+- id: lonsdal-upper
+  name: Lønsdal – Upper
+  station: 163.5.0
+  station_name: Junkerdalselv
+  station_pos:
+  - 66.81491
+  - 15.41267
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 23
+    maximum: 32
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: 661353e6-d8f9-11eb-8ba5-1b0a95020a22
+  putin:
+  - 66.7365
+  - 15.4733
+  takeout:
+  - 66.7584
+  - 15.4779
+- id: lonsdal-upper-upper
+  name: Lønsdal – Upper Upper
+  station: 163.5.0
+  station_name: Junkerdalselv
+  station_pos:
+  - 66.81491
+  - 15.41267
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 23
+    maximum: 30
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: df0caa88-886a-11f1-a7b9-7f514ff33b59
+  putin:
+  - 66.7077
+  - 15.4515
+  takeout:
+  - 66.7364
+  - 15.4732
+- id: rana-upper
+  name: Rana – Upper
+  station: 163.5.0
+  station_name: Junkerdalselv
+  station_pos:
+  - 66.81491
+  - 15.41267
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 25
+    optimum: 35
+    maximum: 45
+    impossible: 55
+    source: whitewater.guide
+  wwguide_section: 340bc6f0-9d85-11e9-95eb-cb27e775be63
+  putin:
+  - 66.4696
+  - 15.2339
+  takeout:
+  - 66.4483
+  - 15.1365
+- id: skaitielva-skaitielva-junkerdalselva
+  name: Skaitielva – Skaitielva-Junkerdalselva
+  station: 163.5.0
+  station_name: Junkerdalselv
+  station_pos:
+  - 66.81491
+  - 15.41267
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III–IV
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 45
+    maximum: 60
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 1242428e-fcfa-11eb-8cda-37c0f124fda7
+  putin:
+  - 66.7924
+  - 15.6944
+  takeout:
+  - 66.777
+  - 15.632
+- id: stormdalselva
+  name: Stormdalselva
+  station: 156.19.0
+  station_name: Bredek
+  station_pos:
+  - 66.51927
+  - 14.88023
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 25
+    maximum: 35
+    impossible: 45
+    source: whitewater.guide
+  wwguide_section: 580c4790-8c33-11e9-8dce-b7eafbba626a
+  putin:
+  - 66.5194
+  - 14.8793
+  takeout:
+  - 66.5034
+  - 14.8982
+- id: gronnfjellaga-classic
+  name: Grønnfjellåga – Classic
+  station: 156.19.0
+  station_name: Bredek
+  station_pos:
+  - 66.51927
+  - 14.88023
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 24
+    optimum: 32
+    maximum: 40
+    impossible: 44
+    source: whitewater.guide
+  wwguide_section: 0f989872-05ae-11ed-8a6e-bf0f4e037818
+  putin:
+  - 66.3435
+  - 14.6911
+  takeout:
+  - 66.3691
+  - 14.6031
+- id: messingaga
+  name: Messingåga
+  station: 156.19.0
+  station_name: Bredek
+  station_pos:
+  - 66.51927
+  - 14.88023
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 25
+    maximum: 35
+    impossible: 45
+    source: whitewater.guide
+  wwguide_section: 1ca0f67c-9607-11ef-9eb8-1baba20224a1
+  putin:
+  - 66.4851
+  - 14.939
+  takeout:
+  - 66.5033
+  - 14.9322
+- id: rana-middle
+  name: Rana – Middle
+  station: 156.19.0
+  station_name: Bredek
+  station_pos:
+  - 66.51927
+  - 14.88023
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III
+  approximate: true
+  thresholds:
+    minimum: 6
+    optimum: 20
+    maximum: 30
+    impossible: 40
+    source: whitewater.guide
+  wwguide_section: f6960e12-792c-11f1-b979-575bfb5a1da7
+  putin:
+  - 66.4358
+  - 14.8086
+  takeout:
+  - 66.4083
+  - 14.7118
+- id: rana-train-bridge-section
+  name: Rana – Train bridge section
+  station: 156.19.0
+  station_name: Bredek
+  station_pos:
+  - 66.51927
+  - 14.88023
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 8
+    optimum: 12
+    maximum: 15
+    impossible: 18
+    source: whitewater.guide
+  wwguide_section: 35cbc080-a6cc-11e9-908e-2ba5c4cbe9d6
+  putin:
+  - 66.5048
+  - 14.983
+  takeout:
+  - 66.507
+  - 14.9158
+- id: gyaani-lower-down-to-helleland
+  name: Gyaåni – Lower down to Helleland
+  station: 27.24.0
+  station_name: Helleland
+  station_pos:
+  - 58.5336
+  - 6.14931
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 6 magasiner, 76 % av feltet regulert, magasinene rommer 6 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 25
+    optimum: 50
+    maximum: 100
+    impossible: 130
+    source: whitewater.guide
+  wwguide_section: 48b6467a-4243-11eb-9879-6bf59b86b826
+  putin:
+  - 58.5634
+  - 6.2253
+  takeout:
+  - 58.5464
+  - 6.1701
+- id: helgaa-upper
+  name: Helgåa – Upper
+  station: 127.11.0
+  station_name: Veravatn
+  station_pos:
+  - 63.78934
+  - 12.32654
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 6
+    optimum: 10
+    maximum: 15
+    impossible: 20
+    source: whitewater.guide
+  wwguide_section: 83cefdc4-53f6-11ef-8630-ffda837bb2a7
+  putin:
+  - 63.8043
+  - 12.2983
+  takeout:
+  - 63.8066
+  - 12.1753
+- id: herdola-damfossen
+  name: Herdøla – Damfossen
+  station: 99.17.0
+  station_name: Rødøla
+  station_pos:
+  - 62.19759
+  - 7.49542
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 2 magasiner, 54 % av feltet regulert, magasinene rommer 86 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 3
+    optimum: 5
+    maximum: 8
+    impossible: 10
+    source: whitewater.guide
+  wwguide_section: 97e2cb62-0012-11ee-a1af-d3ce1dc60a74
+  putin:
+  - 62.2181
+  - 7.3004
+  takeout:
+  - 62.2184
+  - 7.299
+- id: herdola-storfossen
+  name: Herdøla – Storfossen
+  station: 99.17.0
+  station_name: Rødøla
+  station_pos:
+  - 62.19759
+  - 7.49542
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 2 magasiner, 54 % av feltet regulert, magasinene rommer 86 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 3
+    optimum: 5
+    maximum: 8
+    impossible: 10
+    source: whitewater.guide
+  wwguide_section: 2289c6b4-edd6-11ea-9fa2-53fec502d39a
+  putin:
+  - 62.2416
+  - 7.2596
+  takeout:
+  - 62.2421
+  - 7.2552
+- id: inna-dillfossan
+  name: Inna – Dillfossan
+  station: 127.13.0
+  station_name: Dillfoss
+  station_pos:
+  - 63.7642
+  - 11.76507
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: false
+  thresholds:
+    minimum: 8
+    optimum: 12
+    maximum: 16
+    impossible: 20
+    source: whitewater.guide
+  wwguide_section: c05421d2-a21b-11ec-af32-5b5e59be39f2
+  putin:
+  - 63.7486
+  - 11.7299
+  takeout:
+  - 63.7758
+  - 11.7277
+- id: inna-upper
+  name: Inna – Upper
+  station: 127.13.0
+  station_name: Dillfoss
+  station_pos:
+  - 63.7642
+  - 11.76507
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: V
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 30
+    maximum: 40
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: 036b8b76-92c0-11ea-b42e-5f4867121d7f
+  putin:
+  - 63.6607
+  - 12.1186
+  takeout:
+  - 63.6623
+  - 12.0127
+- id: isa-bridge-to-bridge
+  name: Isa – Bridge to bridge
+  station: 103.20.0
+  station_name: Isa v/Morstøl bru
+  station_pos:
+  - 62.58323
+  - 7.95407
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 5
+    optimum: 10
+    maximum: 15
+    impossible: 25
+    source: whitewater.guide
+  wwguide_section: cb26397a-26c9-11eb-9854-1faf62f39aa4
+  putin:
+  - 62.5772
+  - 7.8519
+  takeout:
+  - 62.578
+  - 7.8131
+- id: jolstra-dammed-run
+  name: Jølstra – Dammed run
+  station: 84.21.0
+  station_name: Brulandsfoss ndf.
+  station_pos:
+  - 61.43656
+  - 5.90117
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 6 magasiner, 72 % av feltet regulert, magasinene rommer 6 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 70
+    optimum: 90
+    maximum: 130
+    impossible: 130
+    source: whitewater.guide
+  wwguide_section: 23436446-6ca4-11f0-8a4e-d3d33482f93c
+  putin:
+  - 61.4936
+  - 6.1138
+  takeout:
+  - 61.4504
+  - 6.0104
+- id: ogna-lower
+  name: Ogna – Lower
+  station: 128.5.0
+  station_name: Støafoss
+  station_pos:
+  - 64.01759
+  - 11.71837
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 30
+    optimum: 45
+    maximum: 55
+    impossible: 65
+    source: whitewater.guide
+  wwguide_section: d352e070-559c-11ef-b988-837460a0a0c4
+  putin:
+  - 64.0126
+  - 11.7476
+  takeout:
+  - 64.0105
+  - 11.5699
+- id: jorstadelva-deca
+  name: Jørstadelva – Deca
+  station: 128.5.0
+  station_name: Støafoss
+  station_pos:
+  - 64.01759
+  - 11.71837
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 25
+    optimum: 50
+    maximum: 70
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: 826fce2a-294d-11ed-b109-73ebb3eb5936
+  putin:
+  - 64.1659
+  - 12.3964
+  takeout:
+  - 64.1951
+  - 12.2785
+- id: rokta-slides
+  name: Rokta – Slides
+  station: 128.5.0
+  station_name: Støafoss
+  station_pos:
+  - 64.01759
+  - 11.71837
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 30
+    maximum: 45
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: a2ad2e1c-8de9-11f1-b3cc-2b7f020ec957
+  putin:
+  - 64.0071
+  - 11.976
+  takeout:
+  - 63.9913
+  - 11.887
+- id: kinna-middalbu
+  name: Kinna – Middalbu
+  station: 36.9.0
+  station_name: Middal
+  station_pos:
+  - 59.95409
+  - 6.98207
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 4
+    optimum: 8
+    maximum: 12
+    impossible: 15
+    source: whitewater.guide
+  wwguide_section: eb981100-d9a4-11ef-9415-37bf37c1c970
+  putin:
+  - 59.9543
+  - 6.9831
+  takeout:
+  - 59.9497
+  - 6.9646
+- id: kjervelva
+  name: Kjervelva
+  station: 196.12.0
+  station_name: Lundberg
+  station_pos:
+  - 68.72235
+  - 18.54942
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 30
+    maximum: 50
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: fe841e2a-47cd-11f0-a9f0-af010588ef48
+  putin:
+  - 68.9705
+  - 18.6999
+  takeout:
+  - 69.009
+  - 18.7796
+- id: kosani-kvisla
+  name: Kosåni – Kvisla
+  station: 22.16.0
+  station_name: Myglevatn ndf.
+  station_pos:
+  - 58.44589
+  - 7.58499
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 8
+    optimum: 15
+    maximum: 25
+    impossible: 35
+    source: whitewater.guide
+  wwguide_section: 8806c6de-f7f7-11ee-b8c0-bfa5d95bb932
+  putin:
+  - 58.4467
+  - 7.5838
+  takeout:
+  - 58.4296
+  - 7.5332
+- id: kvanndalselva-lower
+  name: Kvanndalselva – Lower
+  station: 151.11.0
+  station_name: Lavvatn
+  station_pos:
+  - 65.77316
+  - 12.98294
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 30
+    maximum: 45
+    impossible: 55
+    source: whitewater.guide
+  wwguide_section: e13f0e28-697a-11eb-a677-db0222f3b176
+  putin:
+  - 65.7843
+  - 13.159
+  takeout:
+  - 65.7876
+  - 13.1758
+- id: tverraga
+  name: Tverrågå
+  station: 151.11.0
+  station_name: Lavvatn
+  station_pos:
+  - 65.77316
+  - 12.98294
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 16
+    maximum: 25
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: e9afd916-0eda-11eb-b320-d7944c514ad7
+  putin:
+  - 65.7875
+  - 13.1756
+  takeout:
+  - 65.8003
+  - 13.1999
+- id: kvina-knaben
+  name: Kvina – Knaben
+  station: 25.32.0
+  station_name: Knabåni
+  station_pos:
+  - 58.6695
+  - 6.97318
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 7
+    optimum: 12
+    maximum: 20
+    impossible: 35
+    source: whitewater.guide
+  wwguide_section: fa9ff3d4-bd16-11ea-8f63-3b6e0f56b4ba
+  putin:
+  - 58.6149
+  - 6.9087
+  takeout:
+  - 58.6111
+  - 6.9052
+- id: litleana-hafoss
+  name: Litleåna – Håfoss
+  station: 25.51.0
+  station_name: Krågehølen
+  station_pos:
+  - 58.32257
+  - 6.975
+  regulation: partly
+  regulation_note: Ca. 98 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 3
+    optimum: 8
+    maximum: 15
+    impossible: 20
+    source: whitewater.guide
+  wwguide_section: 8069b256-bd18-11ea-b9b0-8f15bec020f5
+  putin:
+  - 58.3255
+  - 6.9882
+  takeout:
+  - 58.3222
+  - 6.9737
+- id: mandalselva-lower
+  name: Mandalselva – Lower
+  station: 22.4.0
+  station_name: Kjølemo
+  station_pos:
+  - 58.12024
+  - 7.52813
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 11 magasiner, 85 % av feltet regulert, magasinene rommer 16 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 30
+    optimum: 100
+    maximum: 200
+    impossible: 300
+    source: whitewater.guide
+  wwguide_section: 8e7199fc-3360-11ed-a63c-3f9e9a8d1b58
+  putin:
+  - 58.1691
+  - 7.5577
+  takeout:
+  - 58.1416
+  - 7.5444
+- id: mandalselva-upper
+  name: Mandalselva – Upper
+  station: 22.4.0
+  station_name: Kjølemo
+  station_pos:
+  - 58.12024
+  - 7.52813
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 11 magasiner, 85 % av feltet regulert, magasinene rommer 16 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: II–III
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 100
+    maximum: 300
+    impossible: 300
+    source: whitewater.guide
+  wwguide_section: a025209e-e032-11e9-9b1a-3fc93db8ab71
+  putin:
+  - 58.3881
+  - 7.5272
+  takeout:
+  - 58.3549
+  - 7.5283
+- id: maudalsana-fossbrekka
+  name: Maudalsåna – Fossbrekka
+  station: 27.52.0
+  station_name: Byrkjelandsvatnet utløp
+  station_pos:
+  - 58.69754
+  - 6.19728
+  regulation: partly
+  regulation_note: Ca. 37 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 10
+    optimum: 17
+    maximum: 24
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 45bbef90-ba32-11ef-8b58-cf9c7f1016c4
+  putin:
+  - 58.7335
+  - 6.2574
+  takeout:
+  - 58.7305
+  - 6.2482
+- id: minilla-grasjoen
+  name: Minilla – Gråsjøen
+  station: 112.8.0
+  station_name: Rinna
+  station_pos:
+  - 62.98495
+  - 9.4071
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: V
+  approximate: true
+  thresholds:
+    minimum: 4
+    optimum: 6
+    maximum: 8
+    impossible: 10
+    source: whitewater.guide
+  wwguide_section: fcefa1ca-6ed6-11f1-a920-ff3775832146
+  putin:
+  - 62.8139
+  - 9.63
+  takeout:
+  - 62.8111
+  - 9.6618
+- id: moska-atland
+  name: Møska – Åtland
+  station: 24.8.0
+  station_name: Møska (Skolandsvatnet)
+  station_pos:
+  - 58.16059
+  - 7.06594
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 5
+    optimum: 10
+    maximum: 18
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 8e98d29e-bd18-11ea-9418-17797c30ebda
+  putin:
+  - 58.2012
+  - 7.034
+  takeout:
+  - 58.1743
+  - 7.0631
+- id: namsen-namskogan
+  name: Namsen – Namskogan
+  station: 139.15.0
+  station_name: Bjørnstad
+  station_pos:
+  - 65.01779
+  - 13.25836
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 1 magasiner, 68 % av feltet regulert, magasinene rommer 31 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 40
+    optimum: 50
+    maximum: 70
+    impossible: 90
+    source: whitewater.guide
+  wwguide_section: 45af34f4-150b-11ed-b13a-f37b14bf1240
+  putin:
+  - 64.9299
+  - 13.139
+  takeout:
+  - 64.9308
+  - 13.137
+- id: storelva-hike-and-run
+  name: Storelva – Hike and run
+  station: 139.15.0
+  station_name: Bjørnstad
+  station_pos:
+  - 65.01779
+  - 13.25836
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 1 magasiner, 68 % av feltet regulert, magasinene rommer 31 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 30
+    maximum: 40
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: 63491dc2-235b-11ee-873b-5f0c98fa8988
+  putin:
+  - 65.1553
+  - 13.4972
+  takeout:
+  - 65.0393
+  - 13.287
+- id: nidelva-trondheim-nedre-leirfoss
+  name: Nidelva (Trondheim) – Nedre Leirfoss
+  station: 123.20.0
+  station_name: Rate
+  station_pos:
+  - 63.3849
+  - 10.39023
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 24 magasiner, 100 % av feltet regulert, magasinene rommer 48 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: II
+  approximate: false
+  thresholds:
+    minimum: 40
+    optimum: 100
+    maximum: 300
+    impossible: 400
+    source: whitewater.guide
+  wwguide_section: 2a54fcc4-31da-11ee-bb4a-4f2a84dc3c2e
+  putin:
+  - 63.3836
+  - 10.3959
+  takeout:
+  - 63.4089
+  - 10.3914
+- id: nordelva-hollandsfossen
+  name: Nordelva – Høllandsfossen
+  station: 41.8.0
+  station_name: Hellaugvatn
+  station_pos:
+  - 59.72001
+  - 6.18786
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 1.5
+    optimum: 3
+    maximum: 4
+    impossible: 5
+    source: whitewater.guide
+  wwguide_section: c7ad7222-732b-11f1-bd4d-476079cbf2cc
+  putin:
+  - 59.661
+  - 6.3582
+  takeout:
+  - 59.6568
+  - 6.3587
+- id: rostaelva-upper
+  name: Rostaelva – Upper
+  station: 196.11.0
+  station_name: Lille Rostavatn
+  station_pos:
+  - 69.02298
+  - 19.58108
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: false
+  thresholds:
+    minimum: 20
+    optimum: 40
+    maximum: 60
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: 653ccb84-5274-11f0-9365-4bf964574119
+  putin:
+  - 68.9538
+  - 19.8995
+  takeout:
+  - 68.9628
+  - 19.7546
+- id: nordkjoselva-balsfjord
+  name: Nordkjoselva – Balsfjord
+  station: 196.11.0
+  station_name: Lille Rostavatn
+  station_pos:
+  - 69.02298
+  - 19.58108
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 40
+    optimum: 60
+    maximum: 100
+    impossible: 120
+    source: whitewater.guide
+  wwguide_section: e44aefa4-4a0a-11f0-aaa0-a3cae69589e8
+  putin:
+  - 69.1721
+  - 19.7966
+  takeout:
+  - 69.1955
+  - 19.7381
+- id: tamokelva-erikbrufossen
+  name: Tamokelva – Erikbrufossen
+  station: 196.11.0
+  station_name: Lille Rostavatn
+  station_pos:
+  - 69.02298
+  - 19.58108
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 30
+    maximum: 50
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 1696029e-47d8-11f0-bad6-57ba8d2bd547
+  putin:
+  - 69.0484
+  - 19.4462
+  takeout:
+  - 69.0218
+  - 19.4451
+- id: tamokelva-upper
+  name: Tamokelva – Upper
+  station: 196.11.0
+  station_name: Lille Rostavatn
+  station_pos:
+  - 69.02298
+  - 19.58108
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III
+  approximate: true
+  thresholds:
+    minimum: 20
+    optimum: 40
+    maximum: 70
+    impossible: 100
+    source: whitewater.guide
+  wwguide_section: 03aa95ce-632d-11e8-88aa-7fedb30997a6
+  putin:
+  - 69.0699
+  - 19.5208
+  takeout:
+  - 69.0485
+  - 19.446
+- id: orkla-innset-ulsberg
+  name: Orkla – Innset-Ulsberg
+  station: 121.23.0
+  station_name: Brattset
+  station_pos:
+  - 62.79464
+  - 10.00277
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 5 magasiner, 75 % av feltet regulert, magasinene rommer 32 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 20
+    optimum: 35
+    maximum: 50
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: 358cd0f4-86d9-11e9-9a0b-4fa731031f21
+  putin:
+  - 62.7107
+  - 10.0377
+  takeout:
+  - 62.7344
+  - 9.9771
+- id: orkla-ulsberg-berkak
+  name: Orkla – Ulsberg-Berkåk
+  station: 121.23.0
+  station_name: Brattset
+  station_pos:
+  - 62.79464
+  - 10.00277
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 5 magasiner, 75 % av feltet regulert, magasinene rommer 32 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV–V
+  approximate: false
+  thresholds:
+    minimum: 20
+    optimum: 35
+    maximum: 45
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 03efea98-632d-11e8-88aa-037081d89e07
+  putin:
+  - 62.7347
+  - 9.9755
+  takeout:
+  - 62.8044
+  - 10.0114
+- id: oselva-tyssdal
+  name: Oselva – Tyssdal
+  station: 55.4.0
+  station_name: Røykenes
+  station_pos:
+  - 60.24881
+  - 5.4419
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 4
+    optimum: 8
+    maximum: 20
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: 6053ea2c-4a08-11f0-b9ed-9fc3d8f8eec4
+  putin:
+  - 60.1996
+  - 5.4713
+  takeout:
+  - 60.1857
+  - 5.4726
+- id: otra-rapid
+  name: Otra – Rapid
+  station: 21.69.0
+  station_name: Syrtveit
+  station_pos:
+  - 58.63958
+  - 7.80774
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 25 magasiner, 100 % av feltet regulert, magasinene rommer 102 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 40
+    optimum: 120
+    maximum: 200
+    impossible: 250
+    source: whitewater.guide
+  wwguide_section: e4620c9e-ea67-11ec-a17e-1ffddf0fc937
+  putin:
+  - 58.6464
+  - 7.815
+  takeout:
+  - 58.6369
+  - 7.8064
+- id: rana-lower-reinforsen-section
+  name: Rana – Lower/Reinforsen Section
+  station: 156.49.0
+  station_name: Reinfossen ndf.
+  station_pos:
+  - 66.34756
+  - 14.33907
+  regulation: partly
+  regulation_note: Ca. 100 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III–IV
+  approximate: false
+  thresholds:
+    minimum: 50
+    optimum: 200
+    maximum: 300
+    impossible: 300
+    source: whitewater.guide
+  wwguide_section: ee264796-795f-11f1-ac5d-b38cdf37f0b7
+  putin:
+  - 66.3497
+  - 14.3422
+  takeout:
+  - 66.3276
+  - 14.2613
+- id: rauddaelva-waterfall
+  name: Rauddaelva – Waterfall
+  station: 191.2.0
+  station_name: Øvrevatn
+  station_pos:
+  - 68.8578
+  - 17.9409
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 30
+    optimum: 60
+    maximum: 90
+    impossible: 90
+    source: whitewater.guide
+  wwguide_section: 5d740840-47c5-11f0-8f4c-4bf7b02621ca
+  putin:
+  - 68.6263
+  - 18.2195
+  takeout:
+  - 68.6353
+  - 18.2318
+- id: spanselva-fossbacken
+  name: Spanselva – Fossbacken
+  station: 191.2.0
+  station_name: Øvrevatn
+  station_pos:
+  - 68.8578
+  - 17.9409
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 30
+    optimum: 60
+    maximum: 80
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: b21f65a4-47c2-11f0-9bb8-c7b012abefac
+  putin:
+  - 68.682
+  - 17.948
+  takeout:
+  - 68.6894
+  - 17.9774
+- id: rauma-lower
+  name: Rauma – Lower
+  station: 103.40.0
+  station_name: Rauma v/Horgheim
+  station_pos:
+  - 62.47378
+  - 7.78184
+  regulation: partly
+  regulation_note: Ca. 12 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V–VI
+  approximate: false
+  thresholds:
+    minimum: 20
+    optimum: 40
+    maximum: 60
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: 03fe5236-632d-11e8-88aa-0b6d60ec4349
+  putin:
+  - 62.2902
+  - 8.1251
+  takeout:
+  - 62.3092
+  - 8.1034
+- id: reisaelva-adventure-canyon
+  name: Reisaelva – Adventure canyon
+  station: 208.3.0
+  station_name: Svartfossberget
+  station_pos:
+  - 69.52844
+  - 21.38222
+  regulation: partly
+  regulation_note: Ca. 2 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: false
+  thresholds:
+    minimum: 30
+    optimum: 60
+    maximum: 80
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: effe4df0-b7f6-11f0-b9ba-7be0ddff26aa
+  putin:
+  - 69.2976
+  - 22.004
+  takeout:
+  - 69.4271
+  - 21.6433
+- id: rossaa-orsta
+  name: Rossåa – Ørsta
+  station: 95.4.0
+  station_name: Vatnevatnet
+  station_pos:
+  - 62.15707
+  - 6.22284
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 2 magasiner, 59 % av feltet regulert, magasinene rommer 15 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 2
+    optimum: 4
+    maximum: 7
+    impossible: 7
+    source: whitewater.guide
+  wwguide_section: 7b58e5d8-1a8f-11ef-80aa-7713ff7e02ab
+  putin:
+  - 62.2043
+  - 6.1549
+  takeout:
+  - 62.1977
+  - 6.1399
+- id: sanddola-sanddoldalen
+  name: Sanddøla – Sanddøldalen
+  station: 139.35.0
+  station_name: Trangen
+  station_pos:
+  - 64.43044
+  - 12.48147
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 20
+    optimum: 40
+    maximum: 60
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 63e3368c-4ca7-11f1-b428-536fb879124a
+  putin:
+  - 64.4926
+  - 13.2698
+  takeout:
+  - 64.4729
+  - 12.9854
+- id: signaldalelva-breakthrough
+  name: Signaldalelva – Breakthrough
+  station: 205.6.0
+  station_name: Didnojokka
+  station_pos:
+  - 69.17903
+  - 20.77847
+  regulation: partly
+  regulation_note: NVE registrerer magasiner eller regulering i feltet, men uten regulert areal. Liten påvirkning.
+  grade: IV–V
+  approximate: true
+  thresholds:
+    minimum: 6
+    optimum: 10
+    maximum: 15
+    impossible: 15
+    source: whitewater.guide
+  wwguide_section: ee5e297e-8ea7-11f1-bce0-87cbc73b4464
+  putin:
+  - 69.0471
+  - 20.7939
+  takeout:
+  - 69.1215
+  - 20.0966
+- id: signaldalelva-lower
+  name: Signaldalelva – Lower
+  station: 205.8.0
+  station_name: Helligskogen
+  station_pos:
+  - 69.23173
+  - 20.65709
+  regulation: partly
+  regulation_note: Ca. 83 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III–IV
+  approximate: true
+  thresholds:
+    minimum: 8
+    optimum: 14
+    maximum: 25
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: dd992a84-b7df-11f0-97d3-4f265b1a634a
+  putin:
+  - 69.1834
+  - 19.9997
+  takeout:
+  - 69.2211
+  - 19.9773
+- id: unkerelva
+  name: Unkerelva
+  station: 151.70.0
+  forecast: false
+  station_name: Unkervatn
+  station_pos:
+  - 65.51437
+  - 14.13285
+  regulation: unknown
+  regulation_note: NVE har ikke reguleringsdata for stasjonen.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 20
+    optimum: 30
+    maximum: 45
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 381511ea-8785-11e9-b82e-5bf5c5da9517
+  putin:
+  - 65.512
+  - 14.1414
+  takeout:
+  - 65.5215
+  - 14.0137
+- id: skarmodalselva-2
+  name: Skarmodalselva
+  station: 151.70.0
+  forecast: false
+  station_name: Unkervatn
+  station_pos:
+  - 65.51437
+  - 14.13285
+  regulation: unknown
+  regulation_note: NVE har ikke reguleringsdata for stasjonen.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 35
+    optimum: 50
+    maximum: 60
+    impossible: 70
+    source: whitewater.guide
+  wwguide_section: ff5769ba-59e0-11e9-acec-3facc7e938b3
+  putin:
+  - 65.4222
+  - 14.6614
+  takeout:
+  - 65.4871
+  - 14.3093
+- id: skibotnelva-upper
+  name: Skibotnelva – Upper
+  station: 205.3.0
+  station_name: Skibotn bru
+  station_pos:
+  - 69.36507
+  - 20.27375
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 3 magasiner, 60 % av feltet regulert, magasinene rommer 25 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 30
+    maximum: 50
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: 28677ea0-47e0-11f0-8179-0714c4605479
+  putin:
+  - 69.2547
+  - 20.5838
+  takeout:
+  - 69.2905
+  - 20.4235
+- id: skjaekra
+  name: Skjækra
+  station: 127.6.0
+  station_name: Grunnfoss
+  station_pos:
+  - 63.7915
+  - 11.81244
+  regulation: partly
+  regulation_note: Ca. 3 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 30
+    optimum: 45
+    maximum: 60
+    impossible: 70
+    source: whitewater.guide
+  wwguide_section: 97f3fa18-cc58-11ea-9f78-ff9d52af2523
+  putin:
+  - 63.8685
+  - 12.0754
+  takeout:
+  - 63.8385
+  - 12.027
+- id: sordalselva-sordalen
+  name: Sørdalselva – Sørdalen
+  station: 155.27.0
+  station_name: Lendingosen (Varnvatnet)
+  station_pos:
+  - 65.79283
+  - 14.22048
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 7
+    optimum: 12
+    maximum: 18
+    impossible: 23
+    source: whitewater.guide
+  wwguide_section: bfabfe06-8878-11f1-aafb-db136addf2d7
+  putin:
+  - 65.7934
+  - 14.2241
+  takeout:
+  - 65.7921
+  - 14.1961
+- id: stabburselva
+  name: Stabburselva
+  station: 223.2.0
+  station_name: Lombola
+  station_pos:
+  - 70.13985
+  - 24.76063
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV–V
+  approximate: false
+  thresholds:
+    minimum: 15
+    optimum: 30
+    maximum: 45
+    impossible: 60
+    source: whitewater.guide
+  wwguide_section: f26b33dc-d827-11ef-945f-771067ecac81
+  putin:
+  - 69.8077
+  - 24.2114
+  takeout:
+  - 70.1485
+  - 24.7744
+- id: storelva-lower
+  name: Storelva – Lower
+  station: 87.10.0
+  station_name: Gloppenelv v/Bergheim
+  station_pos:
+  - 61.7186
+  - 6.52064
+  regulation: partly
+  regulation_note: Overføringer berører ca. 204 km² av feltet (NVE). Noe påvirkning.
+  grade: III–IV
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 35
+    maximum: 60
+    impossible: 80
+    source: whitewater.guide
+  wwguide_section: 0416fffc-632d-11e8-88aa-130a65f744ef
+  putin:
+  - 61.7245
+  - 6.5128
+  takeout:
+  - 61.7297
+  - 6.4054
+- id: suldalslagen-sand
+  name: Suldalslågen – Sand
+  station: 36.6.0
+  station_name: Lavika
+  station_pos:
+  - 59.48171
+  - 6.25919
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 31 magasiner, 93 % av feltet regulert, magasinene rommer 27 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 30
+    optimum: 60
+    maximum: 100
+    impossible: 120
+    source: whitewater.guide
+  wwguide_section: 8240be72-ba38-11ef-a30e-fb60240412b6
+  putin:
+  - 59.4581
+  - 6.3367
+  takeout:
+  - 59.4724
+  - 6.3155
+- id: tovdalselva-birkeland
+  name: Tovdalselva – Birkeland
+  station: 20.3.0
+  station_name: Flakksvann
+  station_pos:
+  - 58.33046
+  - 8.20306
+  regulation: regulated
+  regulation_note: 'Magasinregulert: 10 magasiner, 54 % av feltet regulert, magasinene rommer 5 % av årsavrenningen (NVE). Slipp kan endre vannføringen raskt.'
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 50
+    optimum: 120
+    maximum: 200
+    impossible: 400
+    source: whitewater.guide
+  wwguide_section: 70d1b070-6e68-11f1-9c68-af83459af1df
+  putin:
+  - 58.4039
+  - 8.2827
+  takeout:
+  - 58.3409
+  - 8.2277
+- id: tverraga-2
+  name: Tverråga
+  station: 161.45.0
+  forecast: false
+  station_name: Nye Klipa
+  station_pos:
+  - 66.89458
+  - 14.74753
+  regulation: partly
+  regulation_note: Ca. 30 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: true
+  thresholds:
+    minimum: 15
+    optimum: 30
+    maximum: 45
+    impossible: 50
+    source: whitewater.guide
+  wwguide_section: a840a4f2-8c53-11e9-a3fe-97d95022a182
+  putin:
+  - 66.8475
+  - 14.7146
+  takeout:
+  - 66.8583
+  - 14.6904
+- id: tysselva-lakes-and-slides
+  name: Tysselva – Lakes and slides
+  station: 62.18.0
+  station_name: Svartavatn
+  station_pos:
+  - 60.65359
+  - 5.9
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 8
+    optimum: 14
+    maximum: 20
+    impossible: 22
+    source: whitewater.guide
+  wwguide_section: 041f44b4-632d-11e8-88aa-c7273f0bd068
+  putin:
+  - 60.6727
+  - 5.9544
+  takeout:
+  - 60.6396
+  - 5.899
+- id: vefsna-forsjordio
+  name: Vefsna – Forsjordio
+  station: 151.28.0
+  station_name: Laksfors
+  station_pos:
+  - 65.62138
+  - 13.29194
+  regulation: partly
+  regulation_note: Ca. 9 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 40
+    optimum: 70
+    maximum: 100
+    impossible: 120
+    source: whitewater.guide
+  wwguide_section: 869a5266-8535-11f1-98ca-6fbe3990847e
+  putin:
+  - 65.7177
+  - 13.2136
+  takeout:
+  - 65.7245
+  - 13.215
+- id: vefsna-granesurf
+  name: Vefsna – Granesurf
+  station: 151.28.0
+  station_name: Laksfors
+  station_pos:
+  - 65.62138
+  - 13.29194
+  regulation: partly
+  regulation_note: Ca. 9 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 100
+    optimum: 160
+    maximum: 300
+    impossible: 300
+    source: whitewater.guide
+  wwguide_section: 76e2030c-8227-11f1-aeb5-2371cb99cbbc
+  putin:
+  - 65.5858
+  - 13.3895
+  takeout:
+  - 65.589
+  - 13.383
+- id: vefsna-kvalfors
+  name: Vefsna – Kvalfors
+  station: 151.28.0
+  station_name: Laksfors
+  station_pos:
+  - 65.62138
+  - 13.29194
+  regulation: partly
+  regulation_note: Ca. 9 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: II
+  approximate: false
+  thresholds:
+    minimum: 200
+    optimum: 300
+    maximum: 500
+    impossible: 700
+    source: whitewater.guide
+  wwguide_section: b588229a-8094-11e9-9dfe-7b6fb81fae20
+  putin:
+  - 65.7438
+  - 13.2232
+  takeout:
+  - 65.7454
+  - 13.2352
+- id: vefsna-laksforsen
+  name: Vefsna – Laksforsen
+  station: 151.28.0
+  station_name: Laksfors
+  station_pos:
+  - 65.62138
+  - 13.29194
+  regulation: partly
+  regulation_note: Ca. 9 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: V
+  approximate: false
+  thresholds:
+    minimum: 50
+    optimum: 100
+    maximum: 200
+    impossible: 250
+    source: whitewater.guide
+  wwguide_section: 3e5d27e6-0953-11ee-bfe3-77219c053f9a
+  putin:
+  - 65.6221
+  - 13.2928
+  takeout:
+  - 65.6247
+  - 13.2897
+- id: vetlefjorden-park-huck
+  name: Vetlefjorden – Park & huck
+  station: 78.12.0
+  station_name: Mel
+  station_pos:
+  - 61.33756
+  - 6.56087
+  regulation: partly
+  regulation_note: Ca. 50 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: IV
+  approximate: false
+  thresholds:
+    minimum: 4
+    optimum: 8
+    maximum: 12
+    impossible: 16
+    source: whitewater.guide
+  wwguide_section: 13b29fb0-8573-11ea-b7ab-df8fbdc319e0
+  putin:
+  - 61.3515
+  - 6.5558
+  takeout:
+  - 61.3496
+  - 6.5527
+- id: vista-road-section
+  name: Vista – Road section
+  station: 104.23.0
+  station_name: Vistdal
+  station_pos:
+  - 62.6976
+  - 7.96219
+  regulation: unregulated
+  regulation_note: Uregulert (NVE).
+  grade: III–IV
+  approximate: true
+  thresholds:
+    minimum: 6
+    optimum: 10
+    maximum: 16
+    impossible: 20
+    source: whitewater.guide
+  wwguide_section: 38e02b06-253a-11eb-8da8-5b3fc07ecdd2
+  putin:
+  - 62.663
+  - 8.0281
+  takeout:
+  - 62.7022
+  - 7.9535
+- id: vosso-blue-bridge-hole
+  name: Vosso – Blue Bridge Hole
+  station: 62.5.0
+  station_name: Bulken (Vangsvatnet)
+  station_pos:
+  - 60.62868
+  - 6.29254
+  regulation: partly
+  regulation_note: Ca. 86 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 14
+    optimum: 20
+    maximum: 25
+    impossible: 30
+    source: whitewater.guide
+  wwguide_section: c6520786-8455-11f1-86f3-cb2a6a77e365
+  putin:
+  - 60.6373
+  - 6.1727
+  takeout:
+  - 60.6381
+  - 6.1688
+- id: vosso-bulken-and-flage-wave
+  name: Vosso – Bulken and Flage wave
+  station: 62.5.0
+  station_name: Bulken (Vangsvatnet)
+  station_pos:
+  - 60.62868
+  - 6.29254
+  regulation: partly
+  regulation_note: Ca. 86 % av feltet går gjennom regulerte magasiner (NVE). Noe påvirkning.
+  grade: III
+  approximate: false
+  thresholds:
+    minimum: 80
+    optimum: 140
+    maximum: 170
+    impossible: 200
+    source: whitewater.guide
+  wwguide_section: ee3a4e04-180d-11ef-82b7-434c76cfe340
+  putin:
+  - 60.6306
+  - 6.2784
+  takeout:
+  - 60.6313
+  - 6.2535

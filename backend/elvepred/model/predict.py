@@ -31,7 +31,7 @@ OUT = DATA / "predictions"
 GTS_CACHE = DATA / "cache" / "gts"
 GTS_REFRESH_UTC = 8
 GTS_STALE_DAYS = 2  # eldre hurtiglager brukes bare hvis GTS ikke svarer
-FETCH_WORKERS = 4
+FETCH_WORKERS = 8  # 145 stasjoner uten GTS-hurtiglager: ca. 13 min med 8
 
 
 def gts_state(station: str, today: pd.Timestamp) -> tuple[pd.DataFrame, bool]:
@@ -63,6 +63,8 @@ def current_inputs(station: str, today: pd.Timestamp) -> tuple[pd.DataFrame, pd.
     q = hydapi.daily_discharge(station, start.strftime("%Y-%m-%d"), today.strftime("%Y-%m-%d"))[["q"]]
     hq = hydapi.hourly_discharge(station, (today - pd.Timedelta(hours=HOURLY_HISTORY)).strftime("%Y-%m-%d"),
                                  today.strftime("%Y-%m-%d")).dropna()
+    if hq.empty:  # f.eks. stasjon ute av drift: uten siste nivå kan verken døgn- eller timesmodellen kjøres
+        raise ValueError(f"ingen timesmålinger siste {HOURLY_HISTORY} timer")
     w, from_cache = gts_state(station, today)
     w = w[w.index >= start]
     fch = openmeteo.live_hourly(station, FC_MODEL)
@@ -83,13 +85,15 @@ def upstream_inputs(station: str, today: pd.Timestamp, inputs: dict) -> tuple[pd
     hentet; ellers hentes de nå. None hvis det feiler (da mangler `up_*`, som modellen tåler)."""
     if isinstance(inputs.get(station), tuple):
         df, hq = inputs[station][:2]
-        return df["q"], hq
+        return df["q"].astype(float), hq
     try:
         start = today - pd.Timedelta(days=HISTORY_DAYS)
         q = hydapi.daily_discharge(station, start.strftime("%Y-%m-%d"), today.strftime("%Y-%m-%d"))["q"]
         hq = hydapi.hourly_discharge(station, (today - pd.Timedelta(hours=HOURLY_HISTORY)).strftime("%Y-%m-%d"),
                                      today.strftime("%Y-%m-%d")).dropna()
-        return q, hq
+        if q.dropna().empty or hq.empty:
+            raise ValueError("ingen målinger")
+        return q.astype(float), hq.astype(float)
     except Exception as e:
         print(f"::warning::{station} (oppstrøms): kunne ikke hente data ({type(e).__name__}: {e})", file=sys.stderr)
         return None
@@ -132,52 +136,56 @@ def predict_all(today: pd.Timestamp | None = None) -> tuple[pd.DataFrame, dict]:
             print(f"::warning::{st}: kunne ikke hente data ({type(e).__name__}: {e})", file=sys.stderr)
             failed.extend(r["id"] for r in secs)
             continue
-        df, hq, fc, fch, _ = inputs[st]
-        t0 = time.perf_counter()
-        issue = df["q"].last_valid_index()
-        d = df["q"].dropna().iloc[-OBSERVED_DAYS:]
-        hobs = hq[hq.index > hq.index[-1] - pd.Timedelta(hours=OBSERVED_HOURS)]
-        days = []
-        # klokkeslett (UTC) for siste timesmåling, regnet fra starten av dagen etter issue
-        hour = int(min(23, (hq.index[-1] - issue - pd.Timedelta(days=1)) / pd.Timedelta(hours=1)))
-        up = None
-        if st in ups:
-            u = upstream_inputs(ups[st][0], today, inputs)
-            up = (*u, ups[st][1]) if u else None
-        for h in features.HORIZONS:
-            if h >= 2 and pd.isna(fc[f"rr_fc{h}"].get(issue)):
-                break
-            X = features.build(df, h, "wx_fc", hq=hq, hour=hour, fc=fc, up=up)
-            X["station"] = pd.Categorical([st] * len(X), categories=models[(h, "p50")]["stations"])
-            sig = (models[(h, "p50")].get("signatures") or {}).get(st)
-            if sig:  # feltsignaturen er beregnet fra hele historikken ved trening
-                features.add_signature(X, sig, h)
-            x = X.loc[[issue]]
-            row = {"station": st, "issue_date": issue, "date": issue + pd.Timedelta(days=h),
-                   "horizon": h, "q_yesterday": float(df.loc[issue, "q"]), "q_now": float(hq.iloc[-1]),
-                   "q_now_time": hq.index[-1]}
-            adj = {"p10": -calib[h]["p10"], "p50": 0.0, "p90": calib[h]["p90"]}
-            for n in QUANTILES:
-                m = models[(h, n)]
-                # reindex: stasjoner modellen ikke har signatur for får manglende verdier
-                row[n] = float(x["lq0"].iloc[0] + m["model"].predict(x.reindex(columns=m["cols"]))[0] + adj[n])  # log1p
-            row["rr_forecast"] = float(df["rr"].get(row["date"]) if h == 1 else fc[f"rr_fc{h}"].get(issue))
-            row["tm_forecast"] = float(df["tm"].get(row["date"]) if h == 1 else fc[f"tm_fc{h}"].get(issue))
-            days.append(row)
-        hourly_q = predict_hourly(st, hq, fch, df, hmodels, hcal, hk, days, issue)
-        for row in days:
-            # kvantilkryssing kan skje med separate modeller – sorter
-            row["p10"], row["p50"], row["p90"] = sorted(float(np.expm1(row[n])) for n in QUANTILES)
-        # prognosen er per målestasjon; status og sannsynligheter per seksjon
-        for r in secs:
-            t = r["thresholds"]
-            obs.append(pd.DataFrame({"river": r["id"], "time": d.index, "q": d.values, "resolution": "day"}))
-            obs.append(pd.DataFrame({"river": r["id"], "time": hobs.index, "q": hobs.values, "resolution": "hour"}))
+        try:  # én stasjon med uventede data skal ikke stoppe de andre
+            df, hq, fc, fch, _ = inputs[st]
+            t0 = time.perf_counter()
+            issue = df["q"].last_valid_index()
+            d = df["q"].dropna().iloc[-OBSERVED_DAYS:]
+            hobs = hq[hq.index > hq.index[-1] - pd.Timedelta(hours=OBSERVED_HOURS)]
+            days = []
+            # klokkeslett (UTC) for siste timesmåling, regnet fra starten av dagen etter issue
+            hour = int(min(23, (hq.index[-1] - issue - pd.Timedelta(days=1)) / pd.Timedelta(hours=1)))
+            up = None
+            if st in ups:
+                u = upstream_inputs(ups[st][0], today, inputs)
+                up = (*u, ups[st][1]) if u else None
+            for h in features.HORIZONS:
+                if h >= 2 and pd.isna(fc[f"rr_fc{h}"].get(issue)):
+                    break
+                X = features.build(df, h, "wx_fc", hq=hq, hour=hour, fc=fc, up=up)
+                X["station"] = pd.Categorical([st] * len(X), categories=models[(h, "p50")]["stations"])
+                sig = (models[(h, "p50")].get("signatures") or {}).get(st)
+                if sig:  # feltsignaturen er beregnet fra hele historikken ved trening
+                    features.add_signature(X, sig, h)
+                x = X.loc[[issue]]
+                row = {"station": st, "issue_date": issue, "date": issue + pd.Timedelta(days=h),
+                       "horizon": h, "q_yesterday": float(df.loc[issue, "q"]), "q_now": float(hq.iloc[-1]),
+                       "q_now_time": hq.index[-1]}
+                adj = {"p10": -calib[h]["p10"], "p50": 0.0, "p90": calib[h]["p90"]}
+                for n in QUANTILES:
+                    m = models[(h, n)]
+                    # reindex: stasjoner modellen ikke har signatur for får manglende verdier
+                    row[n] = float(x["lq0"].iloc[0] + m["model"].predict(x.reindex(columns=m["cols"]))[0] + adj[n])  # log1p
+                row["rr_forecast"] = float(df["rr"].get(row["date"]) if h == 1 else fc[f"rr_fc{h}"].get(issue))
+                row["tm_forecast"] = float(df["tm"].get(row["date"]) if h == 1 else fc[f"tm_fc{h}"].get(issue))
+                days.append(row)
+            hourly_q = predict_hourly(st, hq, fch, df, hmodels, hcal, hk, days, issue)
             for row in days:
-                rows.append(row | {"river": r["id"], **classified(row["p10"], row["p50"], row["p90"], t, optimal=True)})
-            hrows.append(hourly_q.assign(river=r["id"], **pd.DataFrame(
-                [classified(*v, t) for v in hourly_q[["p10", "p50", "p90"]].to_numpy()], index=hourly_q.index)))
-        timing["predict_s"] += time.perf_counter() - t0
+                # kvantilkryssing kan skje med separate modeller – sorter
+                row["p10"], row["p50"], row["p90"] = sorted(float(np.expm1(row[n])) for n in QUANTILES)
+            # prognosen er per målestasjon; status og sannsynligheter per seksjon
+            for r in secs:
+                t = r["thresholds"]
+                obs.append(pd.DataFrame({"river": r["id"], "time": d.index, "q": d.values, "resolution": "day"}))
+                obs.append(pd.DataFrame({"river": r["id"], "time": hobs.index, "q": hobs.values, "resolution": "hour"}))
+                for row in days:
+                    rows.append(row | {"river": r["id"], **classified(row["p10"], row["p50"], row["p90"], t, optimal=True)})
+                hrows.append(hourly_q.assign(river=r["id"], **pd.DataFrame(
+                    [classified(*v, t) for v in hourly_q[["p10", "p50", "p90"]].to_numpy()], index=hourly_q.index)))
+            timing["predict_s"] += time.perf_counter() - t0
+        except Exception as e:
+            print(f"::warning::{st}: prognosen feilet ({type(e).__name__}: {e})", file=sys.stderr)
+            failed.extend(r["id"] for r in secs)
     for r in observe:
         try:
             d, hobs = measured(r["station"], today)
