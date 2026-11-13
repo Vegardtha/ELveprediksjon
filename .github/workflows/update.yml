@@ -22,9 +22,6 @@ jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 45 # første kjøring etter GTS-oppdatering henter alt på nytt: ca. 13 min for 145 stasjoner
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
 
@@ -73,5 +70,23 @@ jobs:
         with:
           path: frontend/dist
 
+  # Egen jobb: deploy-pages i samme jobb som opplastingen fant av og til ikke pakken
+  # («No artifacts named github-pages»), og kan nå kjøres på nytt uten ny prognose.
+  deploy:
+    needs: update
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.retry.outputs.page_url || steps.deploy.outputs.page_url }}
+    steps:
       - id: deploy
+        uses: actions/deploy-pages@v5
+        continue-on-error: true
+
+      - if: steps.deploy.outcome == 'failure'
+        run: sleep 60
+
+      - id: retry
+        if: steps.deploy.outcome == 'failure'
         uses: actions/deploy-pages@v5
